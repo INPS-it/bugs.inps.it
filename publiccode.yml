@@ -69,11 +69,9 @@ description:
       project management software, with the goal to provide INPS online
       services users a simple, streamlined way to report software
       bugs, ask usage questions and make suggestions.
-     
       The INPS Bug tracking platform allows you to create bug reports with attachments and rich text editing,
       with comments, moderation, assignment and tagging, priority and severity for each single post.
-     
-     screenshots:
+    screenshots:
       - >-
         https://github.com/INPS-it/bugs.inps.it/blob/master/docs/public/discovery_view.png
       - >-
