@@ -9,4 +9,4 @@ cp -R ./taiga-inps-theme/. ./taiga-front/app/themes/inps/
 cp -R ./taiga-contrib-inps/front/custom-taiga-override/. ./taiga-front/
 
 # Run local dev docker compose
-docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up
