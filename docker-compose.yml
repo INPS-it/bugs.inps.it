@@ -1,0 +1,98 @@
+version: "3"
+
+services:
+  certs:
+    image: psmiraglia/spid-compliant-certificates
+    volumes:
+        - ./certs:/tmp/certs:rw
+    entrypoint: spid-compliant-certificates generator --key-size 3072 --common-name "A.C.M.E" --days 365 --entity-id https://spid.acme.it --locality-name Roma --org-id "PA:IT-c_h501" --org-name "A Company Making Everything" --sector public --key-out /tmp/certs/private.key --crt-out /tmp/certs/public.cert
+
+  taiga-gateway:
+    image: nginx:1.19-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - taiga-static-data:/taiga/static
+      - taiga-media-data:/taiga/media
+      - ./docker/gateway/example.key:/etc/nginx/certs/certificate.key
+      - ./docker/gateway/example.crt:/etc/nginx/certs/certificate.crt
+    depends_on:
+      - taiga-front
+      - taiga-back
+    networks:
+      - taiga
+  taiga-front:
+    build:
+      context: .
+      dockerfile: ./docker/front/Dockerfile
+    depends_on:
+      - taiga-back
+    networks:
+      - taiga
+  taiga-back:
+    build:
+      context: .
+      dockerfile: ./docker/back/Dockerfile
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - taiga-db
+      - certs
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings.config
+      - DB_HOST=taiga-db
+      - DB_NAME=taiga
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - SPID_SAML_CHECK_IDP_ACTIVE=True
+      - SPID_DEMO_IDP_ACTIVE=True
+      - SPID_BASE_URL=https://localhost
+    volumes:
+      - taiga-static-data:/taiga-back/static
+      - taiga-media-data:/taiga-back/media
+    networks:
+      - taiga
+  taiga-db:
+    image: postgres:12.3
+    expose:
+      - 5432
+    command: "-c logging_collector=on"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geocommunity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=taiga
+      - POSTGRES_PORT=5432
+      - PGDATA=/var/lib/postgresql/data
+    networks:
+      - taiga
+    volumes:
+      - taigadbdata:/var/lib/postgresql/data
+
+  spid-saml-check:
+    image: italia/spid-saml-check
+    ports:
+      - "8080:8080"
+    networks:
+      - taiga
+    volumes:
+      - "./docker/spid-saml-check-config/idp.json:/spid-saml-check/spid-validator/config/idp.json:ro"
+      - "./docker/spid-saml-check-config/idp_demo.json:/spid-saml-check/spid-validator/config/idp_demo.json:ro"
+      - "./docker/spid-saml-check-config/server.json:/spid-saml-check/spid-validator/config/server.json:ro"
+
+volumes:
+  taigadbdata:
+  taiga-static-data:
+  taiga-media-data:
+
+networks:
+  taiga:

@@ -1,0 +1,55 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# Credits: https://github.com/kaleidos-ventures/taiga-back/blob/main/.github/workflows/tests-and-coverall.yml
+
+name: Taiga INPS Bug tracking - Test and Coverage
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [ '3.8', '3.9' ]
+
+    services:
+      postgres:
+        image: postgres:9.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: taiga
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: '--health-cmd "pg_isready" --health-interval 5s --health-timeout 5s --health-retries 6 --health-start-period 20s'
+      rabbitmq:
+        image: rabbitmq
+        ports:
+          - 5672:5672
+        # needed because the rabbitmq container does not provide a healthcheck
+        options: '--health-cmd "rabbitmqctl status" --health-interval 5s --health-timeout 5s --health-retries 6 --health-start-period 20s'
+
+    name: Test on Python ${{ matrix.python-version }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install libraries and binaries 👷
+      run: sudo apt-get install xmlsec1 libssl-dev libsasl2-dev
+    - name: Set up Python ${{ matrix.python-version }} 🐍
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Prepare test env 📦
+      run: |
+        pip install wheel
+        make prepare-test
+    - name: Test with pytest and calculate coverage 🧪
+      run: |
+        make test

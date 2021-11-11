@@ -1,0 +1,114 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+doctype html
+html(lang="en", ng-attr-dir="{{ isRTL ? 'rtl' : 'ltr' }}")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="content-type", content="text/html; charset=utf-8")
+        meta(name="fragment", content="!")
+        base(href="/")
+
+        // Main meta
+        title INPS Bug Tracker
+        meta(name="description", content="Segnalazione bugs per INPS")
+        meta(name="keywords", content="agile, scrum, taiga, management, project, developer, designer, user experience")
+
+        //-meta(name="viewport", content="width=device-width, user-scalable=no")
+        link(rel="stylesheet", href="#{v}/styles/theme-taiga.css")
+        link(rel="icon", type="image/png", href="#{v}/images/favicon.png")
+
+        //- PRERENDER SERVICE: This is to know when the page is completely loaded.
+        script(type='text/javascript').
+            window.prerenderReady = false;
+            window.TAIGA_VERSION = '#{v}';
+            window.TAIGA_USER_PILOT_TOKEN = '#{userpilotToken}'
+            window._taigaAvailableThemes = !{availableThemes};
+
+    body(tg-main, ng-class="{'rtl': isRTL}")
+        include partials/includes/modules/inps-loading
+        
+        tg-legacy
+
+        div(tg-navigation-bar, ng-if="!errorHandling.showingError")
+        div(ng-if="!errorHandling.showingError")
+            div.master(ng-view)
+
+        div(ng-if="errorHandling.notfound", ng-include="'error/not-found.html'")
+        div(ng-if="errorHandling.error", ng-include="'error/error.html'")
+        div(ng-if="errorHandling.permissionDenied", ng-include="'error/permission-denied.html'")
+        div(ng-if="errorHandling.blocked", ng-include="'projects/project/blocked-project.html'")
+
+        div.lightbox.lightbox-generic-ask
+            include partials/includes/modules/lightbox-generic-ask
+        div.lightbox.lightbox-ask-choice
+            include partials/includes/modules/lightbox-ask-choice
+        div.lightbox.lightbox-generic-success
+            include partials/includes/modules/lightbox-generic-success
+        div.lightbox.lightbox-generic-error
+            include partials/includes/modules/lightbox-generic-error
+        div.lightbox.lightbox-generic-loading
+            include partials/includes/modules/lightbox-generic-loading
+        div.lightbox.lightbox-generic-delete
+            include partials/includes/modules/lightbox-generic-delete
+
+        include partials/includes/modules/loader
+
+        include partials/includes/components/notification-message
+
+        div(tg-live-announcement)
+
+        script(src="#{v}/js/app-loader.js")
+
+        // load userpilot library if required
+        if userpilotToken
+            script(src="https://js.userpilot.io/#{userpilotToken}/latest.js")
+
+        // zendesk
+        if zendeskToken
+            script(id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=#{zendeskToken}")
+            script(type='text/javascript').
+                window.zESettings = {
+                    webWidget: {
+                        chat: {
+                            suppress: true
+                        },
+                        contactForm: {
+                            suppress: true
+                        },
+                        helpCenter: {
+                            suppress: true
+                        },
+                        talk: {
+                            suppress: true
+                        },
+                        answerBot: {
+                            suppress: true
+                        }
+                    }
+                }
+
+        include svg/sprite.svg
+        include svg/editor.svg
+        
+        script(type='text/javascript').
+            document.addEventListener('readystatechange', function(event) { 
+                // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
+                if (event.target.readyState === "complete") {
+                    // Let's hide the custom INPS loading screen
+                    document.getElementById('inps-loading-overlay').style.display = 'none';
+                }
+            });

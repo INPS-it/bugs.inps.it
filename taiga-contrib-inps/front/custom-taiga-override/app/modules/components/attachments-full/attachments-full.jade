@@ -1,0 +1,122 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+section.attachments.attachment-full(
+    tg-attachments-drop="vm.addAttachments(files, false)"
+    ng-show="vm.showAttachments()"
+)
+    .attachments-header
+        h3.attachments-title #[span.attachments-num {{vm.attachments.size}}] #[span.attachments-text(translate="ATTACHMENT.SECTION_NAME")]
+        .options
+            button.view-gallery(
+                ng-class="{'is-active': vm.mode == 'gallery'}"
+                ng-if="vm.attachments.size"
+                ng-click="vm.setMode('gallery')"
+                title="{{ 'ATTACHMENT.GALLERY_VIEW_MODE' | translate }}"
+            )
+                tg-svg(svg-icon="icon-gallery")
+            button.view-list(
+                ng-class="{'is-active': vm.mode == 'list'}"
+                ng-if="vm.attachments.size"
+                ng-click="vm.setMode('list')"
+                title="{{ 'ATTACHMENT.LIST_VIEW_MODE' | translate }}"
+            )
+                tg-svg(svg-icon="icon-list")
+
+            .add-attach(
+                tg-check-permission="modify_{{vm.type}}"
+                title!="{{'ATTACHMENT.ADD' | translate}}"
+            )
+                button.btn-icon.add-attachment-button(
+                    type="button"
+                    variant="primary"
+                    ng-click="displayAttachmentInput()"
+                )
+                    tg-svg(svg-icon="icon-add")
+
+                input(
+                    id="add-attach",
+                    type="file",
+                    accept="{{vm.attachmentMimeTypes}}",
+                    ng-model="files",
+                    multiple="multiple",
+                    tg-file-change="vm.addAttachments(files, true)"
+                )
+
+    .attachments-empty(ng-if="!vm.attachments.size && !vm.uploadingAttachments().length")
+        div {{'ATTACHMENT.DROP' | translate}}
+    .attachment-list.sortable(ng-if="vm.mode == 'list'")
+        div(tg-attachments-sortable="vm.reorderAttachment(attachment, index)")
+          div(
+            tg-repeat="attachment in vm.attachmentsVisible track by attachment.getIn(['file', 'id'])",
+            tg-bind-scope
+          )
+            tg-attachment(
+                attachment="attachment",
+                on-delete="vm.deleteAttachment(attachment)",
+                on-update="vm.updateAttachment(attachment)",
+                type="vm.type"
+            )
+
+          .single-attachment.uploading-attachment(ng-repeat="file in vm.uploadingAttachments()")
+              .attachment-name
+                  tg-svg(svg-icon="icon-attachment")
+                  span {{file.name}}
+              .attachment-size
+                  span {{file.size | sizeFormat}}
+              .attachment-comments
+                  span {{file.progressMessage}}
+                  progress.percentage(value="{{file.progressPercent}}" max="100")
+
+        a.more-attachments(
+          href="",
+          title="{{'ATTACHMENT.SHOW_DEPRECATED' | translate}}",
+          ng-if="vm.deprecatedsCount > 0",
+          ng-click="vm.toggleDeprecatedsVisible()"
+        )
+            span.text(
+              ng-show="!vm.deprecatedsVisible",
+              translate="ATTACHMENT.SHOW_DEPRECATED"
+            )
+            span.text(
+              ng-show="vm.deprecatedsVisible",
+              translate="ATTACHMENT.HIDE_DEPRECATED"
+            )
+            span.more-attachments-num(
+              translate="ATTACHMENT.COUNT_DEPRECATED",
+              translate-values="{counter: '{{vm.deprecatedsCount}}'}"
+            )
+
+    .attachment-gallery(ng-if="vm.mode == 'gallery'")
+        tg-attachment-gallery.attachment-gallery-container(
+            tg-repeat="attachment in vm.attachmentsVisible track by attachment.getIn(['file', 'id'])"
+            attachment="attachment",
+            on-delete="vm.deleteAttachment(attachment)",
+            on-update="vm.updateAttachment(attachment)",
+            type="vm.type"
+        )
+        .single-attachment(ng-repeat="file in vm.uploadingAttachments()")
+            .loading-container
+                img.loading-spinner(
+                    src="/#{v}/svg/spinner-circle.svg",
+                    alt="{{'COMMON.LOADING' | translate}}"
+                )
+            .attachment-data {{file.progressMessage}}
+
+tg-attachments-preview.lightbox.lightbox-block(
+    ng-show="vm.showAttachments()",
+    attachments="vm.attachments"
+)

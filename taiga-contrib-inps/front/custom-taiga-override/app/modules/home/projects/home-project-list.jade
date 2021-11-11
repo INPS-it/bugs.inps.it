@@ -1,0 +1,108 @@
+//
+// license-start
+//
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+section.home-project-list(ng-if="vm.projects.size")
+
+    .home-project(
+        tg-bind-scope
+        tg-repeat="project in vm.projects"
+        ng-class="{'blocked-project': project.get('blocked_code')}"
+    )
+        .project-card-inner(
+            href="#"
+            tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+        )
+            .project-card-header
+                a.project-card-logo(
+                    href="#"
+                    tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                    title="{{::project.get('name')}}"
+                )
+                    img(
+                        tg-project-logo-small-src="::project"
+                        alt="{{::project.get('name')}}"
+                    )
+                h3.project-card-name
+                    a.project-title(
+                        href="#"
+                        tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                        title="{{::project.get('name')}}"
+                    ) {{::project.get('name')}}
+
+                    tg-svg.look-for-people(
+                        ng-if="project.get('is_looking_for_people')"
+                        svg-icon="icon-recruit"
+                        svg-title="{{ ::project.get('looking_for_people_note') }}"
+                    )
+
+                    tg-svg.owner-badge(
+                        ng-if="project.get('i_am_owner')"
+                        svg-icon="icon-badge"
+                        svg-title="COMMON.OWNER"
+                    )
+
+                    tg-svg(
+                        ng-if="project.get('blocked_code')"
+                        svg-icon="icon-blocked-project"
+                        svg-title-translate="PROJECT.BLOCKED_PROJECT.BLOCKED"
+                    )
+
+            p.project-card-description {{::project.get('description')| limitTo:100 }}
+                 span(ng-if="::project.get('description').length > 100") ...
+            .project-card-statistics
+                //- span.statistic(
+                //-     ng-class="{'active': project.get('is_fan')}"
+                //-     title="{{ 'PROJECT.FANS_COUNTER_TITLE'|translate:{total:project.get('total_fans')||0}:'messageformat' }}"
+                //- )
+                //-     tg-svg(svg-icon="icon-like")
+                //-     span {{::project.get('total_fans')}}
+                span.statistic(
+                    ng-class="{'active': project.get('is_watcher')}"
+                    title="{{ 'PROJECT.WATCHERS_COUNTER_TITLE'|translate:{total:project.get('total_watchers')||0}:'messageformat' }}"
+                )
+                    tg-svg(svg-icon="icon-watch")
+                    span {{::project.get('total_watchers')}}
+                //- span.statistic(
+                //-     ng-class="{'active': project.get('i_am_member')}"
+                //-     title="{{ 'PROJECT.MEMBERS_COUNTER_TITLE'|translate:{total:project.get('members').size||0}:'messageformat' }}"
+                //- )
+                //-     tg-svg(svg-icon="icon-team")
+                //-     span.statistics-num {{ ::project.get('members').size }}
+                span.statistic(
+                    ng-if="::project.get('is_private')"
+                    title="{{ 'PROJECT.PRIVATE' | translate }}"
+                )
+                    tg-svg(svg-icon="icon-private")
+    button.btn-small.see-more-projects-btn(
+        variant="primary"
+        href="#",
+        ng-show="vm.projects.size",
+        tg-nav="projects",
+        title="{{'PROJECT.NAVIGATION.MANAGE_PROJECTS' | translate}}",
+        translate="PROJECT.NAVIGATION.MANAGE_PROJECTS"
+    )
+
+section.projects-empty(ng-if="vm.projects != undefined && vm.projects.size === 0")
+    tg-svg(svg-icon="icon-project")
+    p(translate="HOME.EMPTY_PROJECT_LIST")
+    button.btn-small.create-project-button(
+        ng-if = "vm.user_can_create_project"
+        variant="primary"
+        href="#",
+        tg-nav="create-project"
+        title="{{'PROJECT.NAVIGATION.TITLE_CREATE_PROJECT' | translate}}"
+        translate="PROJECT.NAVIGATION.ACTION_CREATE_PROJECT"
+    )

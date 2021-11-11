@@ -1,0 +1,22 @@
+FROM node:12
+
+WORKDIR /
+
+RUN wget "https://github.com/kaleidos-ventures/taiga-front/archive/refs/tags/6.4.2.zip" -O "taiga-front.zip"
+RUN unzip "taiga-front.zip"
+RUN mv taiga-front-6.4.2 taiga-front
+
+COPY ./taiga-contrib-inps/front/custom-taiga-override/. /taiga-front/
+
+RUN mkdir /taiga-front/dist
+
+COPY ./config/front-config.json /taiga-front/dist/conf.json
+
+RUN mkdir -p /taiga-front/app/themes/inps
+COPY ./taiga-inps-theme/. /taiga-front/app/themes/inps/
+
+WORKDIR /taiga-front
+
+RUN npm install
+
+ENTRYPOINT [ "/taiga-front/node_modules/.bin/gulp", "--theme", "inps" ]

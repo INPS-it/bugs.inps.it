@@ -1,0 +1,106 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+nav.navbar(ng-if="vm.isEnabledHeader")
+    .nav-left
+
+        a.logo(
+            href="#",
+            tg-nav="home",
+            title="{{'PROJECT.NAVIGATION.HOMEPAGE' | translate}}"
+        )
+            include ../../svg/logo.svg
+
+    .nav-right.center(ng-if="!vm.isAuthenticated")
+
+        a.italia-it-button.italia-it-button-size-m.button-spid(
+            href="#"
+            ng-click="vm.toLoginSpidUrl()"
+            title="Accedi"
+        )
+            span.italia-it-button-icon
+                img(
+                    src="/#{v}/images/spid-button/spid-ico-circle-bb.svg"
+                    onerror="this.src='/#{v}/images/spid-button/spid-ico-circle-bb.png'; this.onerror=null;"
+                    alt=""
+                )
+            span.italia-it-button-text
+                |Accedi
+
+
+
+        a.register(
+            href="#"
+            ng-if="vm.publicRegisterEnabled"
+            tg-nav="register"
+            title="{{ 'REGISTER_FORM.ACTION_SIGN_UP' | translate }}"
+            translate="REGISTER_FORM.ACTION_SIGN_UP"
+        )
+
+
+
+
+    .nav-right(ng-if="vm.isAuthenticated")
+        a(
+            tg-nav="discover",
+            ng-class="{'active': vm.active == 'discover' }"
+            title="{{'PROJECT.NAVIGATION.DISCOVER_TITLE' | translate}}"
+        )
+            tg-svg(svg-icon="icon-compass")
+
+        .topnav-dropdown-wrapper.nav-bar-support(ng-if="vm.customSupportUrl")
+            a(
+                ng-if="vm.customSupportUrl"
+                href="{{ vm.customSupportUrl }}",
+                target="_blank",
+                title="{{'PROJECT.NAVIGATION.HELP_TITLE' | translate}}",
+            )
+                tg-svg(svg-icon="icon-help-circle")
+
+            .navbar-dropdown.navigation-help
+                ul
+                    li(ng-if="vm.userpilotEnabled")
+                        a.secondary(
+                            href="#"
+                            title="{{ vm.userPilotTitle }}"
+                        )
+                            tg-svg(svg-icon="icon-lifeguard")
+                            span {{ vm.userPilotTitle }}
+
+                    li
+                        a.secondary(
+                            ng-show="vm.isFeedbackEnabled"
+                            href="#"
+                            ng-click="vm.sendFeedback()",
+                            title="{{ 'PROJECT.NAVIGATION.FEEDBACK_TITLE' | translate }}"
+                        )
+                            tg-svg(svg-icon="icon-message-square")
+                            span {{ 'PROJECT.NAVIGATION.FEEDBACK' | translate }}
+                    li
+                        a.secondary(
+                            href="{{ vm.customSupportUrl }}",
+                            target="_blank",
+                            title="{{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES_TITLE' | translate }}"
+                        )
+                            tg-svg(svg-icon="icon-resources")
+                            span {{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES' | translate }}
+
+        .topnav-dropdown-wrapper(
+            tg-dropdown-notifications
+            active="vm.active == 'notifications'"
+        )
+
+        div(tg-dropdown-user)

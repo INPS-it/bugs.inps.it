@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  taiga-gateway:
+      - ./docker/gateway/taiga.conf:/etc/nginx/conf.d/default.conf
+  taiga-back:
+    volumes:
+      - ./config/back-config.py:/taiga-back/settings/config.py
+      - ./certs:/certs
+      - ./docker/back/taiga-back.sh:/taiga-back.sh
+      - ./taiga-contrib-inps/back:/taiga-contrib-inps/back
+      - ./taiga-contrib-inps/spid_inps:/taiga-contrib-inps/spid_inps
+
+  taiga-front:
+    build:
+      context: .
+      dockerfile: ./docker/front-dev/Dockerfile
+    image: taiga-front-dev
+    depends_on:
+      - taiga-back
+    networks:
+      - taiga
+    volumes:
+      - node_modules:/taiga-front/node_modules
+#      - ./taiga-contrib-inps/front/custom-taiga-override:/taiga-contrib-inps-front
+#      - ./taiga-inps-theme:/taiga-inps-theme
+      - ./taiga-front/app:/taiga-front/app
+    ports:
+      - "9001:9001"
+#    entrypoint: ["/taiga-contrib-inps-front/start-dev.sh"]
+
+  taiga-gateway:
+    volumes:
+      - ./docker/gateway/taiga.dev.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  node_modules:

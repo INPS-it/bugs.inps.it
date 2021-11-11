@@ -1,0 +1,82 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.dropdown-user-inner
+    .dropdown-user-navbar
+        a.user-avatar(
+            tg-nav="profile"
+            title="{{ vm.user.get('full_name_display') }}"
+        )
+            img(
+                tg-avatar="vm.user"
+                alt="{{ vm.user.get('full_name_display') }}"
+            )
+
+        button.chevron
+            tg-svg(svg-icon="icon-chevron-down")
+
+    div.navbar-dropdown.dropdown-user
+        .dropdown-user-profile
+            a.profile-link.avatar(
+                tg-nav="profile",
+                href="#"
+            )
+                img(
+                    tg-avatar="vm.user"
+                    alt="{{ ::vm.user.get('full_name_display') }}"
+                )
+            .dropdown-user-data
+                a.profile-link.full-name(
+                    tg-nav="profile",
+                    href="#"
+                ) {{ ::vm.user.get('full_name_display') }}
+                .profile-link.email {{ ::vm.user.get('email') }}
+                p
+                    a.edit-profile(
+                        href="#",
+                        tg-nav="user-settings-user-profile",
+                        title="{{'PROJECT.NAVIGATION.EDIT_PROFILE' | translate}}",
+                        translate="PROJECT.NAVIGATION.EDIT_PROFILE")
+
+        ul
+            li.plugin(ng-repeat="plugin in vm.userSettingsPlugins")
+                a.secondary(
+                    href=""
+                    tg-nav="user-settings-contrib:plugin=plugin.slug"
+                    ng-class="{active: plugin.slug == currentPlugin.slug}"
+                )
+                    span.title {{ plugin.name }}
+            li.user-profile-option
+                a.secondary(
+                    href="#",
+                    tg-nav="user-settings-user-profile",
+                    title="{{'PROJECT.NAVIGATION.ACCOUNT_SETTINGS' | translate}}",
+                    translate="PROJECT.NAVIGATION.ACCOUNT_SETTINGS")
+
+            //- li.user-profile-option
+            //-     a.secondary(
+            //-         href="#",
+            //-         tg-nav="user-settings-mail-notifications",
+            //-         title="{{'PROJECT.NAVIGATION.NOTIFICATIONS_TITLE' | translate}}",
+            //-         translate="PROJECT.NAVIGATION.NOTIFICATIONS")
+
+            li.user-profile-option
+                a(
+                    href="#",
+                    ng-click="vm.logout()",
+                    onclick="location.href='/spid/logout/';",
+                    title="{{'COMMON.LOGOUT' | translate}}",
+                    translate="COMMON.LOGOUT")

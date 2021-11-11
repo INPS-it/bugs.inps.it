@@ -1,0 +1,61 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+div.profile.centered(ng-if="vm.user")
+    tg-profile-bar(
+        user="vm.user"
+        isCurrentUser="vm.isCurrentUser"
+    )
+    div.main
+        tg-profile-tabs.timeline-wrapper
+            div(
+                tg-profile-tab="{{'USER.PROFILE.TABS.ACTIVITY_TAB' | translate}}"
+                tab-title="{{'USER.PROFILE.TABS.ACTIVITY_TAB_TITLE' | translate}}"
+                tab-icon="icon-timeline"
+                tab-active
+            )
+                div(tg-user-timeline, user="vm.user", current-user="vm.isCurrentUser")
+
+            div(
+                tg-profile-tab="{{'USER.PROFILE.TABS.PROJECTS_TAB' | translate}}"
+                tab-title="{{'USER.PROFILE.TABS.PROJECTS_TAB_TITLE' | translate}}"
+                tab-icon="icon-project"
+                tab-disabled="{{vm.isCurrentUser}}"
+            )
+                div(tg-profile-projects, user="vm.user")
+
+            //- div(
+            //-     tg-profile-tab="{{'USER.PROFILE.TABS.LIKES_TAB' | translate}}"
+            //-     tab-title="{{'USER.PROFILE.TABS.LIKES_TAB_TITLE' | translate}}"
+            //-     tab-icon="icon-like"
+            //- )
+            //-     div(tg-profile-liked, user="vm.user")
+
+            div(
+                tg-profile-tab="{{'USER.PROFILE.TABS.WATCHED_TAB' | translate}}"
+                tab-title="{{'USER.PROFILE.TABS.WATCHED_TAB_TITLE' | translate}}"
+                tab-icon="icon-watch"
+            )
+                div(tg-profile-watched, user="vm.user")
+
+            div(
+                tg-profile-tab="{{'USER.PROFILE.TABS.CONTACTS_TAB' | translate}}"
+                tab-title="{{'USER.PROFILE.TABS.CONTACTS_TAB_TITLE' | translate}}"
+                tab-icon="icon-team"
+            )
+                div(tg-profile-contacts, user="vm.user")
+
+        include includes/profile-sidebar

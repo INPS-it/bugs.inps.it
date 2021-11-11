@@ -1,0 +1,80 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.project-list-wrapper.centered
+    .project-list-title
+        h1(translate="PROJECTS.MY_PROJECTS")
+        .create-options(
+            ng-if = "user.can_create_project"
+        )
+            a.create-project-btn.btn-small(
+                variant="primary"
+                href="#"
+                tg-nav="create-project"
+                title="{{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT' | translate}}"
+                translate="PROJECT.NAVIGATION.ACTION_CREATE_PROJECT"
+            )
+
+    section.project-list-section
+        .project-list
+            ul(tg-sort-projects="vm.projects")
+                li.list-itemtype-project(
+                    tg-bind-scope
+                    tg-repeat="project in vm.projects track by project.get('id')"
+                    ng-class="{'blocked-project': project.get('blocked_code')}"
+                )
+                    .list-itemtype-project-left
+
+                        .list-itemtype-project-data-wrapper
+                            a.list-itemtype-project-image(
+                                href="#"
+                                tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                                title="{{ ::project.get('name') }}"
+                            )
+                                img(
+                                    tg-project-logo-small-src="::project"
+                                    alt="{{::project.get('name')}}"
+                                )
+                            .list-itemtype-project-data
+                                .list-itemtype-data-title
+                                    a.project-title(
+                                        href="#"
+                                        tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                                        title="{{ ::project.get('name') }}"
+                                    ) {{project.get('name')}}
+                                    tg-svg(
+                                        ng-if="project.get('is_private')",
+                                        svg-icon="icon-private",
+                                        svg-title-translate="PROJECT.PRIVATE"
+                                    )
+                                    tg-svg(
+                                        ng-if="project.get('i_am_owner')",
+                                        svg-icon="icon-badge",
+                                        svg-title-translate="COMMON.OWNER"
+                                    )
+                                    tg-svg(
+                                        ng-if="project.get('blocked_code')",
+                                        svg-icon="icon-blocked-project",
+                                        svg-title-translate="PROJECT.BLOCKED_PROJECT.BLOCKED"
+                                    )
+
+                                .list-itemtype-data-meta.project-description {{ ::project.get('description') | limitTo:300 }}
+                                    span(ng-if="::project.get('description').length > 300") ...
+
+                    tg-svg.drag(svg-icon="icon-draggable")
+
+        aside.help-area
+            p(translate="PROJECT.HELP")

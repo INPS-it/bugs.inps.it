@@ -1,0 +1,80 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.dropdown-project-list(ng-class="{'active': active}")
+    a(
+        href=""
+        title="{{'PROJECT.NAVIGATION.PROJECTS' | translate}}"
+        tg-nav="projects"
+        class="dropdown-project-list-projects"
+    )
+        tg-svg(
+            class="icon-folder"
+            svg-icon="icon-folder"
+        )
+
+        span {{'PROJECT.NAVIGATION.PROJECTS' | translate}}
+
+        div.empty-projects(ng-if="vm.projects.size === 0")
+
+    div.navbar-dropdown
+        div(ng-if="vm.projects.size")
+            ul.dropdown-project-list-ul
+                li(tg-repeat="project in vm.projects track by project.get('id')")
+                    a.dropdown-project-list-link.secondary(
+                        href="#"
+                        tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                        ng-class="{'blocked-project': project.get('blocked_code'), 'active': vm.currentProject == project.get('id')}"
+                    )
+                        img(
+                            tg-project-logo-small-src="::project"
+                            alt="{{::project.get('name')}}"
+                        )
+                        span {{::project.get("name")}}
+                        tg-svg(
+                            svg-icon="icon-slash"
+                            ng-if="project.get('blocked_code')"
+                            svg-title="PROJECT.BLOCKED_PROJECT.BLOCKED"
+                        )
+
+            a.see-more-projects-btn(
+                href="#",
+                tg-nav="projects",
+                title="{{'PROJECT.NAVIGATION.VIEW_ALL_PROJECTS' | translate}}",
+                translate="PROJECT.NAVIGATION.VIEW_ALL_PROJECTS")
+
+            div.create-options(
+                ng-if = "vm.user_can_create_project"
+            )
+                a.create-project-btn.button-primary(
+                    href="#",
+                    tg-nav="create-project"
+                    title="{{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT' | translate}}",
+                )
+                    tg-svg(svg-icon="icon-plus-1")
+                    span {{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT' | translate}}
+        div(ng-if="!vm.projects.size && vm.user_can_create_project ")
+            h2 {{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT_FIRST' | translate}}
+            p.dropdown-project-list-desc {{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT_FIRST_TEXT' | translate}}
+            div.create-options
+                a.create-project-btn.button-primary(
+                    href="#",
+                    tg-nav="create-project"
+                    title="{{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT' | translate}}",
+                )
+                    span {{'PROJECT.NAVIGATION.ACTION_CREATE_PROJECT' | translate}}
+        div(ng-if="!vm.projects.size && !vm.user_can_create_project ")
+            h2 {{'HOME.EMPTY_PROJECT_LIST' | translate}}

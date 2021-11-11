@@ -1,0 +1,33 @@
+<!--
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+Copyright (c) 2021-present Kaleidos Ventures SL
+-->
+
+<tg-html-editor
+  *ngIf="mode === 'html'"
+  [content]="contentHtml"
+  [lan]="lan"
+  [placeholder]="placeholder"
+  [feedUsers]="feedUsers.bind(this)"
+  [feedReferences]="feedReferences.bind(this)"
+  [uploadFunction]="uploadFunction"
+  (changed)="changed.emit($event)"
+  (focusChanged)="focusChanged.emit($event)">
+</tg-html-editor>
+<tg-markdown-editor
+  *ngIf="mode === 'markdown'"
+  [content]="contentMarkdown"
+  (changed)="changed.emit($event)"
+  (focusChanged)="focusChanged.emit($event)">
+</tg-markdown-editor>
+
+<button
+  *ngIf="mode === 'html'"
+  (click)="toMarkdown()">Markdown</button>
+
+<button
+  *ngIf="mode === 'markdown'"
+  (click)="toHtml()">Html</button>

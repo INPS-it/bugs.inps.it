@@ -1,0 +1,106 @@
+//
+// license-start
+//
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+tg-lightbox-close
+
+form(ng-if="lightboxOpen")
+    h2.title(ng-switch="mode")
+        span(ng-switch-when="new") {{ 'LIGHTBOX.CREATE_EDIT.NEW_' + translationID | translate }}
+        span(ng-switch-when="edit") {{ 'LIGHTBOX.CREATE_EDIT.EDIT_' + translationID | translate }}
+        span(ng-switch-when="add-existing") {{ 'LIGHTBOX.CREATE_EDIT.ADD_EXISTING_' + translationID | translate: { targetName: targetName } }}
+
+    .button-group(ng-show="getOrCreate == true")
+        .button-group-single(ng-click="setMode('add-existing')")
+            input(
+                type="radio"
+                name="related-with-selector"
+                id="add-existing"
+                value="add-existing"
+                ng-model="mode"
+            )
+            label.e2e-existing-item-label(for="add-existing")
+                span.name {{ 'LIGHTBOX.CREATE_EDIT.EXISTING_' + translationID | translate }}
+
+        .button-group-single(ng-click="setMode('new')")
+            input(
+                type="radio"
+                name="related-with-selector"
+                id="new"
+                value="new"
+                ng-model="mode"
+            )
+            label.e2e-new-item-label(for="new")
+                span.name {{ 'LIGHTBOX.CREATE_EDIT.NEW_' + translationID | translate }}
+
+    div(ng-if="mode == 'add-existing'")
+        .existing-item-wrapper
+            tg-search-list(
+                label="{{ 'LIGHTBOX.CREATE_EDIT.CHOOSE_EXISTING_' + translationID | translate }}"
+                placeholder="{{ 'LIGHTBOX.CREATE_EDIT.FILTER_' + translationIDPlural | translate }}"
+                items="existingItems"
+                ng-model="selectedItem"
+                filter-by="['ref', 'subject']"
+                project="project"
+                item-type="{{ objType }}"
+                item-disabled="isDisabledExisting"
+            )
+
+        button.btn-big.add-existing-button(
+            ng-click="addExistingToSprint(selectedItem)"
+            ng-disabled="!selectedItem || isDisabledExisting(selectedItem)"
+        ) {{ 'LIGHTBOX.CREATE_EDIT.ADD_' + translationID | translate }}
+
+    div(ng-if="mode != 'add-existing'")
+        .form-wrapper
+            .main
+                fieldset
+                    input(
+                        type="text"
+                        name="subject"
+                        ng-model-options="{ debounce: 200 }"
+                        ng-model="obj.subject"
+                        tg-auto-select
+                        placeholder="{{ 'COMMON.FIELDS.SUBJECT' | translate }}"
+                        data-required="true"
+                        data-maxlength="500"
+                        autocomplete="off"
+                    )
+
+                fieldset
+                    textarea.description(
+                        rows=7
+                        name="description"
+                        ng-model="obj.description"
+                        ng-model-options="{ debounce: 200 }"
+                        ng-attr-placeholder="{{ 'LIGHTBOX.CREATE_EDIT.' + translationID + '_PLACEHOLDER_DESCRIPTION' | translate }}"
+                    )
+                fieldset
+                    section
+                    tg-attachments-simple(
+                        attachments="attachments",
+                        on-add="addAttachment(attachment)"
+                        on-delete="deleteAttachment(attachment)"
+                    )
+
+        .btn-container
+            button#submitButton.btn-big.add-item(
+                variant="primary"
+                type="submit"
+                tg-loading="vm.loading"
+                ng-switch="mode"
+            )
+                span(ng-switch-when="new") {{ 'COMMON.CREATE' | translate }}
+                span(ng-switch-when="edit") {{ 'COMMON.SAVE' | translate }}

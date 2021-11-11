@@ -1,0 +1,86 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+section.profile-projects
+    div(ng-if="vm.projects === undefined")
+         div.spin
+            img(src="/#{v}/svg/spinner-circle.svg", alt="Loading...")
+
+    .empty-tab(ng-if="vm.projects && !vm.projects.size")
+        tg-svg(svg-icon="icon-unwatch")
+
+        p(
+            translate="USER.PROFILE.PROJECTS_EMPTY"
+            translate-values="{username: vm.user.get('full_name_display')}"
+        )
+    .list-itemtype-project(
+        tg-repeat="project in vm.projects"
+        ng-class="{'blocked-project': project.get('blocked_code')}"
+    )
+        .list-itemtype-project-left
+            .project-list-single-title-wrapper
+                a.list-itemtype-project-image(
+                    href="#"
+                    tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                    title="{{ ::project.get('name') }}"
+                )
+                    img(
+                        tg-project-logo-small-src="::project"
+                        alt="{{::project.get('name')}}"
+                    )
+                .project-list-single-title
+                    h2
+                        a.project-title(
+                            href="#"
+                            tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                            title="{{ ::project.get('name') }}"
+                        ) {{::project.get('name')}}
+
+                        tg-svg(
+                            ng-if="project.get('blocked_code')",
+                            svg-icon="icon-blocked-project"
+                            svg-title-translate="PROJECT.BLOCKED_PROJECT.BLOCKED"
+                        )
+                    p.project-description {{ ::project.get('description') | limitTo:300 }}
+
+        .list-itemtype-project-right
+
+            .list-itemtype-track
+                //- span.list-itemtype-track-likers(
+                //-     ng-class="{'active': project.get('is_fan')}"
+                //-     title="{{ 'PROJECT.LIKE_BUTTON.COUNTER_TITLE'|translate:{total:project.get(\"total_fans\")||0}:'messageformat' }}"
+                //- )
+                //-     tg-svg(svg-icon="icon-like")
+                //-     span {{ ::project.get('total_fans') }}
+
+                span.list-itemtype-track-watchers(
+                    ng-class="{'active': project.get('is_watcher')}"
+                    title="{{ 'PROJECT.WATCH_BUTTON.COUNTER_TITLE'|translate:{total:project.get(\"total_watchers\")||0}:'messageformat' }}"
+                )
+                    tg-svg(svg-icon="icon-watch")
+                    span {{ ::project.get('total_watchers') }}
+
+            .list-itemtype-project-members
+                a(
+                    tg-repeat="contact in ::project.get('contacts')"
+                    tg-nav="user-profile:username=contact.get('username')"
+                    title="{{::contact.get('full_name')}}"
+                )
+                    img(
+                        tg-avatar="contact"
+                        alt="{{::contact.get('full_name')}}"
+                    )
+                    

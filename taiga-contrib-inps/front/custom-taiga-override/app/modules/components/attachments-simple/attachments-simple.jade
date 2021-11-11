@@ -1,0 +1,54 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+//- section.attachments(tg-attachments-drop="vm.addAttachments(files)")
+
+section.attachments.attachment-simple(tg-attachments-drop="vm.addAttachments(files)")
+    .attachments-header
+        h3.attachments-title #[span.attachments-num {{vm.attachments.size}}] #[span.attachments-text(translate="ATTACHMENT.SECTION_NAME")]
+        .add-attach#a11y-add-attach(title!="{{'ATTACHMENT.ADD' | translate}}")
+            button.btn-icon.add-attachment-button(
+                type="button"
+                variant='primary'
+                ng-click="displayAttachmentInput()"
+            )
+                tg-svg(svg-icon="icon-add")
+            input(
+                aria-label="{{'ATTACHMENT.ADD' | translate}}"
+                id="add-attach"
+                type="file"
+                accept="{{vm.attachmentMimeTypes}}"
+                multiple="multiple"
+                ng-model="files"
+                tg-file-change="vm.addAttachments(files)"
+            )
+    .attachments-empty(ng-if="!vm.attachments.size")
+        div {{'ATTACHMENT.DROP' | translate}}
+    .attachment-body.attachment-list
+        .single-attachment(tg-repeat="attachment in vm.attachments track by $index")
+            .attachment-name
+                tg-svg(svg-icon="icon-attachment")
+                span {{attachment.get('name')}}
+            .attachment-size
+                span {{attachment.get('size') | sizeFormat}}
+
+            .attachment-settings
+                a.settings.attachment-delete(
+                    href="#"
+                    title="{{'COMMON.DELETE' | translate}}"
+                    ng-click="vm.deleteAttachment(attachment)"
+                )
+                    tg-svg(svg-icon="icon-trash")

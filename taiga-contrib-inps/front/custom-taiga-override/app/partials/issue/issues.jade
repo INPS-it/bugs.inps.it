@@ -1,0 +1,144 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+doctype html
+
+div.wrapper.issues.lightbox-generic-form(
+    tg-issues-ordering
+    tg-issues-pagination
+    ng-controller="IssuesController as ctrl"
+    ng-init="section='issues'"
+)
+    tg-project-menu
+
+    section.main.issue-main
+        .issue-top
+            header.issue-header
+                include ../includes/components/mainTitle
+                .taskboard-actions
+                    .issue-table-options-start
+
+                        //- Button Legenda tipi BUG
+                        button.btn-filter.e2e-open-filter(
+                            ng-click="ctrl.openFilter = false;  ctrl.openLegend = !ctrl.openLegend; "
+                            title="{{'ISSUES.LEGEND_TITLE' | translate}}"
+                            ng-class="{active: ctrl.openLegend}"
+                        )
+                            tg-svg(svg-icon="icon-list")
+                            span.text(
+                                ng-if="!ctrl.openLegend"
+                                translate="ISSUES.LEGEND_TITLE"
+                            )
+                            span.text(
+                                ng-if="ctrl.openLegend"
+                                translate="ISSUES.LEGEND_HIDE_TITLE"
+                            )
+
+                        button.btn-filter.e2e-open-filter(
+                            ng-click="ctrl.openLegend = false; ctrl.openFilter = !ctrl.openFilter;"
+                            title="{{ctrl.selectedFilters.length}} {{'COMMON.FILTERS.APPLIED_FILTERS_NUM' | translate}}"
+                            ng-class="{active: ctrl.openFilter}"
+                        )
+                            tg-svg(svg-icon="icon-filters")
+                            span.text(
+                                ng-if="!ctrl.openFilter"
+                                translate="BACKLOG.FILTERS.TITLE"
+                            )
+                            span.text(
+                                ng-if="ctrl.openFilter"
+                                translate="BACKLOG.FILTERS.HIDE_TITLE"
+                            )
+                            span.selected-filters(ng-if="ctrl.selectedFilters.length") {{ctrl.selectedFilters.length}}
+
+                        tg-input-search(
+                            q="ctrl.filterQ"
+                            change="ctrl.changeQ(q)"
+                        )
+                        .display-tags-button#show-tags
+                            .check.js-check(
+                                ng-class="{'active': ctrl.showTags}"
+                            )
+                                input(
+                                    type="checkbox"
+                                    id="show-tags-input"
+                                    ng-checked="ctrl.showTags"
+                                    ng-model="ctrl.showTags"
+                                    ng-change="ctrl.toggleShowTags()"
+                                )
+                                div
+                            label(
+                                for="show-tags-input"
+                                translate="BACKLOG.TAGS.SHOW"
+                            )
+
+                    .new-issue(tg-check-permission="add_issue")
+                        button(
+                            ng-class="{'btn-small': !ctrl.sprintIssues, 'btn-board': ctrl.sprintIssues}"
+                            type="button"
+                            variant="primary"
+                            ng-click="ctrl.addNewIssue('standard', null)"
+                        )
+                            tg-svg(svg-icon="icon-add")
+                            span(ng-if="!ctrl.sprintIssues") {{"ISSUES.ACTION_NEW_ISSUE" | translate}}
+
+                        button(
+                            ng-class="{'btn-icon': !ctrl.sprintIssues, 'btn-board': ctrl.sprintIssues}"
+                            type="button"
+                            variant="secondary"
+                            ng-click="ctrl.addIssuesInBulk()"
+                        )
+                            tg-svg(svg-icon="icon-bulk")
+        .issue-container
+            sidebar.filters-bar(
+                ng-if="ctrl.openFilter"
+            )
+                tg-filter(
+                    q="ctrl.filterQ"
+                    filters="ctrl.filters"
+                    custom-filters="ctrl.customFilters"
+                    selected-filters="ctrl.selectedFilters"
+                    customFilters="ctl.customFilters"
+                    on-save-custom-filter="ctrl.saveCustomFilter(name)"
+                    on-add-filter="ctrl.addFilter(filter)"
+                    on-select-custom-filter="ctrl.selectCustomFilter(filter)"
+                    on-remove-custom-filter="ctrl.removeCustomFilter(filter)"
+                    on-remove-filter="ctrl.removeFilter(filter)"
+                    on-change-q="ctrl.changeQ(q)"
+                )
+            sidebar.filters-bar(
+                ng-if="ctrl.openLegend"
+            )
+                tg-issue-legend
+
+            section.issues-page(
+                ng-class="{filter: ctrl.openFilter}"
+            )
+                tg-issues-table(
+                    issues="issues"
+                    show-tags="ctrl.showTags"
+                    on-load-issues="ctrl.loadIssues()"
+                    on-add-new-issue="ctrl.addNewIssue()"
+                    on-add-issues-in-bulk="ctrl.addIssuesInBulk()"
+                    on-toggle-tags="ctrl.toggleTags(tags)"
+                )
+
+                // Paginator is rendered using js.
+                div.paginator.issues-paginator
+
+    div.lightbox.lightbox-generic-form.lightbox-create-edit(tg-lb-create-edit)
+
+    div.lightbox.lightbox-generic-bulk(tg-lb-create-bulk-issues)
+        include ../includes/modules/lightbox-issue-bulk

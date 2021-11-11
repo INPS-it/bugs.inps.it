@@ -1,0 +1,120 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+div.wrapper
+    tg-project-menu
+    div.single-project.centered
+        section.single-project-intro
+            .project-logo(
+                href="#"
+                tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                title="{{::project.get('name')}}"
+            )
+                img(
+                    tg-project-logo-big-src="vm.project"
+                    alt="{{::vm.project.get('name')}}"
+                )
+            .single-project-title-wrapper
+                .intro-options
+                    .intro-title
+                        h1.project-name  {{::vm.project.get("name")}}
+                        tg-svg(
+                            ng-if="::vm.project.get('is_private')"
+                            svg-icon="icon-private"
+                            svgTitleTranslate: "PROJECT.PRIVATE"
+                        )
+
+                    //- div.track-buttons-container(ng-if="vm.user")
+                    //-     //- tg-like-project-button(project="vm.project")
+                    //-     tg-watch-project-button(project="vm.project")
+                    //-     tg-contact-project-button(
+                    //-         ng-if="vm.project.get('is_contact_activated')"
+                    //-         project="vm.project"
+                    //-     )
+
+                    div.track-container(ng-if="!vm.user")
+                        .list-itemtype-track
+                            //- span.list-itemtype-track-likers(
+                            //-     title="{{ 'PROJECT.LIKE_BUTTON.COUNTER_TITLE'|translate:{total:vm.project.get(\"total_fans\")||0}:'messageformat' }}"
+                            //- )
+                            //-     tg-svg(svg-icon="icon-like")
+                            //-     span {{ ::vm.project.get('total_fans') }}
+
+                            span.list-itemtype-track-watchers(
+                                title="{{ 'PROJECT.WATCH_BUTTON.COUNTER_TITLE'|translate:{total:vm.project.get(\"total_watchers\")||0}:'messageformat' }}"
+                            )
+                                tg-svg(svg-icon="icon-watch")
+                                span {{ ::vm.project.get('total_watchers') }}
+
+                p.description {{vm.project.get('description')}}
+
+        div.single-project-tags.tags-container(ng-if="::vm.project.get('tags').size")
+            span.tag(tg-repeat="tag in ::vm.project.get('tags')")
+                span.tag-name {{::tag}}
+
+        a.btn-small.view_all_issues(
+            href="#"
+            tg-nav="project-issues:project=vm.project.get('slug')"
+        ) {{"COMMON.PERMISIONS_CATEGORIES.ISSUES.VIEW_ISSUES" | translate}}
+        div.project-data
+            section.timeline(ng-if="vm.project")
+                div(tg-user-timeline, projectId="vm.project.get('id')")
+
+            section.involved-data
+                .looking-for-people(ng-if="vm.project.get('is_looking_for_people')")
+                    img(
+                        src="/#{v}/images/looking-for-people.png"
+                        title="{{'PROJECT.LOOKING_FOR_PEOPLE' | translate}}"
+                    )
+                    .looking-for-people-content
+                        h3(ng-class="{'is-empty': !vm.project.get('looking_for_people_note')}") {{'PROJECT.LOOKING_FOR_PEOPLE' | translate}}
+                        p(ng-if="vm.project.get('looking_for_people_note')") {{::vm.project.get('looking_for_people_note')}}
+                        tg-contact-project-button(
+                            ng-if="vm.isAuthenticated && vm.project.get('is_contact_activated')"
+                            project="vm.project"
+                            layout="large"
+                        )
+                        div(ng-if="!vm.isAuthenticated")
+                            p
+                                a(
+                                    href="{{ vm.registerUrl }}"
+                                    ng-if="vm.publicRegisterEnabled"
+                                    title="{{ 'REGISTER_FORM.TITLE' | translate }}"
+                                    translate="REGISTER_FORM.TITLE"
+                                )
+                            p
+                                a(
+                                    href="{{ vm.loginUrl }}"
+                                    title="{{ 'REGISTER_FORM.LINK_LOGIN' | translate }}"
+                                    translate="REGISTER_FORM.LINK_LOGIN"
+                                )
+
+                h2.title {{"PROJECT.SECTION.TEAM" | translate}}
+                ul.involved-team
+                    li(tg-repeat="member in vm.members")
+                        a(
+                            tg-nav="user-profile:username=member.get('username')",
+                            title="{{::member.get('full_name')}}"
+                        )
+                            img(
+                                tg-avatar="member"
+                                alt="{{::member.get('full_name')}}"
+                            )
+                            tg-svg(
+                                ng-if="member.get('id') == vm.project.getIn(['owner', 'id'])"
+                                svg-icon="icon-badge"
+                                svgTitleTranslate: "COMMON.OWNER"
+                            )

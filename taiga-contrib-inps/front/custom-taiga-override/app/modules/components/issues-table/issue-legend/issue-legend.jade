@@ -1,0 +1,36 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.legend-step-cat
+    .legend-cats
+        ul.legend-list
+            li.legend-list-item( 
+                ng-if="vm.legend"
+                ng-repeat="legend in vm.legend"
+            )
+                
+                div.legend-title
+                    span.name {{::legend.title}}
+
+                .legend-list
+                    button.single-legend(
+                        ng-repeat="it in legend.content"
+                        ng-class="single-legend-type-general"
+                        ng-style="{'border-color': it.color ? it.color : 'transparent'}"
+                    )
+                        span.name {{it.name}}
+                    
+                                  

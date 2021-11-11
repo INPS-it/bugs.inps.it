@@ -1,0 +1,25 @@
+{
+    "srcFolders": ["taiga-contrib-inps"],
+    "rules": [
+        {
+            "match": [".*\\.py$", ".*\\.coffee$"],
+            "skipIfContains": "license-start",
+            "comments": {
+                "start": "###",
+                "line": "# ",
+                "end": "###"
+            },
+            "content": ".github/default_license_header.txt"
+        },
+        {
+            "match": [".*\\.jade$", ".*\\.js$"],
+            "skipIfContains": "license-start",
+            "comments": {
+                "start": "//",
+                "line": "// ",
+                "end": "//"
+            },
+            "content": ".github/default_license_header.txt"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+section.admin-menu
+    nav
+        ul
+            li#usersettingsmenu-user-profile
+                a(href="", tg-nav="user-settings-user-profile", title="{{ 'USER_SETTINGS.MENU.SECTION_TITLE' | translate }}")
+                    span.title(translate="USER_SETTINGS.MENU.SECTION_TITLE")
+            li#usersettingsmenu-change-password(ng-if = "showChangePassword")
+                a(href="" tg-nav="user-settings-user-change-password", title="{{ 'USER_SETTINGS.MENU.CHANGE_PASSWORD' | translate }}")
+                    span.title(translate="USER_SETTINGS.MENU.CHANGE_PASSWORD")
+            li#usersettingsmenu-project-settings
+                a(href="", tg-nav="user-settings-user-project-settings", title="{{ 'USER_SETTINGS.PROJECT_SETTINGS.SET_START_PAGES' | translate }}")
+                    span.title(translate="USER_SETTINGS.PROJECT_SETTINGS.SET_START_PAGES")
+            //- li#usersettingsmenu-mail-notifications
+            //-     a(href="", tg-nav="user-settings-mail-notifications", title="{{ 'USER_SETTINGS.MENU.EMAIL_NOTIFICATIONS' | translate }}")
+            //-         span.title(translate="USER_SETTINGS.MENU.EMAIL_NOTIFICATIONS")
+            //- li#usersettingsmenu-live-notifications
+            //-     a(href="", tg-nav="user-settings-live-notifications", title="{{ 'USER_SETTINGS.MENU.DESKTOP_NOTIFICATIONS' | translate }}")
+            //-         span.title(translate="USER_SETTINGS.MENU.DESKTOP_NOTIFICATIONS")
+            //- li#usersettingsmenu-web-notifications
+            //-     a(href="", tg-nav="user-settings-web-notifications", title="{{ 'USER_SETTINGS.MENU.EVENTS' | translate }}")
+            //-         span.title(translate="USER_SETTINGS.MENU.EVENTS")
+            li#usersettings-contrib(ng-repeat="plugin in userSettingsPlugins")
+                a(
+                    href=""
+                    tg-nav="user-settings-contrib:plugin=plugin.slug"
+                    ng-class="{active: plugin.slug == currentPlugin.slug}"
+                )
+                    span.title {{ plugin.name }}

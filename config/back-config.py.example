@@ -1,0 +1,170 @@
+# -*- coding: utf-8 -*-
+import os
+from .common import *   # noqa, pylint: disable=unused-wildcard-import
+
+INSTALLED_APPS += [
+    "taiga_contrib_inps",
+
+    "djangosaml2",
+    "djangosaml2_spid",
+    "spid_config",
+    "spid_inps"
+]
+
+AUTHENTICATION_BACKENDS = list(AUTHENTICATION_BACKENDS)
+AUTHENTICATION_BACKENDS += [
+    "spid_inps.backends.TaigaInpsSpidSaml2Backend",
+]
+
+MIDDLEWARE += [
+    'djangosaml2.middleware.SamlSessionMiddleware',
+]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'taiga'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASS', 'postgres'),
+        'HOST': os.environ.get('DB_HOST', 'taiga-db'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
+}
+
+PRODUCTION = False
+
+STATS_CACHE_TIMEOUT = 1 # one second for test, to increment for production
+
+if PRODUCTION:
+    DEBUG = False
+
+    SECRET_KEY = os.environ['SECRET_KEY']
+
+    # SECURITY WARNING: update this when you have the production host
+    ALLOWED_HOSTS = ['']
+
+    #
+    EMAIL_HOST = 'smtp.server.it'
+    # EMAIL_HOST_USER = 'myemail@hotmail.com'
+    # EMAIL_HOST_PASSWORD = 'mypassword'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+    DEFAULT_FROM_EMAIL = 'inps.no-reply@inps.it'
+    SERVER_EMAIL = 'inps-error@inps.it'
+
+    # https only
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = True
+
+    # ADMINS will be notified of 500 errors by email.
+    ADMINS = [('John', 'john@example.com'), ('Mary', 'mary@example.com')]
+
+    # MANAGERS will be notified of 404 errors. IGNORABLE_404_URLS can help filter out spurious reports.
+    # MANAGERS = [('John', 'john@example.com'), ('Mary', 'mary@example.com')]
+else:
+    DEBUG = True
+
+
+if 'spid_config' in INSTALLED_APPS:
+    from spid_config.spid_settings import *
+    SPID_CERTS_DIR = os.path.join(BASE_DIR, 'spid_config', 'certificates')
+    SPID_PUBLIC_CERT = os.path.join(SPID_CERTS_DIR, 'public.cert')
+    SPID_PRIVATE_KEY = os.path.join(SPID_CERTS_DIR, 'private.key')
+    # https only
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = True
+    STATIC_URL = "https://localhost/static/"
+    SPID_BASE_URL = "https://localhost/"
+    LOGOUT_REDIRECT_URL = '/'
+    if SAML_CONFIG:
+        SAML_CONFIG["allow_unsolicited"] = True
+
+    # to be checked - taken from docker-compose example
+    SPID_SAML_CHECK_METADATA_URL = os.environ.get('SPID_SAML_CHECK_METADATA_URL', 'https://spid-saml-check:8080/metadata.xml')
+    SPID_DEMO_METADATA_URL = os.environ.get('SPID_DEMO_METADATA_URL', 'https://spid-saml-check:8080/demo/metadata.xml')
+    LOGIN_REDIRECT_URL = 'https://localhost/post_login'
+    SPID_ACS_URL_PATH = 'spid/acs/'
+
+USER_FULLNAME_PREFIX='User_'
+SAVE_PERSON_FISCAL_NUMBER = False
+USE_ACCOUNT_LINKING_USER_PERSON = False
+ONLY_SUPERUSER_CAN_CREATE_PROJECT = True
+
+MAX_UPLOAD_FILE_SIZE= 10485760
+ATTACHMENT_MIME_TYPES = ["image/jpg", "image/jpeg", "image/png", "application/pdf"]
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "email.user@emailhost.com"
+EMAIL_HOST ='smtp.emailhost.com'
+EMAIL_PORT ='587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'email.user@emailhost.com'
+EMAIL_HOST_PASSWORD = 'emailhostpassword'
+
+SITES = {
+    "api": {"domain": "localhost", "scheme": "https", "name": "api"},
+    "front": {"domain": "localhost", "scheme": "https", "name": "front"},
+}
+
+# DJANGO SETTINGS RESOLVER
+SR = {
+    "social": {
+        "twitter_url": "#",
+        "github_url": "https://github.com/INPS-it/taiga-inps-bug-tracking",
+    },
+    "support": {
+        "url": "https://bugs.inps.it",
+        "email": "bugs@inps.it"
+    },
+    "signature": "The INPS BUG Tracker Team",
+    "product_name": "INPS BUG Tracker",
+}
+
+TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [
+            os.path.join(BASE_DIR, "ext_templates"),
+            os.path.join(BASE_DIR, "templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+            ],
+            "match_extension": ".jinja",
+        }
+    },
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "ext_templates"),
+            os.path.join(BASE_DIR, "templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        }
+    },
+]
+
+LANGUAGE_CODE = 'it'

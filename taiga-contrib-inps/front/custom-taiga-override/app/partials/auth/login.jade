@@ -1,0 +1,23 @@
+//
+// license-start
+//
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+doctype html
+
+div.wrapper
+    div.auth
+        div.auth-container
+            div.logo-svg
+                include ../../svg/logo-color.svg
+            h1.logo INPS
+
+            include ../includes/modules/login-form
+script(type="text/javascript")
+    |$(document).ready(function(){
+    |    window.location.href = '/'
+    |});

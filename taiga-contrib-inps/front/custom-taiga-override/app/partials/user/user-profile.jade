@@ -1,0 +1,161 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+doctype html
+
+div.wrapper(
+    tg-user-profile
+    ng-controller="UserSettingsController as ctrl"
+    ng-init="section='user-settings'"
+)
+
+    sidebar.menu-secondary.sidebar.settings-nav(tg-user-settings-navigation="user-profile")
+        include ../includes/modules/user-settings-menu
+
+    section.main.user-profile
+        header
+            include ../includes/components/mainTitle
+
+        form
+            .project-details-image(tg-user-avatar)
+                fieldset.image-container
+                    img.image(tg-avatar-big="user" alt="avatar")
+                    .loading-overlay
+                        img.loading-spinner(
+                            src="/#{v}/svg/spinner-circle.svg",
+                            alt="{{'COMMON.LOADING' | translate}}"
+                        )
+                    input.hidden(
+                        type="file"
+                        id="avatar-field"
+                        tg-avatar-model="avatarAttachment"
+                    )
+
+                button.btn-small.button-full.js-change-avatar(
+                    type="text"
+                    variant="secondary"
+                    title="{{'USER_PROFILE.CHANGE_PHOTO' | translate}}"
+                ) {{'USER_PROFILE.CHANGE_PHOTO' | translate}}
+
+                a.use-default-image.js-use-gravatar(
+                    href="#"
+                    title="{{ 'USER_PROFILE.ACTION_USE_GRAVATAR' | translate }}"
+                ) {{ 'USER_PROFILE.ACTION_USE_GRAVATAR' | translate }}
+
+            .project-details-form-data
+                fieldset
+                    label(for="username", translate="USER_PROFILE.FIELD.USERNAME")
+                    input(
+                        type="text"
+                        autocorrect="off"
+                        autocapitalize="none"
+                        name="username"
+                        id="username"
+                        ng-model="user.username"
+                        data-required="true"
+                        data-maxlength="255"
+                        data-regexp="^[\\w.-]+$"
+                        placeholder="{{'USER_PROFILE.FIELD.USERNAME' | translate}}",
+                    )
+
+                fieldset
+                    label(for="email", translate="USER_PROFILE.FIELD.EMAIL")
+                    div(ng-if="user.verified_email === false")
+                        a.verify-email(
+                            href=""
+                            title="{{'USER_PROFILE.ACTION_VERIFY_EMAIL' | translate}}"
+                            ng-click="ctrl.verifyEmail()"
+                            translate="USER_PROFILE.ACTION_VERIFY_EMAIL"
+                        )
+                    input(
+                        type="email"
+                        name="email"
+                        id="email"
+                        ng-model="user.email"
+                        data-type="email"
+                        data-required="true"
+                        data-maxlength="255"
+                        placeholder="{{'USER_PROFILE.FIELD.EMAIL' | translate}}"
+                        readonly
+                    )
+
+                fieldset
+                    label(for="full-name", translate="USER_PROFILE.FIELD.FULL_NAME")
+                    input(
+                        type="text"
+                        name="full_name"
+                        id="full-name"
+                        ng-model="user.full_name"
+                        data-required="true"
+                        data-maxlength="256"
+                        placeholder="{{'USER_PROFILE.FIELD.PLACEHOLDER_FULL_NAME' | translate}}",
+                    )
+
+                fieldset
+                    label(for="lang", translate="USER_PROFILE.FIELD.LANGUAGE")
+                    select(
+                        name="lang"
+                        id="lang"
+                        ng-model="lang"
+                        ng-options="locale.code as locale.name for locale in locales"
+                    )
+                        option(value="", translate="USER_PROFILE.FIELD.LANGUAGE_DEFAULT")
+
+                //- fieldset
+                //-     label(for="theme", translate="USER_PROFILE.FIELD.THEME")
+                //-     select(
+                //-         name="theme"
+                //-         id="theme"
+                //-         ng-model="theme"
+                //-         ng-options="availableTheme for availableTheme in availableThemes"
+                //-     )
+                //-         option(value="", translate="USER_PROFILE.FIELD.THEME_DEFAULT")
+
+                fieldset
+                    label(for="bio", translate="USER_PROFILE.FIELD.BIO")
+                    textarea(
+                        name="bio"
+                        id="bio"
+                        ng-model="user.bio"
+                        ng-attr-placeholder="{{'USER_PROFILE.FIELD.PLACEHOLDER_BIO' | translate}}"
+                        ng-maxlength="210"
+                        maxlength="210"
+                    )
+
+                fieldset.submit
+                    button.btn-small(
+                        variant="primary"
+                        type="submit"
+                        title="{{'COMMON.SAVE' | translate}}",
+                        translate="COMMON.SAVE"
+                    )
+
+                div.actions
+                    //- a.download-profile(
+                    //-     href=""
+                    //-     title="{{'USER_PROFILE.ACTION_DOWNLOAD_PROFILE' | translate}}"
+                    //-     ng-click="ctrl.exportProfile()"
+                    //-     translate="USER_PROFILE.ACTION_DOWNLOAD_PROFILE"
+                    //- )
+                    a.delete-account(
+                        ng-if="user && user.roles && user.roles.length"
+                        href=""
+                        title="{{'USER_PROFILE.ACTION_DELETE_ACCOUNT' | translate}}"
+                        ng-click="ctrl.openDeleteLightbox()"
+                        translate="USER_PROFILE.ACTION_DELETE_ACCOUNT"
+                    )
+
+div.lightbox.lightbox-delete-account(tg-lb-delete-user)

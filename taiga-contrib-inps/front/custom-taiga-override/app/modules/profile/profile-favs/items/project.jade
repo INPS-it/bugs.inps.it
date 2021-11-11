@@ -1,0 +1,64 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.list-itemtype-project(ng-class="{'blocked-project': vm.item.get('project_blocked_code')}")
+    .list-itemtype-project-left
+        .list-itemtype-project-data-wrapper
+            a.list-itemtype-project-image(
+                href="#"
+                tg-nav="project:project=vm.item.get('slug'),section=vm.item.get('my_homepage')"
+                title="{{ ::vm.item.get('name') }}"
+            )
+                img(
+                    tg-project-logo-small-src="vm.item"
+                    title="{{ ::vm.item.get('name') }}"
+                )
+
+            .list-itemtype-project-data
+                .list-itemtype-data-title
+                    a.list-itemtype-project-name(
+                        href="#"
+                        tg-nav="project:project=vm.item.get('slug'),section=vm.item.get('my_homepage')"
+                        title="{{ ::vm.item.get('name') }}"
+                    ) {{ ::vm.item.get('name') }}
+
+                    tg-svg(
+                        ng-if="::vm.item.get('is_private')"
+                        svg-icon="icon-private"
+                        svg-title-translate="PROJECT.PRIVATE"
+                    )
+
+                    tg-svg(
+                        ng-if="vm.item.get('blocked_code')"
+                        svg-icon="icon-blocked-project"
+                        svg-title-translate="PROJECT.BLOCKED_PROJECT.BLOCKED"
+                    )
+                .list-itemtype-data-meta.list-itemtype-project-description {{ ::vm.item.get('description') }}
+
+    .list-itemtype-track
+        //- span.list-itemtype-track-likers(
+        //-     ng-class="{'active': vm.item.get('is_fan')}"
+        //-     title="{{ 'PROJECT.LIKE_BUTTON.COUNTER_TITLE'|translate:{total:vm.item.get(\"total_fans\")||0}:'messageformat' }}"
+        //-  )
+        //-     tg-svg(svg-icon="icon-like")
+        //-     span {{ ::vm.item.get('total_fans') }}
+
+        span.list-itemtype-track-watchers(
+            ng-class="{'active': vm.item.get('is_watcher')}"
+            title="{{ 'PROJECT.WATCH_BUTTON.COUNTER_TITLE'|translate:{total:vm.item.get(\"total_watchers\")||0}:'messageformat' }}"
+        )
+            tg-svg(svg-icon="icon-watch")
+            span {{ ::vm.item.get('total_watchers') }}
