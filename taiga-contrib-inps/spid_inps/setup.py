@@ -21,8 +21,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "djangosaml2-spid @ git+https://git@github.com/italia/spid-django.git@main#egg=djangosaml2-spid",
-        "spid_compliant_certificates @ git+https://git@github.com/italia/spid-compliant-certificates-python.git@main#egg=spid_compliant_certificates",
-        "requests==2.25.1"
+        "spid_compliant_certificates @ git+https://git@github.com/italia/spid-compliant-certificates-python.git@main#egg=spid_compliant_certificates"
     ],
     setup_requires=[
         "zipp==3.1.0",
