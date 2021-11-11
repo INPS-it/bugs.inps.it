@@ -6,3 +6,5 @@
 #
 # Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 ###
+
+__version__ = (1, 0, 0)

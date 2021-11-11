@@ -42,12 +42,11 @@ class ExchangeTokenView(View):
 
         return HttpResponseForbidden()
 
-
+from taiga.projects.models import Membership
 class MyUsersAPI(RetrieveAPIView):
     model = User
-    serializer_class = serializers.UserSerializer
-    permission_classes = (ResourcePermission,)
-
+    serializer_class = serializers.UserAdminSerializer
+    
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.prefetch_related("memberships")
@@ -55,6 +54,11 @@ class MyUsersAPI(RetrieveAPIView):
         return qs
 
     def retrieve(self, request, *args, **kwargs):
+
+        mm = Membership.objects.filter(user=request.user,is_admin=True)
+        if not len(mm):
+            return response.Forbidden()
+        
         user = get_object_or_404(User, **kwargs)
 
         qs = User.objects.filter(is_active=True)
@@ -69,9 +73,11 @@ class MyUsersAPI(RetrieveAPIView):
 
         page = self.paginate_queryset(object_list)
         if page is not None:
-            serializer = serializers.UserSerializer(
+            serializer = self.serializer_class(
                 page.object_list, many=True)
         else:
-            serializer = serializers.UserSerializer(object_list, many=True)
+            serializer = self.serializer_class(object_list, many=True)
 
         return response.Ok(serializer.data)
+
+

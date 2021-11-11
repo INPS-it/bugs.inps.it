@@ -1,0 +1,93 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+div.discover-header
+    div.discover-header-inner
+
+        h1.title {{ 'DISCOVER.DISCOVER_TITLE' | translate }}
+
+        p.project-number(
+            ng-if="vm.projects",
+            translate="DISCOVER.DISCOVER_SUBTITLE",
+            translate-values="{ projects: '{{vm.projects}}'}"
+            translate-interpolation="messageformat"
+        )
+
+        p.project-number(
+            ng-if="vm.projects",
+            translate="DISCOVER.DISCOVER_SUBTITLE_2",
+            translate-values="{ projects: '{{vm.projects}}'}"
+            translate-interpolation="messageformat"
+        )
+
+        form(ng-submit="vm.submitFilter()")
+            div.searchbox
+                input(
+                    name="search"
+                    type="text"
+                    placeholder="{{ 'DISCOVER.SEARCH.INPUT_PLACEHOLDER' | translate }}"
+                    ng-model="vm.q"
+                )
+                tg-svg.search-button(
+                    ng-click="vm.submitFilter()"
+                    svg-icon="icon-search"
+                    svg-title-translate="DISCOVER.SEARCH.ACTION_TITLE"
+                )
+
+            fieldset.searchbox-filters(ng-if="vm.filter")
+                input(
+                    type='radio'
+                    id="filter-all"
+                    name="filter-search"
+                )
+                label(
+                    for="filter-all"
+                    ng-click="vm.selectFilter('all')"
+                    ng-class="{active: vm.filter == 'all'}",
+                ) {{ 'DISCOVER.FILTERS.ALL' | translate }}
+
+                input(
+                    type='radio'
+                    id="filter-kanban"
+                    name="filter-search"
+                )
+                label(
+                    for="filter-kanban"
+                    ng-class="{active: vm.filter == 'kanban'}",
+                    ng-click="vm.selectFilter('kanban')"
+                ) {{ 'DISCOVER.FILTERS.KANBAN' | translate }}
+
+                input(
+                    type='radio'
+                    id="filter-scrum"
+                    name="filter-search"
+                )
+                label(
+                    for="filter-scrum"
+                    ng-class="{active: vm.filter == 'scrum'}",
+                    ng-click="vm.selectFilter('scrum')"
+                ) {{ 'DISCOVER.FILTERS.SCRUM' | translate }}
+
+                input(
+                    type='radio'
+                    id="filter-people"
+                    name="filter-search"
+                )
+                label(
+                    for="filter-people"
+                    ng-class="{active: vm.filter == 'people'}",
+                    ng-click="vm.selectFilter('people')"
+                ) {{ 'DISCOVER.FILTERS.PEOPLE' | translate }}

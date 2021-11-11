@@ -320,6 +320,7 @@ class TaigaContribINPSAppConfig(AppConfig):
             )
         )
 
+
         # Disable the default Taiga auth Routes
         urlpatterns.insert(0, url('api/v1/auth/register', self.render_404))
         urlpatterns.insert(0, url('api/v1/auth', self.render_404))

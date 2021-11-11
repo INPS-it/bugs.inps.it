@@ -13,6 +13,7 @@ from django.db.models import Q
 from taiga.projects.issues.models import Issue
 from taiga.permissions.services import user_has_perm
 from django.db.models.expressions import RawSQL
+from ..models import IssueVisibility
 
 
 def build_project_namespace(project: object):
@@ -55,17 +56,23 @@ def filter_timeline_for_user(timeline, user, namespace=None):
     issues_ids = set([issue.data["issue"]["id"]
                      for issue in list(issue_timeline)])
 
+    public_issues_ids = IssueVisibility.objects.filter(is_public=True).values_list('issue_id', flat=True)
+
     issues = Issue.objects.filter(id__in=issues_ids)
 
     user_allowed_issues_ids = []
     for issue in issues:
         if (
             user_has_perm(user, "modify_issue", issue.project)
-            or issue.status.slug != "triage"
+            # or issue.status.slug != "triage"
+            or issue.id in list(public_issues_ids)
             or issue.owner == user
         ):
             user_allowed_issues_ids.append(issue.id)
 
+    # Filtrare user_allowed_issues_ids con solo quelle public
+
+    
     tl_filter |= Q(
         data_content_type=ContentType.objects.get_by_natural_key(
             "issues", "issue"),

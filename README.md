@@ -123,6 +123,12 @@ Run tests
 make test
 ```
 
+## Confidential Bugs
+
+In addition to the INPS Bug Tracking platform, potential security bugs can be submitted in a confidential manner writing directly to confidential-bugs@inps.it. 
+
+These emails may also be sent using PGP encryption: the public key is available in this repository under the extras folder, and in the Ubuntu and MIT PGP keyservers too.
+
 ## Credits
 
 Thank you to these amazing projects we started from to understand how to customize

@@ -1,0 +1,112 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - collaboration
+  - customer-service-and-support
+  - help-desk
+  - office
+  - task-management
+dependsOn:
+  open:
+    - name: MariaDB
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Python
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Django
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Taiga
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+description:
+  it:
+    documentation: 'https://github.com/INPS-it/bugs.inps.it#inps-bug-tracking'
+    features:
+      - Role based user access and interaction
+      - SAML2 Authentication
+      - Staff team management
+      - Full project bug reports management
+      - Bug report creation with attachments and rich text editing
+      - Rich text bug report comments with attachments
+      - Bug report and comments moderation functionality
+      - Bug report tagging and assignment
+      - Customizable bugs categories names and colors
+      - A rich set of bugs filtering, including:
+      - Severity, priority and tipology
+      - Bug status
+      - Custom tags
+      - Creator user role
+    genericName: applicazione web
+    longDescription: >
+      INPS Bug Tracking platform is a project based on the Taiga.io opensource
+      project management software, with the goal to provide INPS online
+      services users a simple, streamlined way to report software
+      bugs, ask usage questions and make suggestions.
+    screenshots:
+      - >-
+        https://github.com/INPS-it/bugs.inps.it/blob/dev/docs/public/discovery_view.png
+      - >-
+        https://github.com/INPS-it/bugs.inps.it/blob/public/bug_view_filters.png
+    shortDescription: >-
+      INPS Bug Tracking platform
+developmentStatus: stable
+intendedAudience:
+  scope:
+    - employment
+it:
+  conforme:
+    gdpr: true
+    lineeGuidaDesign: true
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: true
+    pagopa: false
+    spid: true
+  riuso:
+    codiceIPA: inps
+landingURL: 'https://github.com/INPS-it/bugs.inps.it'
+legal:
+  authorsFile: >-
+    https://raw.githubusercontent.com/INPS-it/bugs.inps.it/master/AUTHORS
+  license: MPL-2.0
+  mainCopyrightOwner: INPS
+localisation:
+  availableLanguages:
+    - it
+    - en
+  localisationReady: true
+maintenance:
+  contacts:
+    - affiliation: inps
+      email: guido.aulisi@inps.it
+      name: Aulisi Guido
+    - email: christian.ancillotti@inps.it
+      name: Ancillotti Christian
+  type: internal
+name: INPS Bug Tracking
+platforms:
+  - linux
+  - web
+releaseDate: '2021-11-09'
+roadmap: 'https://github.com/INPS-it/bugs.inps.it/issues'
+softwareType: standalone/web
+softwareVersion: v1.0.0
+url: 'https://github.com/INPS-it/bugs.inps.it'
+usedBy:
+  - Istituto Nazionale di Previdenza Sociale

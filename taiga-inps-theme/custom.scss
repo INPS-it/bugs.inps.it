@@ -1236,3 +1236,47 @@ tg-wysiwyg .editor.edit-mode {
 .admin-menu li > a {
     margin-right: 1rem;
 }
+
+.error-main {
+    background: white;
+    align-items: center;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $first-layer;
+    .logo-container {
+        display: block;
+        background-color: $white;
+        width: 100%;
+        max-height: 20rem;
+        padding: 3rem;
+    }
+    .error-container {
+        display: block;
+        color: $white;
+        background-color: $interactiveBluPressed;
+        width: 100%;
+        height: 100%;
+        padding: 3rem 0 3rem 0;
+        text-align: center;
+    }
+    .logo-svg {
+        padding: 0 32%;
+        text-align: center;
+        width: 100%;
+        display: block;
+        height: 10rem;
+    }
+    h1 {
+        color: $white !important;
+        display: block;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    a {
+        color: $primary-light;
+    }
+}

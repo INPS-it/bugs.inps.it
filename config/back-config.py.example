@@ -50,8 +50,8 @@ if PRODUCTION:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
 
-    DEFAULT_FROM_EMAIL = 'inps.no-reply@inps.it'
-    SERVER_EMAIL = 'inps-error@inps.it'
+    DEFAULT_FROM_EMAIL = 'no-reply@emailhost.com'
+    SERVER_EMAIL = 'error@emailhost.com'
 
     # https only
     CSRF_COOKIE_SECURE = True
@@ -119,7 +119,7 @@ SR = {
     },
     "support": {
         "url": "https://bugs.inps.it",
-        "email": "bugs@inps.it"
+        "email": "bugs@emailhost.com"
     },
     "signature": "The INPS BUG Tracker Team",
     "product_name": "INPS BUG Tracker",

@@ -119,6 +119,12 @@ Lancia i test
 make test
 ```
 
+## Confidential Bugs
+
+In aggiunta alla piattaforma INPS Bug Tracking, eventuali bug di sicurezza possono essere segnalati in modo confidenziale scrivendo direttamente a confidential-bugs@inps.it. 
+
+Le email possono essere inviate anche usando cryptazione PGP: la chiave pubblica è disponibile in questo repository nella cartella extras, e in aggiunta anche sui PGP keyserver Ubuntu e MIT.
+
 ## Crediti
 
 Grazie ai seguenti progetti utili a capire come customizzare Taiga

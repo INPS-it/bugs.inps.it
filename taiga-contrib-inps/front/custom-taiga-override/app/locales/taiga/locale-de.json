@@ -1466,8 +1466,8 @@
     },
     "ERROR": {
         "TEXT1": "Etwas ist schiefgelaufen, Inps Bug Tracking hat den Fehler jedoch erfasst, um ihn bearbeiten zu können.",
-        "NOT_FOUND": "Nicht gefunden",
-        "NOT_FOUND_TEXT": "Fehler 404. Die angeforderte Seite existiert nicht mehr. Möglicherweise finden Sie das Gesuchte, wenn Sie zur Inps Bug Tracking Homepage zurückkehren.",
+        "NOT_FOUND": "It's not a bug, it's a feature...",
+        "NOT_FOUND_TEXT": "Die gesuchte Seite existiert nicht oder Sie haben nicht genügend Berechtigungen. Vielleicht können Sie zur Startseite zurückkehren und sehen, ob Sie das Gesuchte finden.",
         "PERMISSION_DENIED": "Berechtigung verweigert",
         "PERMISSION_DENIED_TEXT": "Sie haben nicht die Berechtigung um auf diese Seite zuzugreifen",
         "VERSION_ERROR": "Ein anderer Inps Bug Tracking-Benutzer hat hier bereits Veränderungen vorgenommen, sodass Ihre Änderungen nicht gespeichert werden können. Speichern Sie diese an einer anderen Stelle, laden Sie die Seite neu und nehmen Sie die Änderungen dann erneut vor oder Ihre Eingaben gehen verloren."
@@ -1907,8 +1907,9 @@
     "DISCOVER": {
         "PAGE_TITLE": "Entdecke Projekte  - Inps Bug Tracking",
         "PAGE_DESCRIPTION": "Searchable directory of Public Projects in Inps Bug Tracking. Explore backlogs, timelines, issues, and teams. Check out the most liked or most active projects. Filter by Kanban or Scrum.",
-        "DISCOVER_TITLE": "Entdecke Projekte",
-        "DISCOVER_SUBTITLE": "{projects, plural, =1{# öffentliches Projekt zu entdecken} other{# öffentliche Projekte zu entdecken}}",
+        "DISCOVER_TITLE": "INPS-Website zur Meldung von Fehlern",
+        "DISCOVER_SUBTITLE": "Wählen Sie einen der folgenden Bereiche aus, die sich auf den Fehler beziehen, den Sie melden möchten. Vielen Dank!",
+        "DISCOVER_SUBTITLE_2": "{projects, plural, =1{# öffentliches Projekt zu entdecken} other{# öffentliche Projekte zu entdecken}}",
         "MOST_ACTIVE": "Aktivste Bereiche",
         "MOST_ACTIVE_EMPTY": "Es gibt noch keine AKTIVEN Bereiche",
         "MOST_LIKED": "Gebietsliste",

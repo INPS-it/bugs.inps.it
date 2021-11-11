@@ -1487,8 +1487,8 @@
     },
     "ERROR": {
         "TEXT1": "Something happened and Inps Bug Tracking has captured the error to be able to work on it.",
-        "NOT_FOUND": "Not found",
-        "NOT_FOUND_TEXT": "Error 404. The page you are looking for no longer exists. Perhaps you can return back to TAIGA homepage and see if you can find what you are looking for.",
+        "NOT_FOUND": "It's not a bug, it's a feature...",
+        "NOT_FOUND_TEXT": "The page you are looking for doesn't exists or you don't have enough permissions. Perhaps you can return back to the homepage and see if you can find what you are looking for.",
         "PERMISSION_DENIED": "Permission denied",
         "PERMISSION_DENIED_TEXT": "You don't have permission to access this page.",
         "VERSION_ERROR": "Some other user inside Inps Bug Tracking has changed this before and your changes can't be applied. Save them elsewhere, reload the page and re-apply your changes again or they will be lost."
@@ -1932,8 +1932,9 @@
     "DISCOVER": {
         "PAGE_TITLE": "Theme Areas",
         "PAGE_DESCRIPTION": "Searchable directory of Public Projects in Inps Bug Tracking. Explore backlogs, timelines, issues, and teams. Check out the most liked or most active projects. Filter by Kanban or Scrum.",
-        "DISCOVER_TITLE": "Theme Areas",
-        "DISCOVER_SUBTITLE": "{projects, plural, =1{One theme area to discover} other{# theme areas}}",
+        "DISCOVER_TITLE": "INPS bugs reporting website",
+        "DISCOVER_SUBTITLE": "Choose one of the areas below related to the bug you want to report. Thanks!",
+        "DISCOVER_SUBTITLE_2": "{projects, plural, =1{One theme area to discover} other{# theme areas}}",
         "MOST_ACTIVE": "Most active",
         "MOST_ACTIVE_EMPTY": "There are no ACTIVE projects yet",
         "MOST_LIKED": "Theme Areas",

@@ -184,7 +184,7 @@
         },
         "ASSIGNED_USERS": {
             "ADD": "Seleziona utente assegnato",
-            "ADD_ASSIGNED": "Aggiungi assegnato",
+            "ADD_ASSIGNED": "Assegna a qualcuno",
             "TITLE_LIGHTBOX_DELETE_ASSIGNED": "Elimina assegnato..."
         },
         "STATUS": {
@@ -1491,8 +1491,8 @@
     },
     "ERROR": {
         "TEXT1": "Qualcosa è andato storto e Inps Bug Tracking ha rilevato l'errore per poterci lavorare.",
-        "NOT_FOUND": "Non trovato",
-        "NOT_FOUND_TEXT": "Errore 404. La pagina che stai cercando non esiste più. Forse puoi tornare alla home e vedere se è possibile trovare quello che stai cercando.",
+        "NOT_FOUND": "It's not a bug, it's a feature...",
+        "NOT_FOUND_TEXT": "La pagina che stai cercando non esiste o non hai sufficienti permessi per poterla visualizzare. Forse puoi tornare alla home e vedere se è possibile trovare quello che stai cercando.",
         "PERMISSION_DENIED": "Permesso negato",
         "PERMISSION_DENIED_TEXT": "Non si hanno i permessi necessari per accedere a questa pagina.",
         "VERSION_ERROR": "Qualche altro utente di Inps Bug Tracking lo ha modificato prima e le tue modifiche non possono essere applicate. Salvale altrove, ricarica la pagina e riapplica le tue modifiche o andranno perse."
@@ -1640,7 +1640,7 @@
             "TITLE_ACTION_ASSIGNED_TO": "Assegna a",
             "BLOCKED": "Bloccato",
             "EMPTY": {
-                "TITLE": "Nessun bug presente attualmente :-)",
+                "TITLE": "Nessun bug pubblico presente attualmente :-)",
                 "SUBTITLE": "Hai un bug da segnalare?"
             }
         },
@@ -1936,8 +1936,9 @@
     "DISCOVER": {
         "PAGE_TITLE": "Aree Tematiche",
         "PAGE_DESCRIPTION": "Elenco ricercabile dei progetti pubblici in Inps Bug Tracking. Esplora i backlog, i bug e i team. Scopri i progetti più apprezzati o più attivi. Filtra per Kanban o Scrum.",
-        "DISCOVER_TITLE": "Aree Tematiche",
-        "DISCOVER_SUBTITLE": "{projects, plural, =1{Un'area tematica} other{# aree tematiche}}",
+        "DISCOVER_TITLE": "Sito segnalazione bugs INPS",
+        "DISCOVER_SUBTITLE": "Scegli una delle aree qui sotto relative al bug che vuoi segnalare. Grazie!",
+        "DISCOVER_SUBTITLE_2": "{projects, plural, =1{Un'area tematica} other{# aree tematiche}}",
         "MOST_ACTIVE": "Aree più attive",
         "MOST_ACTIVE_EMPTY": "Non ci sono ancora progetti ATTIVI",
         "MOST_LIKED": "Lista Aree",

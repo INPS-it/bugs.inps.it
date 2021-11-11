@@ -16,10 +16,18 @@
 
 nav.navbar(ng-if="vm.isEnabledHeader")
     .nav-left
-
         a.logo(
+            ng-if="vm.isAdmin"
             href="#",
             tg-nav="home",
+            title="{{'PROJECT.NAVIGATION.DISCOVER' | translate}}"
+        )
+            include ../../svg/logo.svg
+
+        a.logo(
+            ng-if="!vm.isAdmin"
+            href="#",
+            tg-nav="discover",
             title="{{'PROJECT.NAVIGATION.HOMEPAGE' | translate}}"
         )
             include ../../svg/logo.svg

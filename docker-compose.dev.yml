@@ -6,7 +6,6 @@ services:
   taiga-back:
     volumes:
       - ./config/back-config.py:/taiga-back/settings/config.py
-      - ./certs:/certs
       - ./docker/back/taiga-back.sh:/taiga-back.sh
       - ./taiga-contrib-inps/back:/taiga-contrib-inps/back
       - ./taiga-contrib-inps/spid_inps:/taiga-contrib-inps/spid_inps
