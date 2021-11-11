@@ -11,7 +11,7 @@ categories:
   - task-management
 dependsOn:
   open:
-    - name: MariaDB
+    - name: PostgreSQL
       optional: false
       version: ''
       versionMax: ''
@@ -35,31 +35,49 @@ description:
   it:
     documentation: 'https://github.com/INPS-it/bugs.inps.it#inps-bug-tracking'
     features:
-      - Role based user access and interaction
-      - SAML2 Authentication
-      - Staff team management
-      - Full project bug reports management
-      - Bug report creation with attachments and rich text editing
-      - Rich text bug report comments with attachments
-      - Bug report and comments moderation functionality
-      - Bug report tagging and assignment
-      - Customizable bugs categories names and colors
-      - A rich set of bugs filtering, including:
-      - Severity, priority and tipology
-      - Bug status
-      - Custom tags
-      - Creator user role
+      - >-
+        Role based user access and interaction
+      - >-
+        SAML2 Authentication
+      - >-
+        Staff team management
+      - >-
+        Full project bug reports management
+      - >-
+        Bug report creation with attachments and rich text editing
+      - >-
+        Rich text bug report comments with attachments
+      - >-
+        Bug report and comments moderation functionality
+      - >-
+        Bug report tagging and assignment
+      - >-
+        Customizable bugs categories names and colors
+      - >-
+        A rich set of bugs filtering, including:
+      - >-
+        Severity, priority and tipology
+      - >-
+        Bug status
+      - >-
+        Custom tags
+      - >-
+        Creator user role
     genericName: applicazione web
     longDescription: >
       INPS Bug Tracking platform is a project based on the Taiga.io opensource
       project management software, with the goal to provide INPS online
       services users a simple, streamlined way to report software
       bugs, ask usage questions and make suggestions.
-    screenshots:
+     
+      The INPS Bug tracking platform allows you to create bug reports with attachments and rich text editing,
+      with comments, moderation, assignment and tagging, priority and severity for each single post.
+     
+     screenshots:
       - >-
-        https://github.com/INPS-it/bugs.inps.it/blob/dev/docs/public/discovery_view.png
+        https://github.com/INPS-it/bugs.inps.it/blob/master/docs/public/discovery_view.png
       - >-
-        https://github.com/INPS-it/bugs.inps.it/blob/public/bug_view_filters.png
+        https://github.com/INPS-it/bugs.inps.it/blob/master/docs/public/bug_view_filters.png
     shortDescription: >-
       INPS Bug Tracking platform
 developmentStatus: stable
