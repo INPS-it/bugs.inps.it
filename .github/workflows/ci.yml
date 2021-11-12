@@ -6,9 +6,9 @@ name: Taiga INPS Bug tracking - Test and Coverage
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   pull_request:
-    branches: [ dev ]
+    branches: [ master ]
 
 jobs:
   test:
