@@ -1,0 +1,37 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+//- To Aadd a new notification type:
+//-
+//-     div.hidden.notification-message.notification-message-< type >
+//-         (...)
+//-         span < title >
+//-         (...)
+//-         p < message >
+//-         (...)
+//-
+//-See coffe/modules/base/confirm.coffee
+
+div.notification-message.notification-message-success
+   div.text
+       span.warning
+       p
+
+div.notification-message.notification-message-error
+    tg-svg(svg-icon="icon-error")
+    div.text
+        span.warning
+        p
+    a.close(href="", title="{{'NOTIFICATION.CLOSE' | translate}}")
+        tg-svg(svg-icon="icon-close")
+
+div.notification-light.notification-message-light-error
+    div.text
+        span.warning
+        p
+    a.close(href="", title="{{'NOTIFICATION.CLOSE' | translate}}")
+        tg-svg(svg-icon="icon-close")
