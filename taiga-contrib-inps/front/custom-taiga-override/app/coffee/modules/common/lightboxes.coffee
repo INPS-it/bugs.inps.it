@@ -46,6 +46,7 @@ class LightboxService extends taiga.Service
             $el.css('display', 'flex')
 
         @animationFrame.add ->
+            $el.removeAttr("aria-hidden")
             $el.addClass("open")
             $el.one "transitionend", =>
                 firstField = $el.find('input:not(.no-focus),textarea:not(.no-focus)').first()
@@ -88,6 +89,7 @@ class LightboxService extends taiga.Service
 
                 $el.one "transitionend", =>
                     $el.removeAttr('style')
+                    $el.setAttr("aria-hidden", "true")
                     $el
                         .removeClass("open")
                         .removeClass('close')
@@ -191,7 +193,7 @@ module.directive("lightbox", ["lightboxService", LightboxDirective])
 
 LightboxClose = () ->
     template = """
-        <a class="close" ng-click="onClose()" href="" title="{{'COMMON.CLOSE' | translate}}">
+        <a class="close" ng-click="onClose()" href="" title="{{ }}">
             <tg-svg svg-icon="icon-close"></tg-svg>
         </a>
     """
