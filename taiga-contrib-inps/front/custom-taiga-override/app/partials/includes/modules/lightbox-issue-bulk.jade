@@ -1,0 +1,30 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+tg-lightbox-close
+
+form
+    h2.title(translate="COMMON.NEW_BULK")
+    fieldset
+        label.hidden(for="new_bulk_textarea") {{'COMMON.NEW_BULK' | translate}}: {{'COMMON.ONE_ITEM_LINE' | translate}}
+        textarea(
+            id="new_bulk_textarea"
+            cols="200"
+            wrap="off"
+            ng-model="new.bulk"
+            data-required="true"
+            data-linewidth="200"
+            ng-attr-placeholder="{{'COMMON.ONE_ITEM_LINE' | translate}}"
+
+        )
+    .lb-action-wrapper
+        button.btn-big(
+            variant="primary"
+            type="submit"
+            title="{{'COMMON.SAVE' | translate}}"
+            translate="COMMON.SAVE"
+        )

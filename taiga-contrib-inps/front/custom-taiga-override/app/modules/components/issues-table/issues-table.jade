@@ -1,0 +1,248 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+section.issues-options(
+    tg-check-permission="add_issue"
+    ng-class="{'in-taskboard': ctrl.sprintIssues, 'empty': !ctrl.issues.length}"
+)
+    .issues-options-start(ng-if="ctrl.sprintIssues")
+        .sprint-issues-title
+            tg-svg(svg-icon="icon-issues")
+            span.sprint-issues-title-txt Sprint Issues
+
+        .display-tags-button#show-tags
+            .check.js-check(
+                ng-class="{'active': ctrl.showTags}"
+            )
+                input(
+                    type="checkbox"
+                    id="show-tags-input"
+                    ng-checked="ctrl.showTags"
+                    ng-model="ctrl.showTags"
+                    ng-change="ctrl.toggleTags()"
+                )
+                div
+            label(
+                for="show-tags-input"
+                translate="BACKLOG.TAGS.SHOW"
+            )
+    .new-issue
+        button(
+            ng-class="{'btn-small': !ctrl.sprintIssues, 'btn-board': ctrl.sprintIssues}"
+            type="button"
+            variant="primary"
+            ng-click="ctrl.onAddNewIssue()"
+        )
+            tg-svg(svg-icon="icon-add")
+            span(ng-if="!ctrl.sprintIssues") {{"ISSUES.ACTION_NEW_ISSUE" | translate}}
+
+        button(
+            ng-class="{'btn-icon': !ctrl.sprintIssues, 'btn-board': ctrl.sprintIssues}"
+            type="button"
+            variant="secondary"
+            ng-click="ctrl.onAddIssuesInBulk()"
+        )
+            tg-svg(svg-icon="icon-bulk")
+            span.hidden(ng-if="!ctrl.sprintIssues") {{"TASKBOARD.TITLE_ACTION_ADD_ISSUE_BULK" | translate}}
+
+section.issues-table.basic-table(ng-class="{empty: !ctrl.issues.length}")
+    div.row.title
+        div.level-field(data-fieldname="type" ng-if="!ctrl.sprintIssues")
+            span.wide {{"ISSUES.TABLE.COLUMNS.TYPE" | translate}}
+            div.mobile
+                .tooltip.pop-help {{"ISSUES.TABLE.COLUMNS.TYPE" | translate}}
+                span.first-letter {{"ISSUES.TABLE.COLUMNS.TYPE" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+
+
+        div.level-field(data-fieldname="severity" ng-if="!ctrl.sprintIssues")
+            span.wide {{"ISSUES.TABLE.COLUMNS.SEVERITY" | translate}}
+            div.mobile
+                .tooltip.pop-help {{"ISSUES.TABLE.COLUMNS.SEVERITY" | translate}}
+                span.first-letter {{"ISSUES.TABLE.COLUMNS.SEVERITY" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+
+        div.level-field(data-fieldname="priority" ng-if="!ctrl.sprintIssues")
+            span.wide {{"ISSUES.TABLE.COLUMNS.PRIORITY" | translate}}
+            div.mobile
+                .tooltip.pop-help {{"ISSUES.TABLE.COLUMNS.PRIORITY" | translate}}
+                span.first-letter {{"ISSUES.TABLE.COLUMNS.PRIORITY" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+
+        div.subject(data-fieldname="ref")
+            span {{"ISSUES.TABLE.COLUMNS.ISSUE" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+
+        div.issue-field(data-fieldname="status")
+            span {{"ISSUES.TABLE.COLUMNS.STATUS" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+        div.attachments-field.skip-issuesOrder(ng-if="ctrl.sprintIssues", data-fieldname="attachments")
+            span {{"ISSUES.TABLE.COLUMNS.ATTACHMENTS" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+        div.modified-field(data-fieldname="modified_date")
+            span {{"ISSUES.TABLE.COLUMNS.MODIFIED" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+        div.assigned-field(data-fieldname="assigned_to")
+            span {{"ISSUES.TABLE.COLUMNS.ASSIGNED_TO" | translate}}
+            svg(viewBox="0 0 16 16")
+                path(
+                    class="arrow-up"
+                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
+                path(
+                    class="arrow-down"
+                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
+        div.options-field.skip-issuesOrder(ng-if="ctrl.sprintIssues")
+
+    div.row.table-main(
+        ng-repeat="issue in ctrl.issues track by issue.id"
+        ng-class="{'is-blocked': issue.is_blocked}"
+    )
+        div.level-field(tg-listitem-type="issue" ng-if="!ctrl.sprintIssues")
+        div.level-field(tg-listitem-severity="issue" ng-if="!ctrl.sprintIssues")
+        div.level-field(tg-listitem-priority="issue" ng-if="!ctrl.sprintIssues")
+        div.subject
+            a(
+                href=""
+                tg-nav="project-issues-detail:project=project.slug,ref=issue.ref"
+                title="#{{ ::issue.ref }} {{ ::issue.subject }}"
+            )
+                span.issue-text
+                    span.issue-ref(tg-bo-ref="::issue.ref")
+                    span.issue-subject(ng-bind-html="issue.subject | emojify")
+                span.blocked(
+                    ng-if="issue.is_blocked"
+                    ng-attr-title="{{::issue.blocked_note}}"
+                )
+                    tg-svg(svg-icon="icon-lock")
+                tg-due-date.due-date(
+                    ng-if="issue.due_date"
+                    due-date="::issue.due_date"
+                    is-closed="::issue.is_closed"
+                    obj-type="issue"
+                )
+                span.tag(
+                    ng-if="ctrl.showTags"
+                    ng-attr-title="{{tag[0]}}"
+                    ng-repeat="tag in issue.tags"
+                    ng-style="{background: tag[1]}"
+                    ng-class="{'last':$last}"
+                ) {{tag[0]}}
+
+        div.issue-field(tg-issue-status-inline-edition="issue")
+            a.issue-status(
+                href=""
+                title="{{'ISSUES.TABLE.TITLE_ACTION_CHANGE_STATUS' | translate}}"
+            )
+                span.issue-status-bind
+                tg-svg(
+                    tg-check-permission="modify_issue"
+                    svg-icon="icon-arrow-down"
+                )
+
+        div.attachments-field(ng-if="ctrl.sprintIssues" title="{{ 'ISSUES.TABLE.COLUMNS.ATTACHMENTS' | translate }}")
+            span {{ issue.attachments.length }}
+            tg-svg(svg-icon="icon-paperclip")
+
+        div.modified-field(
+            title="{{ issue.modified_date|momentFormat:'DD MMM YYYY HH:mm' }}"
+        ) {{ issue.modified_date|momentFormat:'DD MMM YYYY'}}
+
+        div.assigned-field(tg-issue-assigned-to-inline-edition="issue")
+            .issue-assignedto(title="{{'ISSUES.TABLE.TITLE_ACTION_ASSIGNED_TO' | translate}}")
+                figure.avatar
+                tg-svg(
+                    tg-check-permission="modify_issue"
+                    svg-icon="icon-arrow-down"
+                )
+        div.options-field(
+            ng-if="ctrl.sprintIssues"
+        )
+            button.options-button(
+                type="button"
+                ng-click="displayOptions(issue.id)"
+                ng-class="{'active': issueOptions == issue.id}"
+            )
+                tg-svg(svg-icon="icon-more-vertical")
+            .options(
+                ng-show="issueOptions == issue.id"
+                ng-mouseleave="hideOptions()"
+                ng-mouseenter="displayOptions(issue.id)"
+            )
+                button.option(
+                    ng-click="ctrl.edit(issue)"
+                    type="button"
+                )
+                    tg-svg(svg-icon="icon-edit")
+                    span {{'COMMON.EDIT' | translate}}
+                button.option(
+                    ng-click="ctrl.delete(issue)"
+                    type="button"
+                )
+                    tg-svg(svg-icon="icon-trash")
+                    span {{'COMMON.DELETE' | translate}}
+                button.option(
+                    ng-click="ctrl.detach(issue)"
+                    type="button"
+                )
+                    tg-svg(svg-icon="icon-detach")
+                    span {{'COMMON.CARD.DETACH_ISSUE_FROM_SPRINT' | translate}}
+
+section.empty-large(ng-if="ctrl.issues != undefined && ctrl.issues.length == 0 && !ctrl.sprintIssues")
+    img(
+        src="#{v}/images/empty/empty_moon.png",
+        alt="{{ISSUES.TABLE.EMPTY.TITLE | translate }}"
+    )
+    p.title(translate="ISSUES.TABLE.EMPTY.TITLE")
+    a(
+        href=""
+        ng-click="ctrl.onAddNewIssue()"
+        tg-check-permission="add_issue"
+        title="{{ ISSUES.ACTION_NEW_ISSUE | translate }}"
+        translate="ISSUES.TABLE.EMPTY.SUBTITLE"
+    )
