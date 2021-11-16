@@ -46,7 +46,6 @@ class LightboxService extends taiga.Service
             $el.css('display', 'flex')
 
         @animationFrame.add ->
-            $el.removeAttr("aria-hidden")
             $el.addClass("open")
             $el.one "transitionend", =>
                 firstField = $el.find('input:not(.no-focus),textarea:not(.no-focus)').first()
@@ -89,7 +88,6 @@ class LightboxService extends taiga.Service
 
                 $el.one "transitionend", =>
                     $el.removeAttr('style')
-                    $el.setAttr("aria-hidden", "true")
                     $el
                         .removeClass("open")
                         .removeClass('close')
@@ -220,6 +218,7 @@ module.directive("tgLightboxClose", [LightboxClose])
 BlockLightboxDirective = ($rootscope, $tgrepo, $confirm, lightboxService, $loading, $modelTransform, $translate) ->
     link = ($scope, $el, $attrs, $model) ->
         title = $translate.instant($attrs.title)
+        # TODO: la seguente linea andrebbe cambiata per modificare il tile (non più h2, non accessibile, ma ad esempio SPAN)
         $el.find("h2.title").text(title)
 
         unblock = (finishCallback) =>
