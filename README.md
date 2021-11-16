@@ -25,13 +25,15 @@ INPS Bug Tracking platform is a project based on the [Taiga.io](https://www.taig
 
 And more.
 
-<img src="docs/public/discovery_view.png" width="45%" height="45%" alt="Dashboard View">
-
-<br>
-<br>
-
-<img src="docs/public/bug_view_filters.png" width="45%" height="45%" alt="Bugs List View">
-
+<table>
+<td>
+<img src="docs/public/discovery_view.png" width="500px" height="400px" alt="Dashboard View">
+</td>
+<td>
+<img src="docs/public/bug_view_filters.png" width="500px" height="400px" alt="Bugs List View">
+</td>
+<table>
+	
 ## Dev Setup
 
 - Configure your backend project creating `config/back-config.py` file (from `config/back-config.py.example`).
