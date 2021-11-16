@@ -35,8 +35,12 @@ div.discover-header
 
         form(ng-submit="vm.submitFilter()")
             div.searchbox
+                label.hidden(
+                    for="search_input"
+                ) {{ 'DISCOVER.SEARCH.ACTION_TITLE' | translate }}
                 input(
                     name="search"
+                    id="search_input"
                     type="text"
                     placeholder="{{ 'DISCOVER.SEARCH.INPUT_PLACEHOLDER' | translate }}"
                     ng-model="vm.q"

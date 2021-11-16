@@ -457,6 +457,16 @@ a.secondary:hover {
     }
 }
 
+.lightbox .title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-family: $inpsDefaultFontFamily
+}
+
+.lightbox form {
+    text-align: center;
+}
+
 .lightbox.open {
     @media (max-width: $xl) {
         align-items: unset;
