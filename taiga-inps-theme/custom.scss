@@ -535,6 +535,17 @@ a.secondary:hover {
     }
 }
 
+.discover-header {
+    .search-button {
+        left: auto;
+        right: 1rem;
+        top: 0.8rem!important;
+        @media (max-width: $xl){
+            top: 0rem;
+        }
+    }
+}
+
 .discover-results-header {
     display: none;
 }
