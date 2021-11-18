@@ -45,6 +45,10 @@ div.discover-header
                     placeholder="{{ 'DISCOVER.SEARCH.INPUT_PLACEHOLDER' | translate }}"
                     ng-model="vm.q"
                 )
+                input.hidden(
+                    aria-label="{{ 'DISCOVER.SEARCH.ACTION_TITLE' | translate }}"
+                    type="submit"
+                )                
                 tg-svg.search-button(
                     ng-click="vm.submitFilter()"
                     svg-icon="icon-search"
