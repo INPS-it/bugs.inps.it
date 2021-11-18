@@ -22,6 +22,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
             tg-nav="home",
             title="{{'PROJECT.NAVIGATION.DISCOVER' | translate}}"
         )
+            span.hidden {{'PROJECT.NAVIGATION.DISCOVER' | translate}}
             include ../../svg/logo.svg
 
         a.logo(
@@ -30,6 +31,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
             tg-nav="discover",
             title="{{'PROJECT.NAVIGATION.HOMEPAGE' | translate}}"
         )
+            span.hidden {{'PROJECT.NAVIGATION.HOMEPAGE' | translate}}
             include ../../svg/logo.svg
 
     .nav-right.center(ng-if="!vm.isAuthenticated")
@@ -43,7 +45,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
                 img(
                     src="/#{v}/images/spid-button/spid-ico-circle-bb.svg"
                     onerror="this.src='/#{v}/images/spid-button/spid-ico-circle-bb.png'; this.onerror=null;"
-                    alt=""
+                    alt="{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}"
                 )
             span.italia-it-button-text
                 |Accedi
@@ -67,6 +69,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
             ng-class="{'active': vm.active == 'discover' }"
             title="{{'PROJECT.NAVIGATION.DISCOVER_TITLE' | translate}}"
         )
+            span.hidden {{'PROJECT.NAVIGATION.DISCOVER' | translate}}
             tg-svg(svg-icon="icon-compass")
 
         .topnav-dropdown-wrapper.nav-bar-support(ng-if="vm.customSupportUrl")
