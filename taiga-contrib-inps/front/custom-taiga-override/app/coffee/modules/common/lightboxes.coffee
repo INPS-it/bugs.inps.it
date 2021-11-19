@@ -219,7 +219,6 @@ module.directive("tgLightboxClose", [LightboxClose])
 BlockLightboxDirective = ($rootscope, $tgrepo, $confirm, lightboxService, $loading, $modelTransform, $translate) ->
     link = ($scope, $el, $attrs, $model) ->
         title = $translate.instant($attrs.title)
-        # TODO: la seguente linea andrebbe cambiata per modificare il tile (non più h2, non accessibile, ma ad esempio SPAN)
         $el.find("h2.title").text(title)
 
         unblock = (finishCallback) =>
