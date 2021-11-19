@@ -302,7 +302,12 @@ class TaigaContribINPSAppConfig(AppConfig):
 
             serializer = self.get_serializer(self.object)
 
-            if not request.user or request.user.is_anonymous or not len(request.user.cached_memberships):
+            # DEPRECATED: now we want only anonymous users to not be able to view team members
+            # if not request.user or request.user.is_anonymous or not len(request.user.cached_memberships):
+            #     if serializer.data:
+            #         serializer.data['members'] = []
+
+            if not request.user or request.user.is_anonymous:
                 if serializer.data:
                     serializer.data['members'] = []
 
