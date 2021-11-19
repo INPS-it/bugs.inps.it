@@ -52,17 +52,17 @@ html(lang="en", ng-attr-dir="{{ isRTL ? 'rtl' : 'ltr' }}")
         div(ng-if="errorHandling.permissionDenied", ng-include="'error/permission-denied.html'")
         div(ng-if="errorHandling.blocked", ng-include="'projects/project/blocked-project.html'")
 
-        div.lightbox.lightbox-generic-ask
+        div.lightbox.lightbox-generic-ask(aria-hidden="true")
             include partials/includes/modules/lightbox-generic-ask
-        div.lightbox.lightbox-ask-choice
+        div.lightbox.lightbox-ask-choice(aria-hidden="true")
             include partials/includes/modules/lightbox-ask-choice
-        div.lightbox.lightbox-generic-success
+        div.lightbox.lightbox-generic-success(aria-hidden="true")
             include partials/includes/modules/lightbox-generic-success
-        div.lightbox.lightbox-generic-error
+        div.lightbox.lightbox-generic-error(aria-hidden="true")
             include partials/includes/modules/lightbox-generic-error
-        div.lightbox.lightbox-generic-loading
+        div.lightbox.lightbox-generic-loading(aria-hidden="true")
             include partials/includes/modules/lightbox-generic-loading
-        div.lightbox.lightbox-generic-delete
+        div.lightbox.lightbox-generic-delete(aria-hidden="true")
             include partials/includes/modules/lightbox-generic-delete
 
         include partials/includes/modules/loader

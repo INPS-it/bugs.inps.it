@@ -457,6 +457,16 @@ a.secondary:hover {
     }
 }
 
+.lightbox .title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-family: $inpsDefaultFontFamily
+}
+
+.lightbox form {
+    text-align: center;
+}
+
 .lightbox.open {
     @media (max-width: $xl) {
         align-items: unset;
@@ -521,6 +531,17 @@ a.secondary:hover {
             @media (max-width: $xl){
                 top: 0rem;
             }
+        }
+    }
+}
+
+.discover-header {
+    .search-button {
+        left: auto;
+        right: 1rem;
+        top: 0.8rem!important;
+        @media (max-width: $xl){
+            top: 0rem;
         }
     }
 }

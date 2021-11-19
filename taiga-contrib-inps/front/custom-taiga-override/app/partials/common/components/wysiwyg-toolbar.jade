@@ -1,0 +1,48 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.editor(ng-class="{'edit-mode': editMode, 'read-mode': !editMode, 'html-read-mode': htmlReadMode}")
+    div(ng-if="outdated")
+        p.outdated {{'COMMON.WYSIWYG.OUTDATED' | translate}}
+
+    .wysiwyg.js-wysiwyg-html(
+        ng-if="markdown.length"
+        tg-bind-wysiwyg-html="markdown"
+    )
+
+    .wysiwyg.js-wysiwyg-html(
+        ng-if="!markdown.length"
+    )
+        p.placeholder {{ placeholder }}
+
+    .editor-wrapper
+
+    .mode-editor(ng-if="editMode")
+        a.help-markdown(
+            ng-if="mode=='markdown'"
+            href="https://resources.taiga.io/taiga-markdown-syntax/"
+            target="_blank"
+            title="{{'COMMON.WYSIWYG.MARKDOWN_HELP' | translate}}"
+        )
+            tg-svg(svg-icon="icon-question")
+            span(translate="COMMON.WYSIWYG.MARKDOWN_HELP")
+
+.tools(ng-class="{visible: editMode}")
+    a.e2e-save-editor(
+        ng-class="{disabled: required && !markdown.length}"
+        tg-loading="saving"
+        href="#",
+        ng-click="save($event)"
+    )
+        span.hidden {{'COMMON.SAVE' | translate}}
+        tg-svg(svg-icon="icon-save")
+    a.e2e-cancel-editor(
+        href="#",
+        ng-click="cancelWithConfirmation($event)"
+        title="{{ 'COMMON.CANCEL' | translate }}"
+    )
+        tg-svg(svg-icon="icon-close")

@@ -101,6 +101,7 @@ div.wrapper.issues.lightbox-generic-form(
                             ng-click="ctrl.addIssuesInBulk()"
                         )
                             tg-svg(svg-icon="icon-bulk")
+                            span.hidden(ng-if="!ctrl.sprintIssues") {{"TASKBOARD.TITLE_ACTION_ADD_ISSUE_BULK" | translate}}
         .issue-container
             sidebar.filters-bar(
                 ng-if="ctrl.openFilter"
