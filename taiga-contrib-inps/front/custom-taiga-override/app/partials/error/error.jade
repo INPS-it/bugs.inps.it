@@ -17,8 +17,11 @@
 doctype html
 
 div.error-main
+    
+    div.logo-container
+        img.logo-svg(src="#{v}/svg/logo-color.svg", alt="INPS", width="143px")
+    
     div.error-container
-        img(src="#{v}/svg/logo.svg", alt="TAIGA", width="143px")
-        h1.logo Taiga
+        h1.logo(translate="ERROR.NOT_FOUND")
         p(translate="ERROR.TEXT1")
         a(href="/discover", title="", translate="COMMON.GO_HOME")
