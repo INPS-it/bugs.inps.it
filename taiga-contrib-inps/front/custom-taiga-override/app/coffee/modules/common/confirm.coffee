@@ -283,10 +283,9 @@ class ConfirmService extends taiga.Service
         return if el.hasClass("active")
 
         if title
-            # TODO: propagare la modifica 
-            el.find("span").html(title)
+            el.find("span.warning").html(title)
         else
-            el.find("span").html(@translate.instant(NOTIFICATION_MSG[type].title))
+            el.find("span.warning").html(@translate.instant(NOTIFICATION_MSG[type].title))
 
         if message
             el.find("p").html(message)
