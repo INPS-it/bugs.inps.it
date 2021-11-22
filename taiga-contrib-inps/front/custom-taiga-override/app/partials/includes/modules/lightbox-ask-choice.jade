@@ -17,11 +17,14 @@
 tg-lightbox-close
 
 form
-    h2.title
+    span.title
     p.question
     p.subtitle
     p.replacement
-    select.choices
+    label.hidden(
+        for="choices_select"
+    ) {{ 'COMMON.FIELDS.SELECT' | translate }}
+    select.choices#choices_select
     p.warning
 
     div.options

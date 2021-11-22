@@ -164,7 +164,8 @@
             "VOTES": "Votes",
             "SPRINT": "Sprint",
             "DUE_DATE": "Due date",
-            "DUE_DATE_REASON": "Due date reason"
+            "DUE_DATE_REASON": "Due date reason",
+            "SELECT": "Choose an option"
         },
         "ROLES": {
             "ALL": "All points"

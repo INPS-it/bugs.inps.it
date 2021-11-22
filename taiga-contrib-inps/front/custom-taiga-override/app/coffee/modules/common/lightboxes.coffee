@@ -191,7 +191,8 @@ module.directive("lightbox", ["lightboxService", LightboxDirective])
 
 LightboxClose = () ->
     template = """
-        <a class="close" ng-click="onClose()" href="" title="{{'COMMON.CLOSE' | translate}}">
+        <a class="close" ng-click="onClose()" href="" title="{{ }}">
+            <span class="hidden">{{ 'COMMON.CLOSE' | translate }}</span>
             <tg-svg svg-icon="icon-close"></tg-svg>
         </a>
     """

@@ -1,0 +1,67 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.detail-title-wrapper.e2e-story-header(ng-class="{readonly: !vm.permissions.canEdit}")
+    h2.detail-title-text.ng-animate-disabled(
+        ng-show="!vm.editMode"
+        ng-hide="vm.editMode"
+    )
+        .detail-ref {{'#' + vm.item.ref}}
+        span.detail-subject.e2e-title-subject(
+            ng-click="vm.editSubject(true)"
+            ng-if="vm.permissions.canEdit"
+            ng-bind-html="vm.item.subject | emojify"
+        )
+        span.detail-subject.e2e-title-subject(
+            ng-if="!vm.permissions.canEdit"
+            ng-bind-html="vm.item.subject | emojify"
+        )
+        tg-due-date(
+            due-date="vm.item.due_date"
+            is-closed="vm.item.is_closed"
+            ng-if="vm.item.due_date"
+            obj-type="{{ vm.objType }}"
+        )
+        a.detail-edit(
+            href=""
+            ng-if="vm.permissions.canEdit"
+            ng-click="vm.editSubject(true)"
+        )
+            span.hidden {{'COMMON.EDIT' | translate}}
+            tg-svg.e2e-detail-edit(svg-icon="icon-edit")
+    .edit-title-wrapper(ng-if="vm.editMode")
+        input.edit-title-input.e2e-title-input(
+            type="text"
+            ng-model="vm.item.subject"
+            maxlength="500"
+            autofocus
+            required
+            ng-keydown="vm.onKeyDown($event)"
+        )
+        button.edit-title-button.save-title-button.e2e-title-button(
+            ng-click="vm.saveSubject()"
+            tg-loading="vm.loadingSubject"
+        )
+            tg-svg(
+                svg-icon="icon-save"
+            )
+        button.edit-title-button.cancel-title-button.e2e-cancel-title-button(
+            ng-click="vm.cancelEdit(false)"
+        )
+            tg-svg(svg-icon="icon-close")
+
+.detail-project
+    .section-name {{ vm.sectionName }}
+
+//- Blocked description
+.detail-header-line.block-desc-container(ng-show="vm.item.is_blocked")
+    span.blocked-sign
+        tg-svg(
+            svg-icon="icon-lock"
+        )
+        span.block-description-title(translate="COMMON.BLOCKED")
+    span.block-description(ng-if="blocked_html_note", ng-bind-html="blocked_html_note")

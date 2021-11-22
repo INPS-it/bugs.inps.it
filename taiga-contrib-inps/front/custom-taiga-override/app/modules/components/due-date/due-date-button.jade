@@ -1,0 +1,17 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+label.btn-icon.due-date-button.is-editable(
+    ng-if="vm.visible()"
+    ng-disabled="vm.disabled()"
+    ng-style="{background: vm.color()}"
+    ng-attr-title="{{ vm.title() }}"
+    ng-click="vm.setDueDate()"
+    ng-class="{'active': vm.color(), 'disabled': !!vm.disabled()}"
+)
+    span.hidden {{'COMMON.DUE_DATE.TITLE_ACTION_SET_DUE_DATE' | translate}}
+    tg-svg(svg-icon="icon-clock")

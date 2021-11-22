@@ -163,7 +163,8 @@
             "VOTES": "Stimmen",
             "SPRINT": "Sprint",
             "DUE_DATE": "Fälligkeitsdatum",
-            "DUE_DATE_REASON": "Grund des Fälligkeitsdatum"
+            "DUE_DATE_REASON": "Grund des Fälligkeitsdatum",
+            "SELECT": "Wähle eine option"
         },
         "ROLES": {
             "ALL": "Alle Punkte"

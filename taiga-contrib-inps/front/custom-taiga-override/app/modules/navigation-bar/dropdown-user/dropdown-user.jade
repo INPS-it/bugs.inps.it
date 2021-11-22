@@ -25,7 +25,9 @@
                 alt="{{ vm.user.get('full_name_display') }}"
             )
 
-        button.chevron
+        button.chevron(
+            aria-label="{{'USER.PROFILE_SIDEBAR.TITLE' | translate}}"
+        )
             tg-svg(svg-icon="icon-chevron-down")
 
     div.navbar-dropdown.dropdown-user

@@ -164,7 +164,8 @@
             "VOTES": "Voti",
             "SPRINT": "Sprint",
             "DUE_DATE": "Scadenza",
-            "DUE_DATE_REASON": "Motivo scadenza"
+            "DUE_DATE_REASON": "Motivo scadenza",
+            "SELECT": "Scegli una opzione"
         },
         "ROLES": {
             "ALL": "Tutti i punti"

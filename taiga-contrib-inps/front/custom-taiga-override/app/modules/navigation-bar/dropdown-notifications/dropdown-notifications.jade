@@ -1,0 +1,36 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+a(
+    href=""
+    title="{{ 'EVENTS.TITLE' | translate }}"
+    tg-nav="notifications"
+    ng-mouseover="visible=true"
+    ng-class="{'active': active, 'pending-notifications': total}"
+)
+    span.hidden {{'ADMIN.CUSTOM_FIELDS.FIELD_TYPE_DROPDOWN' | translate}} {{'PROJECT.NAVIGATION.NOTIFICATIONS' | translate}}
+    tg-svg(svg-icon="icon-bell")
+    div.counter(ng-if="total", ng-class="{'counter-active': newEvent, 'large': total > 99, 'small': total < 10}") {{ total }}
+div.navbar-dropdown-notifications(
+    ng-show="visible",
+    ng-mouseleave="visible=false"
+)
+    .header
+        a.action(href="", ng-class="{'disabled': !total}", ng-click="!total||setAllAsRead()") {{ 'EVENTS.DISMISS_ALL' | translate }}
+
+    .notifications-wrapper
+        .empty(ng-if="!total && !loading")
+            span {{ 'EVENTS.NO_NEW_EVENTS' | translate }}
+
+        tg-notifications-list#my-notifications.dropdown-notifications-list(
+            only-unread="true",
+            infinite-scroll-container="#my-notifications"
+            infinite-scroll-disabled="true"
+        )
+
+    .notifications-bottom
+        a.action(tg-nav="notifications") {{ 'EVENTS.VIEW_ALL' | translate }}
