@@ -16,6 +16,43 @@ AUTHENTICATION_BACKENDS += [
     "spid_inps.backends.TaigaInpsSpidSaml2Backend",
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        # Mainly used by taiga-front
+        'taiga.auth.authentication.JWTAuthentication',
+
+        # Mainly used for api debug.
+        # Commented out to overcome django sessions not removed after closing the browser
+        # "taiga.auth.backends.Session",
+
+        # Application tokens auth
+        "taiga.external_apps.auth_backends.Token",
+    ),
+    "DEFAULT_THROTTLE_CLASSES": (
+        "taiga.base.throttling.CommonThrottle",
+    ),
+    "DEFAULT_THROTTLE_RATES": {
+        "anon-write": None,
+        "user-write": None,
+        "anon-read": None,
+        "user-read": None,
+        "import-mode": None,
+        "import-dump-mode": "1/minute",
+        "create-memberships": None,
+        "login-fail": None,
+        "register-success": None,
+        "user-detail": None,
+        "user-update": None,
+    },
+    "DEFAULT_THROTTLE_WHITELIST": [],
+    "FILTER_BACKEND": "taiga.base.filters.FilterBackend",
+    "EXCEPTION_HANDLER": "taiga.base.exceptions.exception_handler",
+    "PAGINATE_BY": 30,
+    "PAGINATE_BY_PARAM": "page_size",
+    "MAX_PAGINATE_BY": 1000,
+    "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z"
+}
+
 MIDDLEWARE += [
     'djangosaml2.middleware.SamlSessionMiddleware',
 ]
