@@ -1927,7 +1927,8 @@
             "MONTH": "Letzter Monat",
             "YEAR": "Letztes Jahr",
             "ALL_TIME": "All time",
-            "CLEAR": "Filter zurücksetzen"
+            "CLEAR": "Filter zurücksetzen",
+            "DEFAULT": "Ursprünglich"
         },
         "SEARCH": {
             "PAGE_TITLE": "Suche - Entdecke Projekte - Inps Bug Tracking",

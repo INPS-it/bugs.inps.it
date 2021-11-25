@@ -24,7 +24,7 @@ class MostLikedController
     constructor: (@discoverProjectsService, @currentUserService) ->
         taiga.defineImmutableProperty @, "highlighted", () => return @discoverProjectsService.mostLiked
 
-        @.currentOrderBy = 'all'
+        @.currentOrderBy = 'default'
         @.order_by = @.getOrderBy()
         @.isAdmin = @currentUserService.isAdmin()
 
