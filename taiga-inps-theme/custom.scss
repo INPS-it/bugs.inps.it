@@ -915,6 +915,12 @@ a.btn-small {
     fill: $interactiveBluPressed;
 }
 
+.highlighted-draggable-project:hover {
+    background: rgba(92, 186, 169, 0.1);
+    cursor: move;
+    transition: background .3s;
+}
+
 .single-project .track-container .list-itemtype-track,
 .list-itemtype-ticket .ticket-type,
 .list-itemtype-ticket .ticket-id {

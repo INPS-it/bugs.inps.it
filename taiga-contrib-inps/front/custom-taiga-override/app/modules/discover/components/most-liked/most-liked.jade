@@ -23,10 +23,11 @@
             on-change="vm.orderBy(orderBy)"
             order-by="vm.currentOrderBy"
         )
-    tg-highlighted(
+    tg-sortable-highlighted(
         loading="vm.loading",
         highlighted="vm.highlighted"
         order-by="vm.order_by"
+        is-admin="vm.isAdmin"
     )
 
 .empty-highlighted-project(

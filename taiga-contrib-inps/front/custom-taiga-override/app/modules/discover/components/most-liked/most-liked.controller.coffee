@@ -17,14 +17,16 @@
 
 class MostLikedController
     @.$inject = [
-        "tgDiscoverProjectsService"
+        "tgDiscoverProjectsService",
+        "tgCurrentUserService",
     ]
 
-    constructor: (@discoverProjectsService) ->
+    constructor: (@discoverProjectsService, @currentUserService) ->
         taiga.defineImmutableProperty @, "highlighted", () => return @discoverProjectsService.mostLiked
 
         @.currentOrderBy = 'all'
         @.order_by = @.getOrderBy()
+        @.isAdmin = @currentUserService.isAdmin()
 
     fetch: () ->
         @.loading = true

@@ -1,0 +1,79 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.highlighted-projects-container(
+    tg-sort-discover-projects="highlighted"
+    )
+    .loading-container(
+        tg-loading="loading"
+        ng-show="loading"
+    )
+    .highlighted-project(
+        tg-repeat="project in highlighted track by project.get('id')"
+        ng-if="!loading"
+        ng-class="{'highlighted-draggable-project': isAdmin}"
+    )
+        a.project-logo(
+            href="#"
+            tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+            title="{{::project.get('name')}}"
+        )
+            img(
+                tg-project-logo-small-src="::project"
+                alt="{{::project.get('name')}}"
+            )
+        .project-data-container
+            .single-project-header
+                h2.project-title
+                    a(
+                        href="#"
+                        tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
+                        title="{{::project.get('name')}}"
+                    ) {{::project.get('name')}}
+                    tg-svg.look-for-people(
+                        ng-if="project.get('is_looking_for_people')"
+                        svg-icon="icon-recruit"
+                        svg-title="{{ ::project.get('looking_for_people_note') }}"
+                    )
+                .project-statistics
+                    //- span.statistic(
+                    //-     ng-class="{'active': project.get('is_fan')}"
+                    //-     title="{{ 'PROJECT.FANS_COUNTER_TITLE'|translate:{total:project.get('total_fans')||0}:'messageformat' }}"
+                    //- )
+                    //-     tg-svg(svg-icon="icon-like")
+                    //-     span {{::project.get('total_fans')}}
+                    span.statistic(
+                        ng-class="{'active': project.get('is_watcher')}"
+                        title="{{ 'PROJECT.WATCHERS_COUNTER_TITLE'|translate:{total:project.get('total_watchers')||0}:'messageformat' }}"
+                    )
+                        tg-svg(svg-icon="icon-watch")
+                        span {{::project.get('total_watchers')}}
+                    //- span.statistic(
+                    //-     ng-class="{'active': project.get('i_am_member')}"
+                    //-     title="{{ 'PROJECT.MEMBERS_COUNTER_TITLE'|translate:{total:project.get('members').size||0}:'messageformat' }}"
+                    //- )
+                    //-     tg-svg(svg-icon="icon-team")
+                    //-     span.statistics-num {{ ::project.get('members').size }}
+            p.project-description {{ ::project.get('description') | limitTo:150 }}{{ ::project.get('description').length < 150 ? '' : '...'}}
+
+    div(ng-if="!loading")
+        a.view-more-projects.btn-small(
+            variant="secondary"
+            ng-if="highlighted"
+            tg-nav="discover-search"
+            tg-nav-get-params="{\"order_by\": \"{{orderBy}}\"}"
+            href="#"
+        ) {{ 'DISCOVER.VIEW_MORE' | translate }}
