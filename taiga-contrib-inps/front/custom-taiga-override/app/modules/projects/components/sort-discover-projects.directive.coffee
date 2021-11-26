@@ -26,7 +26,7 @@ SortDiscoverProjectsDirective = (currentUserService) ->
         drake.on 'dragend', (item) ->
             itemEl = $(item)
             project = itemEl.scope().project
-            index = itemEl.index()
+            index = itemEl.index() - 1
 
             # Il seguente algoritmo trasforma la mappa di progetti in un array di id progetti
             # Elimina dall'array l'id del progetto che si sta spostando
@@ -38,11 +38,11 @@ SortDiscoverProjectsDirective = (currentUserService) ->
             # Ricostruisco l'array di dati da inviare al servizio backend
             sortData = []
 
+            # TODO: dopo aver chiesto la bulkupdate ecc ecc, bisogna richiamare un load dei progetti con il nuovo ordine!!
             for value, index in sorted_project_ids
                 sortData.push({"project_id": value, "order":index})
 
-            # TODO: Creare le chiamate API backend quando lo sviluppo è completato
-            # currentUserService.bulkUpdateProjectsDiscoverOrder(sortData)
+            projectsService.bulkUpdateCustomProjectsOrder(sortData)
 
         scroll = autoScroll(window, {
             margin: 20,

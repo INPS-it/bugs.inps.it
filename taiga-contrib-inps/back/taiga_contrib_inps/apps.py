@@ -310,13 +310,21 @@ class TaigaContribINPSAppConfig(AppConfig):
 
         ProjectViewSet.retrieve = retrieve
 
-        from .views import MyUsersAPI
+        from .views import MyUsersAPI, bulk_update_projects_custom_order_view
 
         urlpatterns.append(
             url(
                 "api/v1/all_users/(?P<pk>[^/.]+)/contacts$",
                 MyUsersAPI.as_view(),
                 name="all_users",
+            )
+        )
+
+        urlpatterns.append(
+            url(
+                "api/v1/projects_custom/bulk_update_custom_projects_order$",
+                bulk_update_projects_custom_order_view,
+                name="bulk_update_custom_projects_order",
             )
         )
 

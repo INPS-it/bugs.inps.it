@@ -22,6 +22,7 @@
         ng-show="loading"
     )
     .highlighted-project(
+        tg-bind-scope
         tg-repeat="project in highlighted track by project.get('id')"
         ng-if="!loading"
         ng-class="{'highlighted-draggable-project': isAdmin}"
