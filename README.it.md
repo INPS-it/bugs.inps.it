@@ -25,11 +25,11 @@ La piattaforma INPS Bug Tracking è un progetto basato sul progetto di project m
 E altro.
 
 <table>
-<td>
-<img src="docs/public/discovery_view.png" width="500px" height="400px" alt="Dashboard View">
+<td width="50%">
+<img src="docs/public/discovery_view.png" alt="Dashboard View">
 </td>
-<td>
-<img src="docs/public/bug_view_filters.png" width="500px" height="400px" alt="Bugs List View">
+<td width="50%">
+<img src="docs/public/bug_view_filters.png" alt="Bugs List View">
 </td>
 <table>
 
