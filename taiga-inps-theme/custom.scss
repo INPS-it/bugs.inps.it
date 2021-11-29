@@ -403,12 +403,6 @@ a.secondary:hover {
     }
 }
 
-.ticket-data {
-    @media (max-width: $xl) {
-        max-width: 100%;
-    }
-}
-
 .master {
     .wrapper {
         @media (max-width: $xl) {
@@ -417,9 +411,22 @@ a.secondary:hover {
     }
 }
 
+.sidebar.ticket-data {
+    @media (max-width: $xl) {
+        order: 1;
+    }
+}
+
 .ticket-section.ticket-data-container {
     @media (max-width: $xl) {
+        flex-direction: column;
         display: flex;
+    }
+}
+
+.ticket-data {
+    @media (max-width: $xl) {
+        max-width: 32%;
     }
 }
 
@@ -448,12 +455,6 @@ a.secondary:hover {
 .main {
     @media (max-width: $xl) {
         overflow-y: scroll;
-    }
-}
-
-.sidebar.ticket-data {
-    @media (max-width: $xl) {
-        order: 0;
     }
 }
 
