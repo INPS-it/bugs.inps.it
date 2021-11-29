@@ -1118,6 +1118,10 @@ tg-html-editor .ck-content,
     }
 }
 
+tg-wysiwyg btn {
+    margin: 0.2rem 0 0.2rem 0;
+}
+
 .add-tag-input input {
     max-height: 48px;
     margin-right: 0.5rem;
@@ -1247,7 +1251,7 @@ h1.title {
 }
 
 tg-wysiwyg .editor.edit-mode {
-    width: 95%;
+    width: 85%;
 }
 
 .table-team .avatar .name {
@@ -1299,5 +1303,20 @@ tg-wysiwyg .editor.edit-mode {
     }
     a {
         color: $primary-light;
+    }
+}
+
+.ticket-user-list-content {
+    .user-list-name {
+        overflow-wrap: anywhere;
+    }
+}
+
+tg-wysiwyg { 
+    .btn-small {
+        margin: 0.2rem 0 0.2rem 0;
+        display: flex;
+        font-size: 0.9rem!important;
+        padding: 0.5rem;
     }
 }
