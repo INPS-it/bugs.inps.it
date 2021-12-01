@@ -84,6 +84,17 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
     )
 
+    # Help
+    $routeProvider.when("/help",
+        {
+            templateUrl: "help/help-home/help-home.html",
+            controller: "HelpHome",
+            controllerAs: "vm",
+            title: "HELP.TITLE",
+            loader: true
+        }
+    )
+
     # Discover
     $routeProvider.when("/discover",
         {
@@ -1025,7 +1036,8 @@ modules = [
     "taigaNotifications",
     "taigaWikiHistory",
     "taigaEpics",
-    "taigaUtils"
+    "taigaUtils",
+    "inpsHelp"
 
     # template cache
     "templates",

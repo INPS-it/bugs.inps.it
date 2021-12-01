@@ -26,6 +26,13 @@ div.discover-header
             translate-interpolation="messageformat"
         )
 
+        a.btn-small.help-btn#help-btn-discover(
+            variant="tertiarydarkbg"
+            tg-nav="help",
+        ) 
+            tg-svg(svg-icon="icon-question")
+            span {{'HELP.TITLE' | translate}}
+
         p.project-number(
             ng-if="vm.projects",
             translate="DISCOVER.DISCOVER_SUBTITLE_2",

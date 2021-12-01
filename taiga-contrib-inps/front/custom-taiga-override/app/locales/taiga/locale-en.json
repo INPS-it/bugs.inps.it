@@ -1968,5 +1968,12 @@
         "ZOOM-2": "Default",
         "ZOOM-3": "Detailed",
         "ZOOM-4": "Expanded"
+    },
+    "HELP": {
+        "TITLE": "Aiuto",
+        "PAGE_DESCRIPTION": "Aiuto per l'utilizzo di bugs.inps.it",
+        "NAVIGATION": {
+            "HELP_HOME": "AIUTO"
+        }
     }
 }

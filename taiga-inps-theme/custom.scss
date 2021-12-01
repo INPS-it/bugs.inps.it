@@ -107,6 +107,7 @@ svg {
 .button-spid {
     background-color: #06C;
     color: $color-white;
+    max-width: 9rem;
 }
 
 .button-spid svg {
@@ -946,6 +947,30 @@ a.btn-small {
     border-color: $interactiveBluHover !important;
 }
 
+.btn-big[variant=tertiarydarkbg],
+.btn-small[variant=tertiarydarkbg],
+.btn-filter[variant=tertiarydarkbg] {
+    color: $tertiaryDarkgBg !important;
+    background-color: transparent !important;
+    border: 2px solid $tertiaryDarkgBg;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.btn-big[variant=tertiarydarkbg]:hover,
+.btn-small[variant=tertiarydarkbg]:hover,
+.btn-filter[variant=tertiarydarkbg]:hover {
+    color: $tertiaryDarkgBgHover !important;
+    border-color: $tertiaryDarkgBgHover !important;
+}
+
+.btn-big[variant=tertiarydarkbg]:focus,
+.btn-small[variant=tertiarydarkbg]:focus,
+.btn-filter[variant=tertiarydarkbg]:focus {
+    color: $tertiaryDarkgBgFocus !important;
+    border-color: $tertiaryDarkgBgFocus !important;
+}
+
 .btn-big[variant=secondary]:hover,
 .btn-small[variant=secondary]:hover,
 .btn-filter:hover,
@@ -958,6 +983,22 @@ a.btn-small {
 .btn-filter:hover,
 .btn-filter[variant=secondary]:hover {
     background-color: $interactiveBluHover !important;
+}
+
+.help-btn {
+    font-size: 0.8rem!important;
+}
+
+#help-btn-discover {
+    margin: 0rem 0 0.5rem 0;
+}
+
+#help-btn-timeline {
+    position: absolute; margin-left: 1rem;
+}
+
+#help-btn-issue-list {
+    margin-left: 1rem;
 }
 
 .detail-ref {

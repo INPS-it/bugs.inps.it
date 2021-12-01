@@ -83,6 +83,13 @@ div.wrapper.issues.lightbox-generic-form(
                                 for="show-tags-input"
                                 translate="BACKLOG.TAGS.SHOW"
                             )
+                    
+                        a.btn-small.help-btn#help-btn-issue-list(
+                            variant="tertiary"
+                            tg-nav="help",
+                        ) 
+                            tg-svg(svg-icon="icon-question")
+                            span {{'HELP.TITLE' | translate}}
 
                     .new-issue(tg-check-permission="add_issue")
                         button(

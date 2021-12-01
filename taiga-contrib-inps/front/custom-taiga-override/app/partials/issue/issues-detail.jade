@@ -77,6 +77,13 @@ div.wrapper(
                     )
                     tg-created-by-display.ticket-created-by(ng-model="issue")
 
+                    a.btn-small.help-btn#help-btn-issue-list(
+                            variant="tertiary"
+                            tg-nav="help",
+                        ) 
+                            tg-svg(svg-icon="icon-question")
+                            span {{'HELP.TITLE' | translate}}
+
 
         .detail-content(ng-if="attachmentsReady")
             section.duty-content

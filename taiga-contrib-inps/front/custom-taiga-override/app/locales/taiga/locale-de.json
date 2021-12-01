@@ -1943,5 +1943,12 @@
         "ZOOM-2": "Standard",
         "ZOOM-3": "Detailiert",
         "ZOOM-4": "Vollständig"
+    },
+    "HELP": {
+        "TITLE": "Aiuto",
+        "PAGE_DESCRIPTION": "Aiuto per l'utilizzo di bugs.inps.it",
+        "NAVIGATION": {
+            "HELP_HOME": "AIUTO"
+        }
     }
 }
