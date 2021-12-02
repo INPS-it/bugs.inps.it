@@ -1972,28 +1972,30 @@
         "ZOOM-4": "Expanded"
     },
     "HELP": {
-        "TITLE": "Aiuto",
-        "INDEX": "Indice",
-        "PAGE_DESCRIPTION": "Aiuto per l'utilizzo di bugs.inps.it",
+        "TITLE": "Help",
+        "SUBTITLE": "Quick start guide of bugs.inps.it. This guide will be updated with frequently asked questions.",
+        "INDEX": "Index",
+        "PAGE_DESCRIPTION": "bugs.inps.it help page",
         "NAVIGATION": {
-            "HELP_HOME": "AIUTO"
+            "HELP_HOME": "HELP"
         },
         "QUESTIONS": {
-            "1": "Come faccio a segnalare un Bug?",
-            "2": "Come faccio ad inserire un allegato quando segnalo un nuovo Bug?",
-            "3": "Per segnalare un bug è necessario registrarsi?",
-            "4": "Come posso seguire lo stato di un bug che ho segnalato?",
-            "6": "Come posso cambiare il nome utente visualizzato?",
-            "7": "Come posso segnalare bug di sicurezza in maniera confidenziale?"
+            "1": "How do I report a Bug?",
+            "2": "How do I insert an attachment when reporting a new Bug?",
+            "3": "Do I have to register to be able to report a Bug?",
+            "4": "How do I check the status of a Bug I reported?",
+            "5": "How can I see my account activity?",
+            "6": "How do I change my displayed user name?",
+            "7": "How can I report a security Bug in a confidential manner?"
         },
         "ANSWERS": {
-            "1": "Per segnalare un bug è necessario per prima cosa effettuare l'accesso cliccando sul bottone \"Accedi\" in alto a destra come da immagine, e successivamente selezionando il metodo <strong>SPID</strong>: <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Accesso alla piattaforma\"> <br />\n Dopodichè procedere a scegliere l'area tematica di competenza della segnalazione (per esempio Miscellanea): <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Scelta dell'area tematica\"> <br />\n Nella schermata che si aprirà, selezionare \"Visualizza i bugs\": <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"Accesso alla lista bugs\"> <br />\n Nella schermata della lista dei bug, cliccare sul bottone \"Nuovo bug\": <br />\n <img class=\"help-img elevation-01\" src=\"{screenshot_4_src}\" alt=\"Apertura nuovo bug\"> <br />",
-            "2": "Nella finestra di creazione Bug, selezionare il bottone con l'icona \"+\" come indicato nell'immagine, oppure trascinare l'allegato nell'area tratteggiata sottostante <br>  <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Allegati nuovo bug\">",
-            "3": "Per poter segnalare un bug è necessario effettuare l'accesso con SPID. Questo creerà automaticamente una utenza sulla piattaforma. Per maggiori informazioni su SPID visitare <a href=\"https://www.spid.gov.it/\">www.spid.gov.it</a>",
-            "4": "Se ricordi in quale area tematica hai segnalato il bug, è sufficiente entrare dalla pagina principale sull'area tematica e cliccare su \"Visualizza i bugs\". Dalla lista che verrà visualizzata, troverai tutti i bug pubblici dell'area tematica e quello che hai segnalato. <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Localizzazione bug aperto in lista bug\"> <br> Alternativamente, puoi cliccare sul tuo nome utente dal menu profilo in alto a destra come da immagine: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Menu profilo utente\"> <br> e nei tab di navigazione scegliere \"Cronologia\". <br> <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"Cronologia utente\">",
-            "5": "Per vedere le tue attività è sufficiente recarsi nel proprio profilo utilizzando il menu in alto a destra come da immagine: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Menu profilo utente\"> <br> Dalla schermata che verrà presentata sarà possibile vedere la cronologia della propria attività.",
-            "6": "Di default, la piattaforma assegna un nome casuale all'utenza del cittadino che effettua l'accesso con SPID la prima volta. Per poter personalizzare il proprio nome utente visualizzato, entrare nel menu di modifica profilo <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Menu profilo utente\"> <br> successivamente compilare il campo \"Nome completo\" e cliccare Salva <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Modifica nome completo utente\"> <br> a questo punto nella piattaforma l'utente interagirà con il nuovo nome scelto. Nello stesso modulo è possibile cambiare la propria foto a piacimento.",
-            "7": "In aggiunta alla piattaforma INPS Bug Tracking, eventuali bug di sicurezza possono essere segnalati in modo confidenziale scrivendo direttamente a confidential-bugs@inps.it. <br> Le email possono essere inviate anche usando cryptazione PGP: la chiave pubblica è disponibile <a href=\"https://github.com/INPS-it/bugs.inps.it/tree/master/extras\">a questo link</a>, e in aggiunta anche sui PGP keyserver Ubuntu e MIT."
+            "1": "In order to report a bug, the first thing to do is to sign in by clicking the \"Accedi\" button in the upper-right corner, then selecting <strong>SPID</strong> method: <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"App login\"> <br />\n After that you have to choose the theme area where you want to file the bug report: <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Theme area choice\"> <br />\n In the newly opened screen, click on \"View bugs\": <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"Bug list opening\"> <br />\n In the bug list screen, click on the button \"New bug\": <br />\n <img class=\"help-img elevation-01\" src=\"{screenshot_4_src}\" alt=\"New bug reporting\"> <br />",
+            "2": "In the Bug creation modal, click on the button with the \"+\" icon as per screenshot, or drag and drop the attachment in the dotted area below <br>  <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"New Bug attachments\">",
+            "3": "To report a Bug you have to be logged in via <strong>SPID</strong>. When you access bugs.inps.it via SPID for the first time, a new account is created automatically. For more info about SPID please visit <a href=\"https://www.spid.gov.it/\">www.spid.gov.it</a>",
+            "4": "If you remember that theme area you filed your bug report, just access to that theme area and click the button \"View bugs\". You will see all public bugs with yours too. <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Your bug in bug list\"> <br>  Alternatively you can click on your username in the user profile menu in the upper-right corner as per screenshot: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"User profile menu\"> <br> then choose \"Timeline\" in the nav tabs. <br> <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"User timeline\">",
+            "5": "To view your activity just access the user profile page using the upper-right corner as per screenshot: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"User profile menu\"> <br> From there you can see your timeline.",
+            "6": "By default the application assigns a random username to the newly SPID-authenticated user. In order to customize the displayed username, access the user settings page <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"User settings page\"> <br> then fill in the \"Full name\" field and click Save <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Fill in user full name\"> <br> from this moment on every user's activity will be displayed with the new user name. In the user settings page you can also update your profile avatar.",
+            "7": "In addition the the INPS Bug Tracking platform, potential security bugs can be submitted in a confidential manner writing directly to confidential-bugs@inps.it. <br> These emails may also be sent using PGP encryption: the public key is available <a href=\"https://github.com/INPS-it/bugs.inps.it/tree/master/extras\">at this link</a>, and in the Ubuntu and MIT PGP keyservers too."
         }
     }
 }

@@ -1977,6 +1977,7 @@
     },
     "HELP": {
         "TITLE": "Aiuto",
+        "SUBTITLE": "Guida rapida all'utilizzo di bugs.inps.it. La guida verrà aggiornata nel tempo con le problematiche riscontrate più frequentemente.",
         "INDEX": "Indice",
         "PAGE_DESCRIPTION": "Aiuto per l'utilizzo di bugs.inps.it",
         "NAVIGATION": {
@@ -1987,6 +1988,7 @@
             "2": "Come faccio ad inserire un allegato quando segnalo un nuovo Bug?",
             "3": "Per segnalare un bug è necessario registrarsi?",
             "4": "Come posso seguire lo stato di un bug che ho segnalato?",
+            "5": "Come posso vedere l'attività del mio account?",
             "6": "Come posso cambiare il nome utente visualizzato?",
             "7": "Come posso segnalare bug di sicurezza in maniera confidenziale?"
         },
