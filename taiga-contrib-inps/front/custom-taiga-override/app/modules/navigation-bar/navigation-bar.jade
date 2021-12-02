@@ -50,7 +50,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
                 ng-if="!vm.isAuthenticated"
                 href="#"
                 ng-click="vm.toLoginSpidUrl()"
-                title="Accedi"
+                title="{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}"
             )
                 span.italia-it-button-icon
                     img(
@@ -59,7 +59,7 @@ nav.navbar(ng-if="vm.isEnabledHeader")
                         alt="{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}"
                     )
                 span.italia-it-button-text
-                    |Accedi
+                    |{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}
 
 
 

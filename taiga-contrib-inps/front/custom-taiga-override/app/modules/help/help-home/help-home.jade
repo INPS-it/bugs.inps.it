@@ -7,14 +7,72 @@
 
 doctype html
 
-section.help
+section.help-main
     header
-        h1 Sezione Help
+        tg-svg(svg-icon="icon-question")
+        h1 
+            span Aiuto
+        p Guida rapida all'utilizzo di bugs.inps.it. La guida verrà aggiornata nel tempo con le problematiche riscontrate più frequentemente.
 
-    aside 
-        h2 Menu Help
+    .help-index
+        ul 
+            li 
+                a(href="#1" translate="HELP.QUESTIONS.1") 
+            li 
+                a(href="#2" translate="HELP.QUESTIONS.2") 
+            li 
+                a(href="#3" translate="HELP.QUESTIONS.3") 
+            li 
+                a(href="#4" translate="HELP.QUESTIONS.4") 
+            li 
+                a(href="#5" translate="HELP.QUESTIONS.5") 
+            li 
+                a(href="#6" translate="HELP.QUESTIONS.6") 
+            li 
+                a(href="#7" translate="HELP.QUESTIONS.7") 
 
-    section.help-topics
-        h3 Domanda 1
-        p Risposta 1
+    .help-topics
+        h3(id="1" translate="HELP.QUESTIONS.1")
+        p(
+            translate="HELP.ANSWERS.1",
+            translate-values="{ screenshot_1_src: '/#{v}/images/help-screenshots/' + lang + '/screen1_1.jpg', screenshot_2_src: '/#{v}/images/help-screenshots/' + lang + '/screen1_2.jpg', screenshot_3_src: '/#{v}/images/help-screenshots/' + lang + '/screen1_3.jpg', screenshot_4_src: '/#{v}/images/help-screenshots/' + lang + '/screen1_4.jpg', screenshot_5_src: '/#{v}/images/help-screenshots/' + lang + '/screen1_5.jpg'}"
+            translate-interpolation="messageformat"
+        )
 
+        h3(id="2" translate="HELP.QUESTIONS.2")
+        p(
+            translate="HELP.ANSWERS.2",
+            translate-values="{ screenshot_1_src: '/#{v}/images/help-screenshots/' + lang + '/screen2_1.jpg'}"
+            translate-interpolation="messageformat"
+        )
+
+        h3(id="3" translate="HELP.QUESTIONS.3")
+        p(
+            translate="HELP.ANSWERS.3",
+        )
+
+        h3(id="4" translate="HELP.QUESTIONS.4")
+        p(
+            translate="HELP.ANSWERS.4",
+            translate-values="{ screenshot_1_src: '/#{v}/images/help-screenshots/' + lang + '/screen4_1.jpg', screenshot_2_src: '/#{v}/images/help-screenshots/' + lang + '/screen4_2.jpg', screenshot_3_src: '/#{v}/images/help-screenshots/' + lang + '/screen4_3.jpg'}"
+            translate-interpolation="messageformat"
+        )
+
+        h3(id="5" translate="HELP.QUESTIONS.5")
+        p(
+            translate="HELP.ANSWERS.5",
+            translate-values="{ screenshot_1_src: '/#{v}/images/help-screenshots/' + lang + '/screen5_1.jpg'}"
+            translate-interpolation="messageformat"
+        )
+
+        h3(id="6" translate="HELP.QUESTIONS.6")
+        p(
+            translate="HELP.ANSWERS.6",
+            translate-values="{ screenshot_1_src: '/#{v}/images/help-screenshots/' + lang + '/screen6_1.jpg', screenshot_2_src: '/#{v}/images/help-screenshots/' + lang + '/screen6_2.jpg'}"
+            translate-interpolation="messageformat"
+        )
+
+        h3(id="7" translate="HELP.QUESTIONS.7")
+        p(
+            translate="HELP.ANSWERS.7",
+        )

@@ -8,13 +8,16 @@
 
 class HelpHomeController
     @.$inject = [
+        "$scope",
+        "$rootScope",
         '$tgLocation',
         '$tgNavUrls',
         'tgAppMetaService',
         '$translate'
     ]
 
-    constructor: (@location, @navUrls, @appMetaService, @translate) ->
+    constructor: (@rootscope, @scope, @location, @navUrls, @appMetaService, @translate) ->
+        @scope.lang = @translate.preferredLanguage()
         title = @translate.instant("HELP.TITLE")
         description = @translate.instant("HELP.PAGE_DESCRIPTION")
         @appMetaService.setAll(title, description)
