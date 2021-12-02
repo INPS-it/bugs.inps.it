@@ -742,7 +742,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         userInfo = JSON.parse(localStorage.userInfo)
 
     # i18n
-    preferedLangCode = userInfo?.lang || window.taigaConfig.defaultLanguage || "en"
+    preferedLangCode = userInfo?.lang || window.navigator.language || window.taigaConfig.defaultLanguage || "en"
 
     $translatePartialLoaderProvider.addPart('taiga')
     $translateProvider
