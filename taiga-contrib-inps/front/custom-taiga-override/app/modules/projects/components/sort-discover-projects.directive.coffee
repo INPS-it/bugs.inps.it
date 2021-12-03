@@ -6,10 +6,10 @@
 # Copyright (c) 2021-present Kaleidos Ventures SL
 ###
 
-SortDiscoverProjectsDirective = (currentUserService) ->
-    draggableElementsClassName = 'highlighted-project'
-
+SortDiscoverProjectsDirective = (currentUserService, projectsService) ->
     link = (scope, el, attrs, ctrl) ->
+
+        draggableElementsClassName = 'highlighted-draggable-project'
 
         if currentUserService.isAdmin() == false 
             return
@@ -26,7 +26,7 @@ SortDiscoverProjectsDirective = (currentUserService) ->
         drake.on 'dragend', (item) ->
             itemEl = $(item)
             project = itemEl.scope().project
-            index = itemEl.index() - 1
+            index = itemEl.index()
 
             # Il seguente algoritmo trasforma la mappa di progetti in un array di id progetti
             # Elimina dall'array l'id del progetto che si sta spostando
@@ -65,4 +65,4 @@ SortDiscoverProjectsDirective = (currentUserService) ->
 
     return directive
 
-angular.module("taigaProjects").directive("tgSortDiscoverProjects", ["tgCurrentUserService", SortDiscoverProjectsDirective])
+angular.module("taigaProjects").directive("tgSortDiscoverProjects", ["tgCurrentUserService", "tgProjectsService", SortDiscoverProjectsDirective])

@@ -14,9 +14,7 @@
 //-
 //- Copyright (c) 2021-present Kaleidos Ventures SL
 
-.highlighted-projects-container(
-    tg-sort-discover-projects="highlighted"
-    )
+.highlighted-projects-container
     .loading-container(
         tg-loading="loading"
         ng-show="loading"
@@ -25,7 +23,6 @@
         tg-bind-scope
         tg-repeat="project in highlighted track by project.get('id')"
         ng-if="!loading"
-        ng-class="{'highlighted-draggable-project': isAdmin}"
     )
         a.project-logo(
             href="#"
