@@ -7,6 +7,8 @@
 # Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 ###
 
+import json
+
 from django.db import models
 
 from taiga.projects.issues.models import Issue
@@ -49,7 +51,10 @@ class ProjectCustomOrder(models.Model):
         ]
 
     def __str__(self):
-        return "%s public: %s" % (self.project.name, self.order)
+        return "%s order: %s" % (self.project.name, self.order)
+    
+    def __repr__(self):
+        return "%s order: %s" % (self.project.name, self.order)
 
 
 def set_public_permissions_to_scrum_project(instance, **kwargs):

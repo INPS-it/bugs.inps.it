@@ -117,6 +117,6 @@ def bulk_update_projects_custom_order_view(request):
 
         order_created = ProjectCustomOrder.objects.update_or_create(defaults, project=project_instance)
 
-        order_created_response.push(order_created)
+        order_created_response.append(str(order_created[0]))
 
-    return JsonResponse(json.dumps(order_created), safe=False)
+    return JsonResponse(json.dumps(order_created_response), safe=False)
