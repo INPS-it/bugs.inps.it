@@ -38,6 +38,12 @@ html(lang="en", ng-attr-dir="{{ isRTL ? 'rtl' : 'ltr' }}")
             window.TAIGA_USER_PILOT_TOKEN = '#{userpilotToken}'
             window._taigaAvailableThemes = !{availableThemes};
 
+        style(type="text/css").
+            #inps-loading-overlay { height: 100vh; background: white; text-align: center; }
+            #inps-loading-overlay img { margin: 4rem auto; max-height: 10rem; max-width: 10rem; }
+            #inps-loading-overlay p { vertical-align: middle; font-size: 3rem; font-family: Arial, Helvetica, sans-serif; }
+
+
     body(tg-main, ng-class="{'rtl': isRTL}")
 
         a.screenreader-text(
