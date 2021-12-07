@@ -6,7 +6,7 @@ body {
 }
 
 :focus {
-	box-shadow: 0 0 0 3px #ff8c00 !important;
+	box-shadow: 0 0 0 2px #ff8c00, inset 0 0 0 2px #ff8c00 !important;
 }
 
 .activity-diff {
