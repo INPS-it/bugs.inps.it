@@ -17,8 +17,8 @@
 a(
     href=""
     title="{{ 'EVENTS.TITLE' | translate }}"
-    tg-nav="notifications"
     ng-mouseover="visible=true"
+    ng-click="visible=!visible"
     ng-class="{'active': active, 'pending-notifications': total}"
 )
     span.hidden {{'ADMIN.CUSTOM_FIELDS.FIELD_TYPE_DROPDOWN' | translate}} {{'PROJECT.NAVIGATION.NOTIFICATIONS' | translate}}

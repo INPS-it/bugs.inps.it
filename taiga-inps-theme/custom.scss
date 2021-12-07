@@ -902,7 +902,7 @@ a.btn-small {
 .attachment-list .attachment-settings:hover svg,
 .navbar .nav-right > a:hover svg,
 .navbar .nav-right > .topnav-dropdown-wrapper:hover > a svg {
-    fill: $interactiveBluHover !important;
+    fill: $interactiveAccentHover !important;
 }
 
 .navbar .nav-right .active svg {
@@ -1308,13 +1308,14 @@ tg-wysiwyg .editor.edit-mode {
 
 .screenreader-text {
     color: #fff;
-    position: absolute;
+    position: fixed;
     left: -999px;
     width:1px;
     height: 1px;
     top: auto;
   
     &:focus {
+        position: absolute;
         font-size: 1.5rem!important;
         text-decoration: none;
         color: $darkPrimary-120!important;
