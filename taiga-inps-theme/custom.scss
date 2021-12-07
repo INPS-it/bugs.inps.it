@@ -5,6 +5,10 @@ body {
     background-color: #fff !important;
 }
 
+:focus {
+	box-shadow: 0 0 0 3px #ff8c00 !important;
+}
+
 .activity-diff {
     .key {
         font-family: $inpsDefaultFontFamily;
