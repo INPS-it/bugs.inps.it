@@ -20,6 +20,10 @@ Copyright (c) 2021-present Kaleidos Ventures SL
   top: 0;
 }
 
+:focus {
+	box-shadow: 0 0 0 2px #ff8c00, inset 0 0 0 2px #ff8c00 !important;
+}
+
 .nav-wrapper {
   height: 100%;
   overflow-x: hidden;
