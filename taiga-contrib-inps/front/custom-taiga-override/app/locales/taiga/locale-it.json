@@ -1977,6 +1977,9 @@
         "SKIP_LINKS": {
             "NAVBAR": "Link diretto alla barra di navigazione",
             "MAIN_CONTENT": "Link diretto al contenuto principale"
+        },
+        "LABELS": {
+            "DISCOVER_SEARCH_INPUT": "Cerca tra le aree tematiche"
         }
     }
 }

@@ -1973,6 +1973,9 @@
         "SKIP_LINKS": {
             "NAVBAR": "Direct link to the navigation bar",
             "MAIN_CONTENT": "Direct link to the main content"
+        },
+        "LABELS": {
+            "DISCOVER_SEARCH_INPUT": "Search among the thematic areas"
         }
     }
 }

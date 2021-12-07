@@ -1948,6 +1948,9 @@
         "SKIP_LINKS": {
             "NAVBAR": "Direktlink zur Navigationsleiste",
             "MAIN_CONTENT": "Direktlink zum Hauptinhalt"
+        },
+        "LABELS": {
+            "DISCOVER_SEARCH_INPUT": "Suche in den Themenbereichen"
         }
     }
 }
