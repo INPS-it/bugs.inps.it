@@ -1968,5 +1968,11 @@
         "ZOOM-2": "Default",
         "ZOOM-3": "Detailed",
         "ZOOM-4": "Expanded"
+    },
+    "SCREENREADER": {
+        "SKIP_LINKS": {
+            "NAVBAR": "Direct link to the navigation bar",
+            "MAIN_CONTENT": "Direct link to the main content"
+        }
     }
 }

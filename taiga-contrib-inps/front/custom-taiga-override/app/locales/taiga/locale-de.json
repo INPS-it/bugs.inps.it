@@ -1943,5 +1943,11 @@
         "ZOOM-2": "Standard",
         "ZOOM-3": "Detailiert",
         "ZOOM-4": "Vollständig"
+    },
+    "SCREENREADER": {
+        "SKIP_LINKS": {
+            "NAVBAR": "Direktlink zur Navigationsleiste",
+            "MAIN_CONTENT": "Direktlink zum Hauptinhalt"
+        }
     }
 }

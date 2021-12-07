@@ -1972,5 +1972,11 @@
         "ZOOM-2": "Predefinito",
         "ZOOM-3": "Dettagliato",
         "ZOOM-4": "Espanso"
+    },
+    "SCREENREADER": {
+        "SKIP_LINKS": {
+            "NAVBAR": "Link diretto alla barra di navigazione",
+            "MAIN_CONTENT": "Link diretto al contenuto principale"
+        }
     }
 }
