@@ -1979,7 +1979,9 @@
             "MAIN_CONTENT": "Link diretto al contenuto principale"
         },
         "LABELS": {
-            "DISCOVER_SEARCH_INPUT": "Cerca tra le aree tematiche"
+            "DISCOVER_SEARCH_INPUT": "Cerca tra le aree tematiche",
+            "VIEW_MORE_MOST_LIKED": "Vedi tutte le aree tematiche restituite dal filtro",
+            "VIEW_MORE_MOST_ACTIVE": "Vedi tutte le aree tematiche più attive filtrate"
         }
     }
 }

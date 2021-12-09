@@ -24,6 +24,7 @@
         ng-if="!loading"
     )
         a.project-logo(
+            aria-hidden="true"
             href="#"
             tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
             title="{{::project.get('name')}}"

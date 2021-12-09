@@ -44,6 +44,7 @@ div(tg-discover-search)
                 li.list-itemtype-project(tg-repeat="project in vm.searchResult track by project.get('id')")
                     .list-itemtype-project-left
                         a.list-itemtype-project-image(
+                            aria-hidden="true"
                             href="#"
                             tg-nav="project:project=project.get('slug'),section=project.get('my_homepage')"
                             title="{{ ::project.get('name') }}"
