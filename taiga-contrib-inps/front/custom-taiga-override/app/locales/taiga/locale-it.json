@@ -1758,7 +1758,7 @@
             "EMAIL": "Email",
             "FULL_NAME": "Nome completo",
             "PLACEHOLDER_FULL_NAME": "Inserisci il tuo nome completo (es. Alessio Biancalana)",
-            "BIO": "Biografia (massimo 210 caratteri)",
+            "BIO": "Altre info (massimo 210 caratteri)",
             "PLACEHOLDER_BIO": "Raccontaci qualcosa di te",
             "LANGUAGE": "Lingua",
             "LANGUAGE_DEFAULT": "-- usa lingua predefinita --",
