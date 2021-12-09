@@ -620,18 +620,21 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
 
                 errorHandlingService.error()
             else if response.status == 401 and $location.url().indexOf('/login') == -1
-                nextUrl = $location.url()
-                search = $location.search()
+                # Let's display an informative 401 page
+                $location.url($navUrls.resolve("unauthorized"))
 
-                if search.force_next
-                    $location.url($navUrls.resolve("login"))
-                        .search("force_next", search.force_next)
-                else
-                    $location.url($navUrls.resolve("login"))
-                        .search({
-                            "unauthorized": true
-                            "next": nextUrl
-                        })
+                # nextUrl = $location.url()
+                # search = $location.search()
+
+                # if search.force_next
+                #     $location.url($navUrls.resolve("login"))
+                #         .search("force_next", search.force_next)
+                # else
+                #     $location.url($navUrls.resolve("login"))
+                #         .search({
+                #             "unauthorized": true
+                #             "next": nextUrl
+                #         })
 
             return $q.reject(response)
 
