@@ -283,6 +283,7 @@ class TaigaContribINPSAppConfig(AppConfig):
         from taiga.base.api.utils import get_object_or_error
         from django.http import Http404
         from taiga.base import filters, response
+        from dateutil.relativedelta import relativedelta
 
         def retrieve(self, request, *args, **kwargs):
             qs = self.get_queryset()
@@ -333,14 +334,6 @@ class TaigaContribINPSAppConfig(AppConfig):
             now = timezone.now()
             order_by_field_name = self._get_order_by_field_name()
 
-            print("***************")
-            print("***************")
-            print("***************")
-            print(order_by_field_name)
-            print("***************")
-            print("***************")
-            print("***************")
-
             if order_by_field_name == "total_fans_last_week":
                 qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(weeks=1))
             elif order_by_field_name == "total_fans_last_month":
@@ -355,7 +348,6 @@ class TaigaContribINPSAppConfig(AppConfig):
                 qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(years=1))
 
             return qs
-
 
         ProjectViewSet.order_by_fields = ("total_fans",
                        "total_fans_last_week",

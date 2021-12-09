@@ -42,10 +42,11 @@ div(tg-discover-search)
 
             ul.project-list(
                 tg-sort-discover-projects="vm.searchResult"
+                search="vm.search()"
                 ng-if="!vm.loadingList && vm.searchResult.size"
                 )
                 li.list-itemtype-project(
-                    ng-class="{'highlighted-draggable-project': vm.isAdmin && vm.orderBy == '-total_fans_last_default'}"
+                    ng-class="{'highlighted-draggable-project': vm.isAdmin && vm.orderBy == 'custom_order__order'}"
                     tg-bind-scope
                     tg-repeat="project in vm.searchResult track by project.get('id')"
                     )

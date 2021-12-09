@@ -6,7 +6,7 @@
 # Copyright (c) 2021-present Kaleidos Ventures SL
 ###
 
-SortDiscoverProjectsDirective = (currentUserService, projectsService) ->
+SortDiscoverProjectsDirective = (currentUserService, projectsService, discoverProjectsService) ->
     link = (scope, el, attrs, ctrl) ->
 
         draggableElementsClassName = 'highlighted-draggable-project'
@@ -38,11 +38,15 @@ SortDiscoverProjectsDirective = (currentUserService, projectsService) ->
             # Ricostruisco l'array di dati da inviare al servizio backend
             sortData = []
 
-            # TODO: dopo aver chiesto la bulkupdate ecc ecc, bisogna richiamare un load dei progetti con il nuovo ordine!!
             for value, index in sorted_project_ids
                 sortData.push({"project_id": value, "order":index})
 
-            projectsService.bulkUpdateCustomProjectsOrder(sortData)
+            projectsService.bulkUpdateCustomProjectsOrder(sortData).then (result) ->
+                discoverProjectsService.resetSearchList()
+                scope.search()
+            .catch (error) ->
+                console.error("Si è verificato un errore nell'impostare l'ordine dei progetti.")
+                console.error(error)
 
         scroll = autoScroll(window, {
             margin: 20,
@@ -58,11 +62,12 @@ SortDiscoverProjectsDirective = (currentUserService, projectsService) ->
 
     directive = {
         scope: {
-            projects: "=tgSortDiscoverProjects"
+            projects: "=tgSortDiscoverProjects",
+            search: "&"
         },
         link: link
     }
 
     return directive
 
-angular.module("taigaProjects").directive("tgSortDiscoverProjects", ["tgCurrentUserService", "tgProjectsService", SortDiscoverProjectsDirective])
+angular.module("taigaProjects").directive("tgSortDiscoverProjects", ["tgCurrentUserService", "tgProjectsService", "tgDiscoverProjectsService", SortDiscoverProjectsDirective])

@@ -41,6 +41,9 @@ class MostLikedController
         @.fetch()
 
     getOrderBy: () ->
+        if @.currentOrderBy == 'default'
+            return 'custom_order__order'
+
         if @.currentOrderBy == 'all'
             return '-total_fans'
         else
