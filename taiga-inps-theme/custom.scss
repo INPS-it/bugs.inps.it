@@ -1348,7 +1348,13 @@ tg-wysiwyg .editor.edit-mode {
     
     h3 {
         font-weight: bold;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        margin-top: 3rem;
+        text-decoration: underline;
+    }
+
+    div:last-child {
+        margin-bottom: 6rem;
     }
 
     header {
