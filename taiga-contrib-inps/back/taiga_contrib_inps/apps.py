@@ -27,8 +27,11 @@ class TaigaContribINPSAppConfig(AppConfig):
         from django.db.models import Q, Subquery
         from taiga.projects.models import Project
         from taiga.base.api.utils import get_object_or_error
+        from taiga.base.response import Unauthorized, Forbidden
+        from taiga.base.api.utils import get_object_or_404
 
         prev_issue_viewset_get_queryset = IssueViewSet.get_queryset
+        IssueViewSet.original_get_queryset = IssueViewSet.get_queryset
 
         def get_queryset(self):
             qs = prev_issue_viewset_get_queryset(self)
@@ -58,7 +61,30 @@ class TaigaContribINPSAppConfig(AppConfig):
                                | Q(owner=self.request.user))
             return qs
 
+        def retrieve(self, request, *args, **kwargs):
+            self.object = get_object_or_404(self.original_get_queryset(), **kwargs)
+            
+            try:
+                self.object = get_object_or_404(self.get_queryset(), **kwargs)
+            except Http404:
+                if request.user.is_authenticated:
+                    return Forbidden()
+                else:
+                    return Unauthorized()
+
+            self.check_permissions(request, 'retrieve', self.object)
+
+            if self.object is None:
+                if request.user.is_authenticated:
+                    return Forbidden()
+                else:
+                    return Unauthorized()
+
+            serializer = self.get_serializer(self.object)
+            return response.Ok(serializer.data)
+
         IssueViewSet.get_queryset = get_queryset
+        IssueViewSet.retrieve = retrieve
 
         # Monkey patch IssueViewSet - Issue Serialization with visibility
 
