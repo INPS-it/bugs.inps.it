@@ -39,7 +39,8 @@ class ProjectCustomOrder(models.Model):
     project = models.OneToOneField(
         Project,
         on_delete=models.CASCADE,
-        primary_key=True
+        primary_key=True,
+        related_name="custom_order"
     )
 
     order = models.IntegerField(null=False, blank=False)

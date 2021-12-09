@@ -278,6 +278,8 @@ class TaigaContribINPSAppConfig(AppConfig):
         UserPermission.destroy_perms = IsTheSameUser() and hasAnyRoles()
 
         from taiga.projects.api import ProjectViewSet
+        from taiga.projects import utils as project_utils
+        from django.utils import timezone
         from taiga.base.api.utils import get_object_or_error
         from django.http import Http404
         from taiga.base import filters, response
@@ -308,7 +310,66 @@ class TaigaContribINPSAppConfig(AppConfig):
 
             return response.Ok(serializer.data)
 
+        def get_queryset(self):
+            qs = super(ProjectViewSet, self).get_queryset()
+            qs = qs.select_related("owner")
+            
+            qs = qs.select_related("custom_order")
+            
+            
+            if self.request.QUERY_PARAMS.get('discover_mode', False):
+                qs = project_utils.attach_members(qs)
+                qs = project_utils.attach_notify_policies(qs)
+                qs = project_utils.attach_is_fan(qs, user=self.request.user)
+                qs = project_utils.attach_my_role_permissions(qs, user=self.request.user)
+                qs = project_utils.attach_closed_milestones(qs)
+                qs = project_utils.attach_my_homepage(qs, user=self.request.user)
+            elif self.request.QUERY_PARAMS.get('slight', False):
+                qs = project_utils.attach_basic_info(qs, user=self.request.user)
+            else:
+                qs = project_utils.attach_extra_info(qs, user=self.request.user)
+
+            # If filtering an activity period we must exclude the activities not updated recently enough
+            now = timezone.now()
+            order_by_field_name = self._get_order_by_field_name()
+
+            print("***************")
+            print("***************")
+            print("***************")
+            print(order_by_field_name)
+            print("***************")
+            print("***************")
+            print("***************")
+
+            if order_by_field_name == "total_fans_last_week":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(weeks=1))
+            elif order_by_field_name == "total_fans_last_month":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(months=1))
+            elif order_by_field_name == "total_fans_last_year":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(years=1))
+            elif order_by_field_name == "total_activity_last_week":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(weeks=1))
+            elif order_by_field_name == "total_activity_last_month":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(months=1))
+            elif order_by_field_name == "total_activity_last_year":
+                qs = qs.filter(totals_updated_datetime__gte=now - relativedelta(years=1))
+
+            return qs
+
+
+        ProjectViewSet.order_by_fields = ("total_fans",
+                       "total_fans_last_week",
+                       "total_fans_last_month",
+                       "total_fans_last_year",
+                       "total_activity",
+                       "total_activity_last_week",
+                       "total_activity_last_month",
+                       "total_activity_last_year",
+                       "custom_order__order")
+
         ProjectViewSet.retrieve = retrieve
+        ProjectViewSet.get_queryset = get_queryset
+            
 
         from .views import MyUsersAPI, bulk_update_projects_custom_order_view
 
