@@ -93,30 +93,31 @@ class MyUsersAPI(RetrieveAPIView):
         return response.Ok(serializer.data)
 
 
-def bulk_update_projects_custom_order_view(request):
-    """Creates or updates the custom projects order that can be used in the discover page.
-    """
-    
-    if request.method != 'POST':
-        return response.MethodNotAllowed()
+from taiga.base.api.views import APIView
 
-    if not user_is_admin(request.user):
-        return response.Forbidden()
+class bulk_update_projects_custom_order(APIView):
+    def post(self, request, *args, **kwargs):
+        """Creates or updates the custom projects order that can be used in the discover page.
+        """
+        if not user_is_admin(request.user):
+            return response.Forbidden()
 
-    order_created_response = []
-    json_request = json.loads(request.body.decode('utf-8'))
+        order_created_response = []
+        json_request = json.loads(request.body.decode('utf-8'))
 
-    for order_map in json_request:
-        project_instance = Project.objects.get(pk=order_map.get('project_id'))
-        order = order_map.get('order')
+        for order_map in json_request:
+            project_instance = Project.objects.get(pk=order_map.get('project_id'))
+            order = order_map.get('order')
 
-        defaults = {
-            'project': project_instance,
-            'order': order
-        }
+            defaults = {
+                'project': project_instance,
+                'order': order
+            }
 
-        order_created = ProjectCustomOrder.objects.update_or_create(defaults, project=project_instance)
+            order_created = ProjectCustomOrder.objects.update_or_create(defaults, project=project_instance)
 
-        order_created_response.append(str(order_created[0]))
+            order_created_response.append(str(order_created[0]))
 
-    return JsonResponse(json.dumps(order_created_response), safe=False)
+        return JsonResponse(json.dumps(order_created_response), safe=False)
+        
+bulk_update_projects_custom_order_view = bulk_update_projects_custom_order.as_view()
