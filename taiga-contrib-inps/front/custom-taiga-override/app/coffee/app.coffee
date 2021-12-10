@@ -586,6 +586,8 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     )
     $routeProvider.when("/error",
         {templateUrl: "error/error.html"})
+    $routeProvider.when("/unauthorized",
+        {templateUrl: "error/unauthorized.html"})
     $routeProvider.when("/not-found",
         {templateUrl: "error/not-found.html"})
     $routeProvider.when("/permission-denied",
@@ -621,7 +623,8 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
                 errorHandlingService.error()
             else if response.status == 401 and $location.url().indexOf('/login') == -1
                 # Let's display an informative 401 page
-                $location.url($navUrls.resolve("unauthorized"))
+                $location.path($navUrls.resolve("unauthorized"))
+                $location.replace()
 
                 # nextUrl = $location.url()
                 # search = $location.search()

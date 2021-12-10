@@ -1471,7 +1471,9 @@
         "NOT_FOUND_TEXT": "Die gesuchte Seite existiert nicht oder Sie haben nicht genügend Berechtigungen. Vielleicht können Sie zur Startseite zurückkehren und sehen, ob Sie das Gesuchte finden.",
         "PERMISSION_DENIED": "Berechtigung verweigert",
         "PERMISSION_DENIED_TEXT": "Sie haben nicht die Berechtigung um auf diese Seite zuzugreifen",
-        "VERSION_ERROR": "Ein anderer Inps Bug Tracking-Benutzer hat hier bereits Veränderungen vorgenommen, sodass Ihre Änderungen nicht gespeichert werden können. Speichern Sie diese an einer anderen Stelle, laden Sie die Seite neu und nehmen Sie die Änderungen dann erneut vor oder Ihre Eingaben gehen verloren."
+        "VERSION_ERROR": "Ein anderer Inps Bug Tracking-Benutzer hat hier bereits Veränderungen vorgenommen, sodass Ihre Änderungen nicht gespeichert werden können. Speichern Sie diese an einer anderen Stelle, laden Sie die Seite neu und nehmen Sie die Änderungen dann erneut vor oder Ihre Eingaben gehen verloren.",
+        "UNAUTHORIZED": "Nicht berechtigt",
+        "UNAUTHORIZED_TEXT": "Die Ressource, auf die Sie zugreifen möchten, steht nur authentifizierten Benutzern zur Verfügung. Bitte loggen Sie sich über die folgende Schaltfläche ein und versuchen Sie es erneut."
     },
     "TASKBOARD": {
         "PAGE_TITLE": "{{sprintName}} - Sprint Taskboard - {{projectName}}",
