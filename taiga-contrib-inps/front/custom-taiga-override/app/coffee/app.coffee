@@ -840,11 +840,14 @@ i18nInit = (lang, $translate) ->
 
 init = ($log, $rootscope, $auth, $events, $analytics, $tagManager, $userPilot, $translate, $location, $navUrls, appMetaService,
         loaderService, navigationBarService, errorHandlingService, lightboxService, $tgConfig,
-        projectService) ->
+        projectService, $windowService) ->
     $log.debug("Initialize application")
 
     $rootscope.$on '$translatePartialLoaderStructureChanged', () ->
         $translate.refresh()
+    
+    $rootscope.toLoginSpidUrl = () ->
+        $windowService.location.href = $tgConfig.get("loginSpidUrl")
 
     # Checksley - Extra validators
     validators = {
@@ -1081,5 +1084,6 @@ module.run([
     "lightboxService",
     "$tgConfig",
     "tgProjectService",
+    "$window",
     init
 ])
