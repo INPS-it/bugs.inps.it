@@ -227,6 +227,8 @@ class TaigaContribINPSAppConfig(AppConfig):
                 raise exc.WrongArguments(
                     _("Mime type not supported, the file is corrupted"))
 
+            super(BaseAttachmentViewSet,self).post_save(object,created)
+
         BaseAttachmentViewSet.post_save = attachment_post_save
 
         # Monkey patch Add Project Admins in User notifications
