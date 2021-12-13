@@ -1,0 +1,212 @@
+.highlighted {
+    @include centered;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 4rem;
+    @include until($desktop) {
+        flex-direction: column;
+        tg-most-active {
+            margin-top: 4rem;
+        }
+    }
+    tg-most-liked,
+    tg-most-active {
+        align-content: stretch;
+        display: flex;
+        flex: 1;
+    }
+    tg-most-liked {
+        margin-right: 8%;
+        @include until($desktop) {
+            margin-right: 0;
+        }
+    }
+    .most-active,
+    .most-liked {
+        align-content: stretch;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+    .header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        svg {
+            @include svg-size(.8rem);
+            fill: $gray-light;
+            margin-left: .5rem;
+        }
+    }
+    .title-wrapper {
+        align-items: center;
+        display: flex;
+        svg {
+            @include svg-size(1.25rem);
+            fill: $gray-light;
+            margin-right: .5rem;
+        }
+    }
+    .title {
+        @include font-type(medium);
+        @include font-size(larger);
+        color: $grayer;
+        display: inline-block;
+        margin: 0;
+    }
+    .highlighted-projects-container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .loading-container {
+        margin-top: calc(50% - 1rem);
+    }
+    .loading-spinner {
+        display: block;
+        margin: 2rem auto;
+        max-height: 3rem;
+        max-width: 3rem;
+    }
+    .view-more-projects {
+        margin-top: auto;
+        width: 100%;
+    }
+    .empty-highlighted-project {
+        border: 2px dashed $whitish;
+        flex: 1;
+        padding: 2rem;
+        text-align: center;
+        svg {
+            @include svg-size(2rem);
+            display: block;
+            fill: $gray-light;
+            margin: 1rem auto;
+        }
+        span {
+            @include font-type(regular);
+            color: $gray;
+            display: block;
+        }
+    }
+}
+
+
+.filter-highlighted {
+    position: relative;
+    .current-filter {
+        display: flex;
+        padding: 1rem;
+        span {
+            margin-left: .2rem;
+            position: relative;
+            top: .2rem;
+        }
+        &:hover {
+            svg {
+                fill: currentColor;
+            }
+        }
+    }
+    .filter-list {
+        @include popover(
+            $width: 200px,
+            $top: 2.5rem,
+            $left: calc(50% - 190/2 * 1px),
+            $padding: .5rem,
+            $arrow-width: .5rem,
+            $arrow-height: .5rem,
+            $arrow-top: -.25rem,
+            $arrow-left: calc(50% - .25rem)
+        );
+        display: block;
+        overflow: unset;
+
+        li {
+            cursor: pointer;
+        }
+
+        &.ng-enter {
+            animation: dropdownFade .2s ease-in;
+        }
+        &.ng-leave {
+            animation: dropdownFade .2s ease-in;
+            animation-direction: reverse;
+        }
+    }
+}
+
+.highlighted-project {
+    align-items: flex-start;
+    border-bottom: 1px solid $whitish;
+    display: flex;
+    flex-basis: 9rem;
+    min-height: 9rem;
+    padding: 1.5rem 0;
+    &:nth-last-child(-n+2) {
+        border-bottom: 0;
+    }
+    .project-logo {
+        flex-basis: 3rem;
+        height: auto;
+        margin-right: 1rem;
+        width: 3rem;
+        img {
+            width: 100%;
+        }
+    }
+    .project-data-container {
+        flex: 1;
+    }
+    .single-project-header {
+        align-content: center;
+        display: flex;
+        justify-content: space-between;
+    }
+    .project-title {
+        @include font-size(large);
+        @include font-type(regular);
+        display: inline-block;
+        margin-bottom: .5rem;
+        a {
+            color: $grey-90;
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+    .project-description {
+        @include font-size(small);
+        color: $gray;
+        margin-bottom: 0;
+    }
+    .project-statistics {
+        align-items: flex-start;
+        display: flex;
+        flex-basis: 140px;
+        justify-content: flex-end;
+        text-align: center;
+        svg {
+            @include svg-size(.75rem);
+            fill: $gray-light;
+        }
+    }
+    .statistic {
+        @include font-size(small);
+        align-items: center;
+        color: $gray-light;
+        display: flex;
+        margin-right: .5rem;
+        span {
+            margin-left: .2rem;
+        }
+        &.active {
+            color: $color-link-primary;
+            svg {
+                fill: $color-link-primary;
+            }
+        }
+    }
+}

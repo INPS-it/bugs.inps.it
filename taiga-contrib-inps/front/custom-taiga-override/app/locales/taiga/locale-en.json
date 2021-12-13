@@ -1954,7 +1954,8 @@
             "MONTH": "Last month",
             "YEAR": "Last year",
             "ALL_TIME": "All time",
-            "CLEAR": "Clear filters"
+            "CLEAR": "Clear filters",
+            "DEFAULT": "Default"
         },
         "SEARCH": {
             "PAGE_TITLE": "Search - Theme Areas",

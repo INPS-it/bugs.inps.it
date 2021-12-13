@@ -1958,7 +1958,8 @@
             "MONTH": "Ultimo mese",
             "YEAR": "Ultimo anno",
             "ALL_TIME": "Tutto",
-            "CLEAR": "Cancella filtri"
+            "CLEAR": "Cancella filtri",
+            "DEFAULT": "Predefinito"
         },
         "SEARCH": {
             "PAGE_TITLE": "Cerca - Aree Tematiche",

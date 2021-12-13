@@ -7,9 +7,12 @@
 # Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 ###
 
+import json
+
 from django.db import models
 
 from taiga.projects.issues.models import Issue
+from taiga.projects.models import Project
 
 
 class IssueVisibility(models.Model):
@@ -28,7 +31,32 @@ class IssueVisibility(models.Model):
         return "%s public: %s" % (self.issue.subject, self.is_public)
 
 
-from taiga.projects.models import Project
+class ProjectCustomOrder(models.Model):
+    """External model that enables projects to be custom ordered by admins in the Discover page.
+
+    Order field will default to project id, it will be then updated by the order customization in the frontend.
+    """
+    project = models.OneToOneField(
+        Project,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name="custom_order"
+    )
+
+    order = models.IntegerField(null=False, blank=False)
+
+    class Meta:
+        app_label = 'taiga_contrib_inps'
+        constraints = [
+            models.UniqueConstraint(fields=['project', 'order'], name='unique_project_order'),
+        ]
+
+    def __str__(self):
+        return "%s order: %s" % (self.project.name, self.order)
+    
+    def __repr__(self):
+        return "%s order: %s" % (self.project.name, self.order)
+
 
 def set_public_permissions_to_scrum_project(instance, **kwargs):
     if not instance.pk:

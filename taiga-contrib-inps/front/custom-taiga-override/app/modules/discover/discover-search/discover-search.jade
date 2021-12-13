@@ -40,8 +40,16 @@ div(tg-discover-search)
 
             .spin(ng-show="vm.loadingList", tg-loading="vm.loadingList")
 
-            ul.project-list(ng-if="!vm.loadingList && vm.searchResult.size")
-                li.list-itemtype-project(tg-repeat="project in vm.searchResult track by project.get('id')")
+            ul.project-list(
+                tg-sort-discover-projects="vm.searchResult"
+                search="vm.search()"
+                ng-if="!vm.loadingList && vm.searchResult.size"
+                )
+                li.list-itemtype-project(
+                    ng-class="{'highlighted-draggable-project': vm.isAdmin && vm.orderBy == 'custom_order__order'}"
+                    tg-bind-scope
+                    tg-repeat="project in vm.searchResult track by project.get('id')"
+                    )
                     .list-itemtype-project-left
                         a.list-itemtype-project-image(
                             aria-hidden="true"

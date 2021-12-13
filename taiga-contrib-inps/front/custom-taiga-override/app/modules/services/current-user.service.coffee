@@ -45,7 +45,7 @@ class CurrentUserService
         if @.isAuthenticated() == true
             userData = @storageService.get("userInfo")
 
-            if userData.roles && userData.roles.indexOf("Staff") > -1
+            if userData.roles && userData.roles.indexOf("Staff") > -1 && userData.can_create_project == true
                 return true
             else
                 return false
