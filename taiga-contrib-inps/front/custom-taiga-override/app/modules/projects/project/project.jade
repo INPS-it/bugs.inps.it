@@ -69,6 +69,14 @@ div.wrapper
             href="#"
             tg-nav="project-issues:project=vm.project.get('slug')"
         ) {{"COMMON.PERMISIONS_CATEGORIES.ISSUES.VIEW_ISSUES" | translate}}
+
+        a.btn-small.help-btn#help-btn-timeline(
+            variant="tertiary"
+            tg-nav="help",
+        ) 
+            tg-svg(svg-icon="icon-question")
+            span {{'HELP.TITLE' | translate}}
+
         div.project-data
             section.timeline(ng-if="vm.project")
                 div(tg-user-timeline, projectId="vm.project.get('id')")

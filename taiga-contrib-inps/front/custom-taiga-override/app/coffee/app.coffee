@@ -84,6 +84,17 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
     )
 
+    # Help
+    $routeProvider.when("/help",
+        {
+            templateUrl: "help/help-home/help-home.html",
+            controller: "HelpHome",
+            controllerAs: "vm",
+            title: "HELP.TITLE",
+            loader: true
+        }
+    )
+
     # Discover
     $routeProvider.when("/discover",
         {
@@ -737,7 +748,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         userInfo = JSON.parse(localStorage.userInfo)
 
     # i18n
-    preferedLangCode = userInfo?.lang || window.taigaConfig.defaultLanguage || "en"
+    preferedLangCode = userInfo?.lang || window.navigator.language || window.taigaConfig.defaultLanguage || "en"
 
     $translatePartialLoaderProvider.addPart('taiga')
     $translateProvider
@@ -1034,7 +1045,8 @@ modules = [
     "taigaNotifications",
     "taigaWikiHistory",
     "taigaEpics",
-    "taigaUtils"
+    "taigaUtils",
+    "inpsHelp"
 
     # template cache
     "templates",

@@ -5,6 +5,7 @@
         "OR": "or",
         "I_GET_IT": "OK, I get it",
         "LOADING": "Loading...",
+        "LOADING_IN_PROGRESS": "Loading in progress...",
         "DATE": "DD MMM YYYY",
         "DATETIME": "DD MMM YYYY HH:mm",
         "SAVE": "Save",
@@ -324,6 +325,7 @@
         }
     },
     "LOGIN": {
+        "ACTION": "Sign in",
         "PAGE_TITLE": "Login - Inps Bug Tracking",
         "PAGE_DESCRIPTION": "Logging in to Inps Bug Tracking, a project management platform for startups and agile developers & designers who want a simple, beautiful tool that makes work truly enjoyable."
     },
@@ -1754,7 +1756,7 @@
             "EMAIL": "Email",
             "FULL_NAME": "Full name",
             "PLACEHOLDER_FULL_NAME": "Set your full name (ex. Íñigo Montoya)",
-            "BIO": "Bio (max. 210 chars)",
+            "BIO": "More info (max. 210 chars)",
             "PLACEHOLDER_BIO": "Tell us something about you",
             "LANGUAGE": "Language",
             "LANGUAGE_DEFAULT": "-- use default language --",
@@ -1981,6 +1983,33 @@
             "DISCOVER_SEARCH_INPUT": "Search among the thematic areas",
             "VIEW_MORE_MOST_LIKED": "See all the thematic areas returned by the filter",
             "VIEW_MORE_MOST_ACTIVE": "See all the most active thematic areas filtered"
+        }
+    },
+    "HELP": {
+        "TITLE": "Help",
+        "SUBTITLE": "Quick start guide of bugs.inps.it. This guide will be updated with frequently asked questions.",
+        "INDEX": "Index",
+        "PAGE_DESCRIPTION": "bugs.inps.it help page",
+        "NAVIGATION": {
+            "HELP_HOME": "HELP"
+        },
+        "QUESTIONS": {
+            "1": "How do I report a Bug?",
+            "2": "How do I insert an attachment when reporting a new Bug?",
+            "3": "Do I have to register to be able to report a Bug?",
+            "4": "How do I check the status of a Bug I reported?",
+            "5": "How can I see my account activity?",
+            "6": "How do I change my displayed user name?",
+            "7": "How can I report a security Bug in a confidential manner?"
+        },
+        "ANSWERS": {
+            "1": "In order to report a bug, the first thing to do is to sign in by clicking the \"Accedi\" button in the upper-right corner, then selecting <strong>SPID</strong> method: <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"App login\"> <br />\n After that you have to choose the theme area where you want to file the bug report: <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Theme area choice\"> <br />\n In the newly opened screen, click on \"View bugs\": <br /> \n <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"Bug list opening\"> <br />\n In the bug list screen, click on the button \"New bug\": <br />\n <img class=\"help-img elevation-01\" src=\"{screenshot_4_src}\" alt=\"New bug reporting\"> <br />",
+            "2": "In the Bug creation modal, click on the button with the \"+\" icon as per screenshot, or drag and drop the attachment in the dotted area below <br>  <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"New Bug attachments\">",
+            "3": "To report a Bug you have to be logged in via <strong>SPID</strong>. When you access bugs.inps.it via SPID for the first time, a new account is created automatically. For more info about SPID please visit <a href=\"https://www.spid.gov.it/\">www.spid.gov.it</a>",
+            "4": "If you remember that theme area you filed your bug report, just access to that theme area and click the button \"View bugs\". You will see all public bugs with yours too. <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"Your bug in bug list\"> <br>  Alternatively you can click on your username in the user profile menu in the upper-right corner as per screenshot: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"User profile menu\"> <br> then choose \"Timeline\" in the nav tabs. <br> <img class=\"help-img elevation-01\" src=\"{screenshot_3_src}\" alt=\"User timeline\">",
+            "5": "To view your activity just access the user profile page using the upper-right corner as per screenshot: <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"User profile menu\"> <br> From there you can see your timeline.",
+            "6": "By default the application assigns a random username to the newly SPID-authenticated user. In order to customize the displayed username, access the user settings page <br> <img class=\"help-img elevation-01\" src=\"{screenshot_1_src}\" alt=\"User settings page\"> <br> then fill in the \"Full name\" field and click Save <br> <img class=\"help-img elevation-01\" src=\"{screenshot_2_src}\" alt=\"Fill in user full name\"> <br> from this moment on every user's activity will be displayed with the new user name. In the user settings page you can also update your profile avatar.",
+            "7": "In addition the the INPS Bug Tracking platform, potential security bugs can be submitted in a confidential manner writing directly to confidential-bugs@inps.it. <br> These emails may also be sent using PGP encryption: the public key is available <a href=\"https://github.com/INPS-it/bugs.inps.it/tree/master/extras\">at this link</a>, and in the Ubuntu and MIT PGP keyservers too."
         }
     }
 }

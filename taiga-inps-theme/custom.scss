@@ -111,6 +111,7 @@ svg {
 .button-spid {
     background-color: #06C;
     color: $color-white;
+    max-width: 9rem;
 }
 
 .button-spid svg {
@@ -957,6 +958,30 @@ a.btn-small {
     border-color: $interactiveBluHover !important;
 }
 
+.btn-big[variant=tertiarydarkbg],
+.btn-small[variant=tertiarydarkbg],
+.btn-filter[variant=tertiarydarkbg] {
+    color: $tertiaryDarkgBg !important;
+    background-color: transparent !important;
+    border: 2px solid $tertiaryDarkgBg;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.btn-big[variant=tertiarydarkbg]:hover,
+.btn-small[variant=tertiarydarkbg]:hover,
+.btn-filter[variant=tertiarydarkbg]:hover {
+    color: $tertiaryDarkgBgHover !important;
+    border-color: $tertiaryDarkgBgHover !important;
+}
+
+.btn-big[variant=tertiarydarkbg]:focus,
+.btn-small[variant=tertiarydarkbg]:focus,
+.btn-filter[variant=tertiarydarkbg]:focus {
+    color: $tertiaryDarkgBgFocus !important;
+    border-color: $tertiaryDarkgBgFocus !important;
+}
+
 .btn-big[variant=secondary]:hover,
 .btn-small[variant=secondary]:hover,
 .btn-filter:hover,
@@ -969,6 +994,22 @@ a.btn-small {
 .btn-filter:hover,
 .btn-filter[variant=secondary]:hover {
     background-color: $interactiveBluHover !important;
+}
+
+.help-btn {
+    font-size: 0.8rem!important;
+}
+
+#help-btn-discover {
+    margin: 0rem 0 0.5rem 0;
+}
+
+#help-btn-timeline {
+    position: absolute; margin-left: 1rem;
+}
+
+#help-btn-issue-list {
+    margin-left: 1rem;
 }
 
 .detail-ref {
@@ -1351,4 +1392,41 @@ tg-wysiwyg {
         font-size: 0.9rem!important;
         padding: 0.5rem;
     }
+}
+
+.help-main {
+    margin: 1rem;
+
+    h3 {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-top: 3rem;
+        text-decoration: underline;
+    }
+
+    div:last-child {
+        margin-bottom: 6rem;
+    }
+
+    header {
+        text-align: center;
+
+        h1 {
+            text-align: center!important;
+        }
+    }
+
+    .help-img {
+        margin: 2rem;
+        max-width: 85%;
+    }
+}
+
+.elevation-01 {
+    background: #FFFFFF;
+
+    /* $elevation-01 */
+    box-shadow: 0px 4px 4px rgba(170, 178, 187, 0.5), 0px 0px 1px rgba(170, 178, 187, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
