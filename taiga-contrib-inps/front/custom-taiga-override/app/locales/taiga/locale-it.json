@@ -1496,7 +1496,9 @@
         "NOT_FOUND_TEXT": "La pagina che stai cercando non esiste o non hai sufficienti permessi per poterla visualizzare. Forse puoi tornare alla home e vedere se è possibile trovare quello che stai cercando.",
         "PERMISSION_DENIED": "Permesso negato",
         "PERMISSION_DENIED_TEXT": "Non si hanno i permessi necessari per accedere a questa pagina.",
-        "VERSION_ERROR": "Qualche altro utente di Inps Bug Tracking lo ha modificato prima e le tue modifiche non possono essere applicate. Salvale altrove, ricarica la pagina e riapplica le tue modifiche o andranno perse."
+        "VERSION_ERROR": "Qualche altro utente di Inps Bug Tracking lo ha modificato prima e le tue modifiche non possono essere applicate. Salvale altrove, ricarica la pagina e riapplica le tue modifiche o andranno perse.",
+        "UNAUTHORIZED": "Non autenticato",
+        "UNAUTHORIZED_TEXT": "La risorsa a cui stai cercando di accedere è accessibile solo agli utenti autenticati. Effettua il login con il bottone sottostante e riprova."
     },
     "TASKBOARD": {
         "PAGE_TITLE": "{{sprintName}} - Pannello dei compiti dello Sprint - {{projectName}}",

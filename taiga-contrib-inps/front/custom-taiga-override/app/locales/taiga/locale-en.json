@@ -1492,7 +1492,9 @@
         "NOT_FOUND_TEXT": "The page you are looking for doesn't exists or you don't have enough permissions. Perhaps you can return back to the homepage and see if you can find what you are looking for.",
         "PERMISSION_DENIED": "Permission denied",
         "PERMISSION_DENIED_TEXT": "You don't have permission to access this page.",
-        "VERSION_ERROR": "Some other user inside Inps Bug Tracking has changed this before and your changes can't be applied. Save them elsewhere, reload the page and re-apply your changes again or they will be lost."
+        "VERSION_ERROR": "Some other user inside Inps Bug Tracking has changed this before and your changes can't be applied. Save them elsewhere, reload the page and re-apply your changes again or they will be lost.",
+        "UNAUTHORIZED": "Not authenticated",
+        "UNAUTHORIZED_TEXT": "The resource you're trying to access is available only to authenticated users. Please login by using the following button and retry."
     },
     "TASKBOARD": {
         "PAGE_TITLE": "{{sprintName}} - Sprint taskboard - {{projectName}}",

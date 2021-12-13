@@ -586,6 +586,8 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     )
     $routeProvider.when("/error",
         {templateUrl: "error/error.html"})
+    $routeProvider.when("/unauthorized",
+        {templateUrl: "error/unauthorized.html"})
     $routeProvider.when("/not-found",
         {templateUrl: "error/not-found.html"})
     $routeProvider.when("/permission-denied",
@@ -620,18 +622,22 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
 
                 errorHandlingService.error()
             else if response.status == 401 and $location.url().indexOf('/login') == -1
-                nextUrl = $location.url()
-                search = $location.search()
+                # Let's display an informative 401 page
+                $location.path($navUrls.resolve("unauthorized"))
+                $location.replace()
 
-                if search.force_next
-                    $location.url($navUrls.resolve("login"))
-                        .search("force_next", search.force_next)
-                else
-                    $location.url($navUrls.resolve("login"))
-                        .search({
-                            "unauthorized": true
-                            "next": nextUrl
-                        })
+                # nextUrl = $location.url()
+                # search = $location.search()
+
+                # if search.force_next
+                #     $location.url($navUrls.resolve("login"))
+                #         .search("force_next", search.force_next)
+                # else
+                #     $location.url($navUrls.resolve("login"))
+                #         .search({
+                #             "unauthorized": true
+                #             "next": nextUrl
+                #         })
 
             return $q.reject(response)
 
@@ -834,11 +840,14 @@ i18nInit = (lang, $translate) ->
 
 init = ($log, $rootscope, $auth, $events, $analytics, $tagManager, $userPilot, $translate, $location, $navUrls, appMetaService,
         loaderService, navigationBarService, errorHandlingService, lightboxService, $tgConfig,
-        projectService) ->
+        projectService, $windowService) ->
     $log.debug("Initialize application")
 
     $rootscope.$on '$translatePartialLoaderStructureChanged', () ->
         $translate.refresh()
+    
+    $rootscope.toLoginSpidUrl = () ->
+        $windowService.location.href = $tgConfig.get("loginSpidUrl")
 
     # Checksley - Extra validators
     validators = {
@@ -1075,5 +1084,6 @@ module.run([
     "lightboxService",
     "$tgConfig",
     "tgProjectService",
+    "$window",
     init
 ])
