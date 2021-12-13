@@ -1,0 +1,34 @@
+
+//- This Source Code Form is subject to the terms of the Mozilla Public
+//- License, v. 2.0. If a copy of the MPL was not distributed with this
+//- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//-
+//- Copyright (c) 2021-present Kaleidos Ventures SL
+
+.row.member(ng-repeat="user in memberships | membersFilter:filtersQ:filtersRole")
+    .username
+        .avatar
+            img(tg-avatar="user", tg-bo-alt="user.full_name_display")
+
+            .avatar-data
+                a.name(
+                    tg-nav="user-profile:username=user.username",
+                    title="{{::user.full_name_display}}"
+                ) {{::user.full_name_display}}
+                    tg-svg(
+                        ng-if="user.id == owner"
+                        svg-icon="icon-badge"
+                        svg-title-translate="COMMON.OWNER"
+                    )
+
+                span.position {{::user.role_name}}
+                span.position {{::user.user_email}}
+
+    .member-stats(
+        tg-team-member-stats
+        stats="stats"
+        user="user.id"
+        issuesEnabled="issuesEnabled"
+        tasksenabled="tasksEnabled"
+        wikienabled="wikiEnabled"
+    )
