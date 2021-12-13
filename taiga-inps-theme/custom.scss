@@ -407,12 +407,6 @@ a.secondary:hover {
     }
 }
 
-.ticket-data {
-    @media (max-width: $xl) {
-        max-width: 100%;
-    }
-}
-
 .master {
     .wrapper {
         @media (max-width: $xl) {
@@ -421,9 +415,22 @@ a.secondary:hover {
     }
 }
 
+.sidebar.ticket-data {
+    @media (max-width: $xl) {
+        order: 1;
+    }
+}
+
 .ticket-section.ticket-data-container {
     @media (max-width: $xl) {
+        flex-direction: column;
         display: flex;
+    }
+}
+
+.ticket-data {
+    @media (max-width: $xl) {
+        max-width: 32%;
     }
 }
 
@@ -452,12 +459,6 @@ a.secondary:hover {
 .main {
     @media (max-width: $xl) {
         overflow-y: scroll;
-    }
-}
-
-.sidebar.ticket-data {
-    @media (max-width: $xl) {
-        order: 0;
     }
 }
 
@@ -1128,6 +1129,10 @@ tg-html-editor .ck-content,
     }
 }
 
+tg-wysiwyg btn {
+    margin: 0.2rem 0 0.2rem 0;
+}
+
 .add-tag-input input {
     max-height: 48px;
     margin-right: 0.5rem;
@@ -1257,7 +1262,7 @@ h1.title {
 }
 
 tg-wysiwyg .editor.edit-mode {
-    width: 95%;
+    width: 85%;
 }
 
 .table-team .avatar .name {
@@ -1319,7 +1324,7 @@ tg-wysiwyg .editor.edit-mode {
     width:1px;
     height: 1px;
     top: auto;
-  
+
     &:focus {
         position: absolute;
         font-size: 1.5rem!important;
@@ -1330,5 +1335,20 @@ tg-wysiwyg .editor.edit-mode {
         width: auto;
         position: static;
         margin: 1rem;
+    }
+}
+
+.ticket-user-list-content {
+    .user-list-name {
+        overflow-wrap: anywhere;
+    }
+}
+
+tg-wysiwyg {
+    .btn-small {
+        margin: 0.2rem 0 0.2rem 0;
+        display: flex;
+        font-size: 0.9rem!important;
+        padding: 0.5rem;
     }
 }
