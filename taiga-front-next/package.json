@@ -20,11 +20,6 @@
     "deploy:elements": "npm run build:elements && npm run pack:elements && cp dist/elements/elements.js ../taiga-contrib-inps/front/custom-taiga-override/elements.js"
   },
   "private": true,
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && npm run lint && node ./scripts/append-license.js"
-    }
-  },
   "dependencies": {
     "@angular/animations": "~10.0.14",
     "@angular/cdk": "^10.1.3",

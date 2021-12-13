@@ -7,16 +7,12 @@
 // Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 //
 
-div(style={height: '100vh', background: 'white', 'text-align': 'center'}, id='inps-loading-overlay')
+div#inps-loading-overlay
     
     img(
         src="/#{v}/svg/logo-color.svg",
         alt="INPS Bug Tracking",
-        style={margin: '4rem auto', 'max-height': '10rem', 'max-width': '10rem'}
     )
 
-    p(
-        style={'vertical-align': 'middle', 'font-size': '3rem', 'font-family': 'Arial, Helvetica, sans-serif'}
-    ) 
+    p 
         |Caricamento in corso...
-

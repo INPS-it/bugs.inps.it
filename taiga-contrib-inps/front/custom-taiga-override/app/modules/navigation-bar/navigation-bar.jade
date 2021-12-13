@@ -45,10 +45,10 @@ nav.navbar(ng-if="vm.isEnabledHeader")
                 img(
                     src="/#{v}/images/spid-button/spid-ico-circle-bb.svg"
                     onerror="this.src='/#{v}/images/spid-button/spid-ico-circle-bb.png'; this.onerror=null;"
-                    alt="{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}"
+                    alt=""
                 )
             span.italia-it-button-text
-                |Accedi
+                |{{'LOGIN_COMMON.ACTION_SIGN_IN' | translate}}
 
 
 
@@ -72,43 +72,43 @@ nav.navbar(ng-if="vm.isEnabledHeader")
             span.hidden {{'PROJECT.NAVIGATION.DISCOVER' | translate}}
             tg-svg(svg-icon="icon-compass")
 
-        .topnav-dropdown-wrapper.nav-bar-support(ng-if="vm.customSupportUrl")
-            a(
-                ng-if="vm.customSupportUrl"
-                href="{{ vm.customSupportUrl }}",
-                target="_blank",
-                title="{{'PROJECT.NAVIGATION.HELP_TITLE' | translate}}",
-            )
-                span.hidden {{'PROJECT.NAVIGATION.HELP_TITLE' | translate}}
-                tg-svg(svg-icon="icon-help-circle")
+        //- .topnav-dropdown-wrapper.nav-bar-support(ng-if="vm.customSupportUrl")
+        //-     a(
+        //-         ng-if="vm.customSupportUrl"
+        //-         href="{{ vm.customSupportUrl }}",
+        //-         target="_blank",
+        //-         title="{{'PROJECT.NAVIGATION.HELP_TITLE' | translate}}",
+        //-     )
+        //-         span.hidden {{'PROJECT.NAVIGATION.HELP_TITLE' | translate}}
+        //-         tg-svg(svg-icon="icon-help-circle")
 
-            .navbar-dropdown.navigation-help
-                ul
-                    li(ng-if="vm.userpilotEnabled")
-                        a.secondary(
-                            href="#"
-                            title="{{ vm.userPilotTitle }}"
-                        )
-                            tg-svg(svg-icon="icon-lifeguard")
-                            span {{ vm.userPilotTitle }}
+        //-     .navbar-dropdown.navigation-help
+        //-         ul
+        //-             li(ng-if="vm.userpilotEnabled")
+        //-                 a.secondary(
+        //-                     href="#"
+        //-                     title="{{ vm.userPilotTitle }}"
+        //-                 )
+        //-                     tg-svg(svg-icon="icon-lifeguard")
+        //-                     span {{ vm.userPilotTitle }}
 
-                    li
-                        a.secondary(
-                            ng-show="vm.isFeedbackEnabled"
-                            href="#"
-                            ng-click="vm.sendFeedback()",
-                            title="{{ 'PROJECT.NAVIGATION.FEEDBACK_TITLE' | translate }}"
-                        )
-                            tg-svg(svg-icon="icon-message-square")
-                            span {{ 'PROJECT.NAVIGATION.FEEDBACK' | translate }}
-                    li
-                        a.secondary(
-                            href="{{ vm.customSupportUrl }}",
-                            target="_blank",
-                            title="{{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES_TITLE' | translate }}"
-                        )
-                            tg-svg(svg-icon="icon-resources")
-                            span {{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES' | translate }}
+        //-             li
+        //-                 a.secondary(
+        //-                     ng-show="vm.isFeedbackEnabled"
+        //-                     href="#"
+        //-                     ng-click="vm.sendFeedback()",
+        //-                     title="{{ 'PROJECT.NAVIGATION.FEEDBACK_TITLE' | translate }}"
+        //-                 )
+        //-                     tg-svg(svg-icon="icon-message-square")
+        //-                     span {{ 'PROJECT.NAVIGATION.FEEDBACK' | translate }}
+        //-             li
+        //-                 a.secondary(
+        //-                     href="{{ vm.customSupportUrl }}",
+        //-                     target="_blank",
+        //-                     title="{{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES_TITLE' | translate }}"
+        //-                 )
+        //-                     tg-svg(svg-icon="icon-resources")
+        //-                     span {{ 'PROJECT.NAVIGATION.TAIGA_RESOURCES' | translate }}
 
         .topnav-dropdown-wrapper(
             tg-dropdown-notifications

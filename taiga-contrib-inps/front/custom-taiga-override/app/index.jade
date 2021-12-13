@@ -38,14 +38,38 @@ html(lang="en", ng-attr-dir="{{ isRTL ? 'rtl' : 'ltr' }}")
             window.TAIGA_USER_PILOT_TOKEN = '#{userpilotToken}'
             window._taigaAvailableThemes = !{availableThemes};
 
+        style(type="text/css").
+            .screenreader-text { color: white; }
+            #inps-loading-overlay { height: 100vh; background: white; text-align: center; }
+            #inps-loading-overlay img { margin: 4rem auto; max-height: 10rem; max-width: 10rem; }
+            #inps-loading-overlay p { vertical-align: middle; font-size: 3rem; font-family: Arial, Helvetica, sans-serif; }
+
+
     body(tg-main, ng-class="{'rtl': isRTL}")
+
+        a.screenreader-text(
+            href="#navigation-bar"
+        )
+            {{'SCREENREADER.SKIP_LINKS.NAVBAR' | translate}}
+
+        a.screenreader-text(
+            href="#main-content"
+        )
+            {{'SCREENREADER.SKIP_LINKS.MAIN_CONTENT' | translate}}
+
         include partials/includes/modules/inps-loading
         
         tg-legacy
 
-        div(tg-navigation-bar, ng-if="!errorHandling.showingError")
+        div(
+            tg-navigation-bar, ng-if="!errorHandling.showingError"
+            id="navigation-bar"
+            )
         div(ng-if="!errorHandling.showingError")
-            div.master(ng-view)
+            div.master(
+                id="main-content"
+                ng-view
+                )
 
         div(ng-if="errorHandling.notfound", ng-include="'error/not-found.html'")
         div(ng-if="errorHandling.error", ng-include="'error/error.html'")

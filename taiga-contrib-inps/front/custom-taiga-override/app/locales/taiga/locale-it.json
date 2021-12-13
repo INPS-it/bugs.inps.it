@@ -1972,5 +1972,16 @@
         "ZOOM-2": "Predefinito",
         "ZOOM-3": "Dettagliato",
         "ZOOM-4": "Espanso"
+    },
+    "SCREENREADER": {
+        "SKIP_LINKS": {
+            "NAVBAR": "Link diretto alla barra di navigazione",
+            "MAIN_CONTENT": "Link diretto al contenuto principale"
+        },
+        "LABELS": {
+            "DISCOVER_SEARCH_INPUT": "Cerca tra le aree tematiche",
+            "VIEW_MORE_MOST_LIKED": "Vedi tutte le aree tematiche restituite dal filtro",
+            "VIEW_MORE_MOST_ACTIVE": "Vedi tutte le aree tematiche più attive filtrate"
+        }
     }
 }

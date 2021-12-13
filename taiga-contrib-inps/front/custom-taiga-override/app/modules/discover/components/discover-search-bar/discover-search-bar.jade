@@ -35,9 +35,9 @@ div.discover-header
 
         form(ng-submit="vm.submitFilter()")
             div.searchbox
-                label.hidden(
+                label.screenreader-text(
                     for="search_input"
-                ) {{ 'DISCOVER.SEARCH.ACTION_TITLE' | translate }}
+                ) {{ 'SCREENREADER.LABELS.DISCOVER_SEARCH_INPUT' | translate }}
                 input(
                     name="search"
                     id="search_input"
@@ -45,7 +45,7 @@ div.discover-header
                     placeholder="{{ 'DISCOVER.SEARCH.INPUT_PLACEHOLDER' | translate }}"
                     ng-model="vm.q"
                 )
-                input.hidden(
+                input.screenreader-text(
                     aria-label="{{ 'DISCOVER.SEARCH.ACTION_TITLE' | translate }}"
                     type="submit"
                 )                

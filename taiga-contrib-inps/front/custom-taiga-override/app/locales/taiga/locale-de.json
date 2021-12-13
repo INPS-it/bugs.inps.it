@@ -1943,5 +1943,16 @@
         "ZOOM-2": "Standard",
         "ZOOM-3": "Detailiert",
         "ZOOM-4": "Vollständig"
+    },
+    "SCREENREADER": {
+        "SKIP_LINKS": {
+            "NAVBAR": "Direktlink zur Navigationsleiste",
+            "MAIN_CONTENT": "Direktlink zum Hauptinhalt"
+        },
+        "LABELS": {
+            "DISCOVER_SEARCH_INPUT": "Suche in den Themenbereichen",
+            "VIEW_MORE_MOST_LIKED": "See all the thematic areas returned by the filter",
+            "VIEW_MORE_MOST_ACTIVE": "See all the most active thematic areas filtered"
+        }
     }
 }
