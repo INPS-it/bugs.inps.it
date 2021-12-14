@@ -1324,6 +1324,8 @@ tg-wysiwyg .editor.edit-mode {
     right: 0;
     top: 0;
     z-index: $first-layer;
+    overflow: auto;
+
     .logo-container {
         display: block;
         background-color: $white;
@@ -1332,6 +1334,9 @@ tg-wysiwyg .editor.edit-mode {
         padding: 3rem;
     }
     .error-container {
+        .error-img {
+            max-height: 25rem;
+        }
         display: block;
         color: $white;
         background-color: $interactiveBluPressed;
