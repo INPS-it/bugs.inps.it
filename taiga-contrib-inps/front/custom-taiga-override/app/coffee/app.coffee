@@ -748,7 +748,15 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         userInfo = JSON.parse(localStorage.userInfo)
 
     # i18n
-    preferedLangCode = userInfo?.lang || window.navigator.language || window.taigaConfig.defaultLanguage || "en"
+    
+    # Let's try to get language from browser settings at first
+    navigatorLangCode = window.navigator.language.substring(0,2)
+    supportedLanguages = ['it','en','de']
+
+    if supportedLanguages.includes(navigatorLangCode)
+        preferedLangCode = userInfo?.lang || navigatorLangCode
+    else
+        preferedLangCode = userInfo?.lang || window.taigaConfig.defaultLanguage || "en"
 
     $translatePartialLoaderProvider.addPart('taiga')
     $translateProvider
