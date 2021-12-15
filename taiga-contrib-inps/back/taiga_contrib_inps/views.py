@@ -23,6 +23,7 @@ import time
 from django.views import View
 from django.http import *
 from django.conf import settings
+from django.contrib.auth import logout
 from .services import ext_make_auth_response_data
 import json
 
@@ -43,8 +44,10 @@ class ExchangeTokenView(View):
                 data = ext_make_auth_response_data(user)
                 data["roles"] = list(data["roles"])
                 del request.session[partial_code]
+                logout(request)
                 return JsonResponse(data, safe=False)
 
+        logout(request)
         return HttpResponseForbidden()
 
 
