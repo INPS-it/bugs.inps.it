@@ -15,7 +15,7 @@
 # Copyright (c) 2021-present Kaleidos Ventures SL
 ###
 
-NavigationBarDirective = (currentUserService, navigationBarService, locationService, navUrlsService, config, feedbackService, $windowService) ->
+NavigationBarDirective = (currentUserService, navigationBarService, locationService, navUrlsService, config, feedbackService, $auth, $windowService) ->
     link = (scope, el, attrs, ctrl) ->
         scope.vm = {}
 
@@ -62,6 +62,7 @@ NavigationBarDirective = (currentUserService, navigationBarService, locationServ
             feedbackService.sendFeedback()
 
         scope.vm.toLoginSpidUrl = () ->
+            $auth.logout()
             $windowService.location.href = config.get("loginSpidUrl")
 
         window._taigaSendFeedback = scope.vm.sendFeedback
@@ -98,6 +99,7 @@ NavigationBarDirective.$inject = [
     "$tgNavUrls",
     "$tgConfig",
     "tgFeedbackService",
+    "$tgAuth",
     "$window"
 ]
 

@@ -858,6 +858,7 @@ init = ($log, $rootscope, $auth, $events, $analytics, $tagManager, $userPilot, $
         $translate.refresh()
     
     $rootscope.toLoginSpidUrl = () ->
+        $auth.logout()
         $windowService.location.href = $tgConfig.get("loginSpidUrl")
 
     # Checksley - Extra validators
