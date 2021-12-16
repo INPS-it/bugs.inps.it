@@ -1625,7 +1625,9 @@
     },
     "ISSUE": {
         "PAGE_TITLE": "{{issueSubject}} - Ticket {{issueRef}} - {{projectName}}",
-        "PAGE_DESCRIPTION": "Status: {{issueStatus }}. Typ: {{issueType}}, Priorität: {{issuePriority}}. Gewichtung: {{issueSeverity}}. Beschreibung: {{issueDescription}}"
+        "PAGE_DESCRIPTION": "Status: {{issueStatus }}. Typ: {{issueType}}, Priorität: {{issuePriority}}. Gewichtung: {{issueSeverity}}. Beschreibung: {{issueDescription}}",
+        "MOVE_TO_PROJECT": "Zum Themenbereich wechseln",
+        "MOVE_ACTION": "Umzug"
     },
     "KANBAN": {
         "PAGE_TITLE": "Kanban - {{projectName}}",

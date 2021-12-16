@@ -429,6 +429,12 @@ a.secondary:hover {
     }
 }
 
+.move-issue {
+    button {
+        margin: 0.5rem 0 0.5rem 0;
+    }
+}
+
 .ticket-data {
     @media (max-width: $xl) {
         max-width: 32%;

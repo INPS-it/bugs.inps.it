@@ -1654,7 +1654,9 @@
     },
     "ISSUE": {
         "PAGE_TITLE": "{{issueSubject}} - Criticitá {{issueRef}} - {{projectName}}",
-        "PAGE_DESCRIPTION": "Stato: {{issueStatus }}. Tipo: {{issueType}}, Prioritá: {{issuePriority}}. Severitá: {{issueSeverity}}. Descrizione: {{issueDescription}}"
+        "PAGE_DESCRIPTION": "Stato: {{issueStatus }}. Tipo: {{issueType}}, Prioritá: {{issuePriority}}. Severitá: {{issueSeverity}}. Descrizione: {{issueDescription}}",
+        "MOVE_TO_PROJECT": "Sposta su Area Tematica",
+        "MOVE_ACTION": "Sposta"
     },
     "KANBAN": {
         "PAGE_TITLE": "Kanban - {{projectName}}",

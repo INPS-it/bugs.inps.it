@@ -161,6 +161,16 @@ div.wrapper(
             required-perm="modify_issue"
         )
 
+        section.ticket-section.move-issue(
+            tg-check-permission="modify_issue"
+        )
+            label(for="project-list-select") {{'ISSUE.MOVE_TO_PROJECT' | translate}}:
+            select#project-list-select
+                option(
+                    ng-repeat="project in projects_list"
+                    value="{{project.id}}") {{project.name}}
+            button.btn-small(variant="primary") {{'ISSUE.MOVE_ACTION' | translate}}
+
         section.ticket-section.ticket-detail-settings
             tg-due-date(
                 due-date="issue.due_date"
