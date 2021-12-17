@@ -396,7 +396,7 @@ class TaigaContribINPSAppConfig(AppConfig):
         ProjectViewSet.get_queryset = get_queryset
             
 
-        from .views import MyUsersAPI, bulk_update_projects_custom_order_view
+        from .views import MyUsersAPI, bulk_update_projects_custom_order_view, MoveIssueView
 
         urlpatterns.append(
             url(
@@ -411,6 +411,14 @@ class TaigaContribINPSAppConfig(AppConfig):
                 "api/v1/projects_custom/bulk_update_custom_projects_order$",
                 bulk_update_projects_custom_order_view,
                 name="bulk_update_custom_projects_order",
+            )
+        )
+
+        urlpatterns.append(
+            url(
+                "api/v1/issues_custom/move_issue$",
+                MoveIssueView.as_view(),
+                name="move_issue",
             )
         )
 

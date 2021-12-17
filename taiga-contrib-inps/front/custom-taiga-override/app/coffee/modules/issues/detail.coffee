@@ -59,6 +59,7 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
                   @errorHandlingService, @projectService, @attachmentsFullService, @resources, @currentUserService) ->
         bindMethods(@)
 
+        that = this
         @scope.issueRef = @params.issueref
         @scope.sectionName = @translate.instant("ISSUES.SECTION_NAME")
         @scope.attachmentsReady = false
@@ -80,6 +81,22 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
 
         # On Error
         promise.then null, @.onInitialDataError.bind(@)
+
+        @scope.onMoveToArea = () ->
+            if !that.scope.moveto
+                return
+            
+            selectedProjectId = that.scope.moveto.project_id
+            issueData = that.scope.issue
+
+            that.rs.issues.moveIssueTo(selectedProjectId, issueData).then(
+                (response) -> 
+                    console.log(response)
+                    # TODO: visualizzare l'alert di spostamento riuscito
+                (error) -> 
+                    console.log(error)
+                    # TODO: visualizzare l'alert di spostamento fallito
+            )
 
     _setMeta: ->
         title = @translate.instant("ISSUE.PAGE_TITLE", {

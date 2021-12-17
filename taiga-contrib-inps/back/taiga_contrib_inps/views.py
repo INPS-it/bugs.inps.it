@@ -124,3 +124,20 @@ class bulk_update_projects_custom_order(APIView):
         return JsonResponse(json.dumps(order_created_response), safe=False)
         
 bulk_update_projects_custom_order_view = bulk_update_projects_custom_order.as_view()
+
+class MoveIssueView(APIView):
+    def post(self, request, *args, **kwargs):
+        """Moves an issue to a different project.
+        """
+        if not user_is_admin(request.user):
+            return response.Forbidden()
+
+        json_request = json.loads(request.body.decode('utf-8'))
+
+        # TODO: Recuperare owner, stato, criticità, priorità, tipo dalla Issue
+        # TODO: Assegnare l'id del nuovo progetto alla issue
+        # TODO: Ri-assegnare owner, stato, criticità, priorità e tipo salvati precedentemente
+        # TODO: Verificare esistenza eventuali allegati, e nel caso ci siano aggiornare project_id ed object_id
+        
+
+        return JsonResponse("OK", safe=False)
