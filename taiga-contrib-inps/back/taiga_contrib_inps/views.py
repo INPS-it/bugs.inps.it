@@ -9,6 +9,7 @@
 from .models import ProjectCustomOrder
 from taiga.projects.models import Membership, Project, Priority, Severity, IssueType, IssueStatus
 from taiga.projects.issues.models import Issue
+from taiga.projects.history.models import HistoryEntry
 from taiga.projects.attachments import models as attachments_models
 from taiga.base.api.permissions import ResourcePermission
 from taiga.base.api.generics import RetrieveAPIView
@@ -203,5 +204,13 @@ class MoveIssueView(APIView):
             for attachment in attachments:
                 attachment.project = project
                 attachment.save()
+
+        # Let's find and manipulate history entries
+        history_entries = HistoryEntry.objects.filter(key='issues.issue:'+str(issue_id))
+
+        if history_entries.count() > 0:
+            for history_entry in history_entries:
+                history_entry.project = project
+                history_entry.save()
 
         return JsonResponse(json_request, safe=False)
