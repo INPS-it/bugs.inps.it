@@ -91,11 +91,9 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
 
             that.rs.issues.moveIssueTo(selectedProjectId, issueData).then(
                 (response) -> 
-                    console.log(response)
-                    # TODO: visualizzare l'alert di spostamento riuscito
+                    that.confirm.notify("success")
                 (error) -> 
-                    console.log(error)
-                    # TODO: visualizzare l'alert di spostamento fallito
+                    that.confirm.notify("error")
             )
 
     _setMeta: ->

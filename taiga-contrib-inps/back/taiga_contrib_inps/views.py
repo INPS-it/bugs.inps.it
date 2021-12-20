@@ -7,7 +7,9 @@
 # Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 ###
 from .models import ProjectCustomOrder
-from taiga.projects.models import Membership, Project
+from taiga.projects.models import Membership, Project, Priority, Severity, IssueType, IssueStatus
+from taiga.projects.issues.models import Issue
+from taiga.projects.attachments import models as attachments_models
 from taiga.base.api.permissions import ResourcePermission
 from taiga.base.api.generics import RetrieveAPIView
 
@@ -133,11 +135,73 @@ class MoveIssueView(APIView):
             return response.Forbidden()
 
         json_request = json.loads(request.body.decode('utf-8'))
+        issue_data = json_request['issue_data']
 
-        # TODO: Recuperare owner, stato, criticità, priorità, tipo dalla Issue
-        # TODO: Assegnare l'id del nuovo progetto alla issue
-        # TODO: Ri-assegnare owner, stato, criticità, priorità e tipo salvati precedentemente
-        # TODO: Verificare esistenza eventuali allegati, e nel caso ci siano aggiornare project_id ed object_id
+        old_project_id = issue_data.get('project')
+        new_project_id = json_request['project_id']
+        issue_id = issue_data.get('id')
+        old_owner = issue_data.get('owner')
+
+        # Let's retrieve the issue:
+        issue = Issue.objects.get(id=issue_id)
+        project = Project.objects.get(id=new_project_id)
+        
+        try:
+            owner = User.objects.get(id=old_owner)
+        except DoesNotExist:
+            owner = None
+
+        
+        old_status = IssueStatus.objects.get(project_id=old_project_id,id=issue_data.get('status'))
+
+        try:
+            target_status = IssueStatus.objects.get(project_id=new_project_id,slug=old_status.slug)
+        except IssueStatus.DoesNotExist:
+            # Status not found, we have to create a new status with the same data of the old status
+            target_status = IssueStatus.create(name=old_status.name,order=10,is_closed=old_status.is_closed,color=old_status.color,project_id=new_project_id,slug=old_status.slug)
+
+        old_severity = Severity.objects.get(project_id=old_project_id, id=issue_data.get('severity'))
+
+        try:
+            target_severity = Severity.objects.get(project_id=new_project_id,name=old_severity.name)
+        except Severity.DoesNotExist:
+            # Severity not found, we have to create a new status with the same data of the old status
+            target_severity = Severity.create(name=old_severity.name,order=10,color=old_severity.color,project_id=new_project_id)
+
+        old_priority = Priority.objects.get(project_id=old_project_id, id=issue_data.get('priority'))
+
+        try:
+            target_priority = Priority.objects.get(project_id=new_project_id,name=old_priority.name)
+        except Priority.DoesNotExist:
+            # priority not found, we have to create a new status with the same data of the old status
+            target_priority = Priority.create(name=old_priority.name,order=10,color=old_priority.color,project_id=new_project_id)
+
+        old_issue_type = IssueType.objects.get(project_id=old_project_id, id=issue_data.get('type'))
+
+        try:
+            target_type = IssueType.objects.get(project_id=new_project_id,name=old_issue_type.name)
+        except IssueType.DoesNotExist:
+            # type not found, we have to create a new status with the same data of the old status
+            target_type = IssueType.create(name=old_issue_type.name,order=10,color=old_issue_type.color,project_id=new_project_id)
         
 
-        return JsonResponse("OK", safe=False)
+        # Let's update the issue
+        issue.status = target_status
+        issue.project = project
+        issue.owner = owner
+        issue.severity = target_severity
+        issue.priority = target_priority
+        issue.type = target_type
+
+        issue.save()
+
+        # Let's find and update attachments
+        attachments = attachments_models.Attachment.objects.filter(object_id=issue_id, project=old_project_id)
+
+        if attachments.count() > 0:
+
+            for attachment in attachments:
+                attachment.project = project
+                attachment.save()
+
+        return JsonResponse(json_request, safe=False)
