@@ -141,10 +141,12 @@ class TaigaContribINPSAppConfig(AppConfig):
             """Method to override default Issue creation behaviour.
             This will sync the external IssueUrl table with data feeded from the creation form.
             """
+
             issue_url_param = request.DATA.get('issue_url', None)
             request.DATA['issue_url'] = None
 
-            super().create()
+            # TODO: la seguente linea dà errore, necessario Michele
+            super(IssueViewSet,self).create(self, request, *args, **kwargs)
             
             issue_obj = self.get_object_or_none()
 

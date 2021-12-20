@@ -38,7 +38,7 @@ class IssueUrl(models.Model):
         primary_key=True,
     )
 
-    issue_url = models.CharField()
+    issue_url = models.CharField(max_length=1024)
 
     class Meta:
         app_label = 'taiga_contrib_inps'

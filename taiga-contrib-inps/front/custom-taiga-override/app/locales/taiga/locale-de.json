@@ -1174,6 +1174,8 @@
             "TASK_PLACEHOLDER_DESCRIPTION": "Bitte beschreiben Sie diese Aufgabe ausreichend, damit Beteiligte den Vorgang besser verstehen.",
             "ISSUE_PLACEHOLDER_DESCRIPTION": "Bitte beschreiben Sie dieses Ticket ausreichend, damit Beteiligte den Vorgang besser verstehen.",
             "US_PLACEHOLDER_DESCRIPTION": "Bitte beschreiben Sie diese User Story ausreichend, damit Beteiligte den Vorgang besser verstehen.",
+            "ISSUE_URL_LABEL": "Bug-URL (optional)",
+            "ISSUE_URL_PLACEHOLDER": "Fügen Sie hier die URL der Seite ein, auf der Sie auf den bug gestoßen sind",
             "NEW_TASK": "Neue Aufgabe",
             "NEW_ISSUE": "Neues Ticket",
             "NEW_US": "Neue User-Story",
