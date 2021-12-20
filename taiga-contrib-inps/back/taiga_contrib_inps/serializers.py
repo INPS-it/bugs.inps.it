@@ -19,6 +19,7 @@ from taiga.users.serializers import UserAdminSerializer
 
 class ExtIssueListSerializer(IssueListSerializer):
     is_public = MethodField()
+    issue_url = MethodField()
 
     def get_is_public(self, obj):
         if hasattr(obj, 'issuevisibility'):
@@ -26,13 +27,26 @@ class ExtIssueListSerializer(IssueListSerializer):
         else:
             return False
 
+    def get_issue_url(self, obj):
+        if hasattr(obj, 'issueurl'):
+            return obj.issueurl.issue_url
+        else:
+            return False
+
 
 class ExtIssueSerializer(IssueSerializer):
     is_public = MethodField()
+    issue_url = MethodField()
 
     def get_is_public(self, obj):
         if hasattr(obj, 'issuevisibility'):
             return obj.issuevisibility.is_public
+        else:
+            return False
+
+    def get_issue_url(self, obj):
+        if hasattr(obj, 'issueurl'):
+            return obj.issueurl.issue_url
         else:
             return False
 

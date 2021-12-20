@@ -103,7 +103,7 @@ class TaigaContribINPSAppConfig(AppConfig):
 
         # Monkey patch IssueViewSet - Update Issue visibility
 
-        from .models import IssueVisibility
+        from .models import IssueVisibility, IssueUrl
         from taiga.base.utils.db import get_object_or_none
 
         prev_issue_viewset_update = IssueViewSet.update
@@ -111,7 +111,10 @@ class TaigaContribINPSAppConfig(AppConfig):
         def ext_update(self, request, *args, **kwargs):
 
             is_public_param = request.DATA.get('is_public', None)
+            issue_url_param = request.DATA.get('issue_url', None)
+
             issue_obj = self.get_object_or_none()
+
             if is_public_param is not None and issue_obj:
                 self.check_permissions(self.request, "update", issue_obj)
                 visibility = get_object_or_none(
@@ -124,9 +127,32 @@ class TaigaContribINPSAppConfig(AppConfig):
                 visibility.save()
                 request.DATA['is_public'] = None
 
+            if issue_url_param is not None and issue_obj:
+                issue_url = get_object_or_none(IssueUrl, issue=issue_obj)
+                if issue_url is not None:
+                    issue_url.issue_url = issue_url_param
+                else:
+                    IssueUrl.create(issue=issue_obj, issue_url=issue_url_param)
+                request.DATA['issue_url'] = None
+
             return prev_issue_viewset_update(self, request, *args, **kwargs)
 
+        def ext_create(self, request, *args, **kwargs):
+            """Method to override default Issue creation behaviour.
+            This will sync the external IssueUrl table with data feeded from the creation form.
+            """
+            issue_url_param = request.DATA.get('issue_url', None)
+            request.DATA['issue_url'] = None
+
+            super().create()
+            
+            issue_obj = self.get_object_or_none()
+
+            if issue_url_param is not None and issue_obj:
+                IssueUrl.create(issue=issue_obj, issue_url=issue_url_param)
+
         IssueViewSet.update = ext_update
+        IssueViewSet.create = ext_create
 
         # Monkey patch ProjectTimeline
 
