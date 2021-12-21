@@ -132,26 +132,26 @@ class TaigaContribINPSAppConfig(AppConfig):
                 if issue_url is not None:
                     issue_url.issue_url = issue_url_param
                 else:
-                    IssueUrl.create(issue=issue_obj, issue_url=issue_url_param)
+                    IssueUrl.objects.create(issue=issue_obj, issue_url=issue_url_param)
                 request.DATA['issue_url'] = None
 
             return prev_issue_viewset_update(self, request, *args, **kwargs)
 
         def ext_create(self, request, *args, **kwargs):
-            """Method to override default Issue creation behaviour.
+            """Method to extend default Issue creation behaviour.
             This will sync the external IssueUrl table with data feeded from the creation form.
             """
 
             issue_url_param = request.DATA.get('issue_url', None)
             request.DATA['issue_url'] = None
 
-            # TODO: la seguente linea dà errore, necessario Michele
-            super(IssueViewSet,self).create(self, request, *args, **kwargs)
-            
-            issue_obj = self.get_object_or_none()
+            return_value = super(IssueViewSet,self).create(request, *args, **kwargs)
 
-            if issue_url_param is not None and issue_obj:
-                IssueUrl.create(issue=issue_obj, issue_url=issue_url_param)
+            if issue_url_param is not None and self.object:
+                IssueUrl.objects.create(issue=self.object, issue_url=issue_url_param)
+
+            return return_value
+            
 
         IssueViewSet.update = ext_update
         IssueViewSet.create = ext_create
