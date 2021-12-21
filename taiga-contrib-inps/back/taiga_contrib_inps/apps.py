@@ -128,9 +128,11 @@ class TaigaContribINPSAppConfig(AppConfig):
                 request.DATA['is_public'] = None
 
             if issue_url_param is not None and issue_obj:
-                issue_url = get_object_or_none(IssueUrl, issue=issue_obj)
+                issue_url = issue_obj.issue_url
+                
                 if issue_url is not None:
                     issue_url.issue_url = issue_url_param
+                    issue_url.save()
                 else:
                     IssueUrl.objects.create(issue=issue_obj, issue_url=issue_url_param)
                 request.DATA['issue_url'] = None

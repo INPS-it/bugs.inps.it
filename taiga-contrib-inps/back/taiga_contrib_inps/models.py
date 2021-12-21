@@ -36,6 +36,7 @@ class IssueUrl(models.Model):
         Issue,
         on_delete=models.CASCADE,
         primary_key=True,
+        related_name='issue_url'
     )
 
     issue_url = models.CharField(max_length=1024)

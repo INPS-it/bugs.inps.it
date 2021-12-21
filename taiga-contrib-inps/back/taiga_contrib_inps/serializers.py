@@ -28,8 +28,8 @@ class ExtIssueListSerializer(IssueListSerializer):
             return False
 
     def get_issue_url(self, obj):
-        if hasattr(obj, 'issueurl'):
-            return obj.issueurl.issue_url
+        if hasattr(obj, 'issue_url'):
+            return obj.issue_url.issue_url
         else:
             return False
 
@@ -45,8 +45,8 @@ class ExtIssueSerializer(IssueSerializer):
             return False
 
     def get_issue_url(self, obj):
-        if hasattr(obj, 'issueurl'):
-            return obj.issueurl.issue_url
+        if hasattr(obj, 'issue_url'):
+            return obj.issue_url.issue_url
         else:
             return False
 
