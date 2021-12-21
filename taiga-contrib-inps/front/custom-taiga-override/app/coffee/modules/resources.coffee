@@ -148,7 +148,7 @@ urls = {
     "issue-watch": "/issues/%s/watch"
     "issue-unwatch": "/issues/%s/unwatch"
     "promote-issue-to-us": "/issues/%s/promote_to_user_story"
-    "move-issue-to": "/issues_custom/move_issue"
+    "move-issue-to": "/issues_custom/%s/move_issue"
 
     # Swimlanes
     "swimlanes": "/swimlanes"

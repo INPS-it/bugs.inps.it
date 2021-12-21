@@ -416,7 +416,7 @@ class TaigaContribINPSAppConfig(AppConfig):
 
         urlpatterns.append(
             url(
-                "api/v1/issues_custom/move_issue$",
+                "api/v1/issues_custom/(?P<pk>[^/.]+)/move_issue$",
                 MoveIssueView.as_view(),
                 name="move_issue",
             )

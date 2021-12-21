@@ -87,9 +87,8 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
                 return
             
             selectedProjectId = that.scope.moveto.project_id
-            issueData = that.scope.issue
 
-            that.rs.issues.moveIssueTo(selectedProjectId, issueData).then(
+            that.rs.issues.moveIssueTo(selectedProjectId,that.scope.issue.id).then(
                 (response) -> 
                     that.confirm.notify("success")
                 (error) -> 

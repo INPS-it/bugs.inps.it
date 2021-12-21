@@ -136,64 +136,25 @@ class MoveIssueView(APIView):
         if not user_is_admin(request.user):
             return response.Forbidden()
 
-        json_request = json.loads(request.body.decode('utf-8'))
-        issue_data = json_request['issue_data']
-
-        old_project_id = issue_data.get('project')
-        new_project_id = json_request['project_id']
-        issue_id = issue_data.get('id')
-        old_owner = issue_data.get('owner')
-
+        issue_id = kwargs.get('pk')
         # Let's retrieve the issue:
         issue = Issue.objects.get(id=issue_id)
-        project = Project.objects.get(id=new_project_id)
+        old_project_id = issue.project_id
+
+        json_request = json.loads(request.body.decode('utf-8'))
+        new_project_id = json_request['project_id']
+
+        project = get_object_or_404(Project, pk=new_project_id)
         
-        try:
-            owner = User.objects.get(id=old_owner)
-        except DoesNotExist:
-            owner = None
-
-        
-        old_status = IssueStatus.objects.get(project_id=old_project_id,id=issue_data.get('status'))
-
-        try:
-            target_status = IssueStatus.objects.get(project_id=new_project_id,slug=old_status.slug)
-        except IssueStatus.DoesNotExist:
-            # Status not found, we have to create a new status with the same data of the old status
-            target_status = IssueStatus.create(name=old_status.name,order=10,is_closed=old_status.is_closed,color=old_status.color,project_id=new_project_id,slug=old_status.slug)
-
-        old_severity = Severity.objects.get(project_id=old_project_id, id=issue_data.get('severity'))
-
-        try:
-            target_severity = Severity.objects.get(project_id=new_project_id,name=old_severity.name)
-        except Severity.DoesNotExist:
-            # Severity not found, we have to create a new status with the same data of the old status
-            target_severity = Severity.create(name=old_severity.name,order=10,color=old_severity.color,project_id=new_project_id)
-
-        old_priority = Priority.objects.get(project_id=old_project_id, id=issue_data.get('priority'))
-
-        try:
-            target_priority = Priority.objects.get(project_id=new_project_id,name=old_priority.name)
-        except Priority.DoesNotExist:
-            # priority not found, we have to create a new status with the same data of the old status
-            target_priority = Priority.create(name=old_priority.name,order=10,color=old_priority.color,project_id=new_project_id)
-
-        old_issue_type = IssueType.objects.get(project_id=old_project_id, id=issue_data.get('type'))
-
-        try:
-            target_type = IssueType.objects.get(project_id=new_project_id,name=old_issue_type.name)
-        except IssueType.DoesNotExist:
-            # type not found, we have to create a new status with the same data of the old status
-            target_type = IssueType.create(name=old_issue_type.name,order=10,color=old_issue_type.color,project_id=new_project_id)
-        
-
-        # Let's update the issue
-        issue.status = target_status
         issue.project = project
-        issue.owner = owner
-        issue.severity = target_severity
-        issue.priority = target_priority
-        issue.type = target_type
+        
+        issue.status, created = IssueStatus.objects.get_or_create(project_id=new_project_id,slug=issue.status.slug, defaults={"name": issue.status.name, "order":10,"is_closed":issue.status.is_closed,"color":issue.status.color})
+
+        issue.severity, created = Severity.objects.get_or_create(name=issue.severity.name,project_id=new_project_id, defaults={"order":10,"color":issue.severity.color})
+
+        issue.priority, created = Priority.objects.get_or_create(name=issue.priority.name,project_id=new_project_id, defaults={"order":10,"color":issue.priority.color})
+
+        issue.type, created = IssueType.objects.get_or_create(name=issue.type.name,project_id=new_project_id, defaults={"order":10,"color":issue.type.color})
 
         issue.save()
 
@@ -218,7 +179,7 @@ class MoveIssueView(APIView):
         old_timeline_entries = Timeline.objects.filter(
             project_id=old_project_id,
             event_type__contains="issues.issue",
-            data__issue__id=issue_id
+            data__issue__id=issue.id
         )
 
         old_timeline_entries.delete()

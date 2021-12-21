@@ -123,9 +123,9 @@ resourceProvider = ($repo, $http, $urls, $storage, $q) ->
         hash = generateHash([projectId, ns])
         return $storage.get(hash)
 
-    service.moveIssueTo = (projectId, issueData) ->
-        url = $urls.resolve("move-issue-to")
-        params = {project_id: projectId, issue_data: issueData}
+    service.moveIssueTo = (projectId, issueId) ->
+        url = $urls.resolve("move-issue-to", issueId)
+        params = {project_id: projectId}
         return $http.post(url, params)
 
     return (instance) ->
