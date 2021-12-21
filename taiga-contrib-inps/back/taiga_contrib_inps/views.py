@@ -13,6 +13,7 @@ from taiga.projects.history.models import HistoryEntry
 from taiga.projects.attachments import models as attachments_models
 from taiga.base.api.permissions import ResourcePermission
 from taiga.base.api.generics import RetrieveAPIView
+from taiga.timeline.models import Timeline
 
 from taiga.base.exceptions import MethodNotAllowed
 from taiga.base.decorators import list_route
@@ -212,5 +213,14 @@ class MoveIssueView(APIView):
             for history_entry in history_entries:
                 history_entry.project = project
                 history_entry.save()
+
+        # Let's delete old timeline entries for consistency
+        old_timeline_entries = Timeline.objects.filter(
+            project_id=old_project_id,
+            event_type__contains="issues.issue",
+            data__issue__id=issue_id
+        )
+
+        old_timeline_entries.delete()
 
         return JsonResponse(json_request, safe=False)
