@@ -1,0 +1,46 @@
+//
+// license-start
+// 
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// 
+// Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
+//
+
+
+section.issue-url-edit
+    label(
+        for="bug-url-input"
+        translate="LIGHTBOX.CREATE_EDIT.ISSUE_URL_LABEL"
+    ) |:
+    
+    input.issue-url-input(
+        ng-if="issueUrlEditMode"
+        id="bug-url-input"
+        type="text"
+        value="{{issue.issue_url}}"
+        ng-disabled != "<%- !isEditable %>"
+    )
+
+    .tools(ng-if="issueUrlEditMode")
+        btn.btn-small(
+            id="btn-save"
+            variant="primary"
+            tg-loading="savingIssueUrl"
+            href="#",
+        )
+            tg-svg(svg-icon="icon-save")
+            span {{'COMMON.SAVE' | translate}}
+        btn.btn-small(
+            id="btn-cancel"
+            variant="secondary"
+            href="#",
+            title="{{ 'COMMON.CANCEL' | translate }}"
+        )
+            tg-svg(svg-icon="icon-close")
+            span {{'COMMON.CANCEL' | translate}}
+
+
+    p.issue-url-display(
+        ng-if="!issueUrlEditMode"
+    ) {{issue.issue_url}}

@@ -86,6 +86,12 @@ div.wrapper(
 
 
         .detail-content(ng-if="attachmentsReady")
+
+            div(
+                tg-issue-url-edit
+                ng-model="issue"
+            )
+
             section.duty-content
                 tg-item-wysiwyg(
                     type="issue",
