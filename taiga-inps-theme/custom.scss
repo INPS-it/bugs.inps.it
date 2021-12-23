@@ -1460,6 +1460,7 @@ tg-wysiwyg {
 
     label {
         margin-right: 1rem;
+        padding-left: 1rem;
     }
 
     input {
@@ -1470,12 +1471,19 @@ tg-wysiwyg {
     .issue-url-display {
         margin: 0;
         margin-left: 2rem;
+        cursor: pointer;
+        min-width: 70%;
+        min-height: 48px;
+        border: solid 1px $grey-50;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
     }
 
     .tools {
         display: flex;
         .btn-small {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
             font-size: 0.9rem!important;
             padding: 0.5rem;
             cursor: pointer;

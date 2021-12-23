@@ -41,6 +41,7 @@ section.issue-url-edit
             span {{'COMMON.CANCEL' | translate}}
 
 
-    p.issue-url-display(
+    div.issue-url-display(
         ng-if="!issueUrlEditMode"
-    ) {{issue.issue_url}}
+    ) 
+        span(ng-if="issue.issue_url != false") {{issue.issue_url}}
