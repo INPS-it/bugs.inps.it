@@ -50,13 +50,16 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
         "tgErrorHandlingService",
         "tgProjectService",
         "tgAttachmentsFullService",
+        "tgResources",
+        "tgCurrentUserService"
     ]
 
     constructor: (@scope, @rootscope, @repo, @confirm, @rs, @params, @q, @location,
                   @log, @appMetaService, @analytics, @navUrls, @translate, @modelTransform,
-                  @errorHandlingService, @projectService, @attachmentsFullService) ->
+                  @errorHandlingService, @projectService, @attachmentsFullService, @resources, @currentUserService) ->
         bindMethods(@)
 
+        that = this
         @scope.issueRef = @params.issueref
         @scope.sectionName = @translate.instant("ISSUES.SECTION_NAME")
         @scope.attachmentsReady = false
@@ -66,6 +69,11 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
 
         promise = @.loadInitialData()
 
+        if @currentUserService.isAdmin()
+            @resources.projects.getProjects({}, false).then (projects) -> 
+                # Let's remove actual issue project from the "move to" list
+                that.scope.projects_list = _.filter(projects.data, (project) -> project.id != that.scope.project.id)
+
         # On Success
         promise.then =>
             @._setMeta()
@@ -73,6 +81,19 @@ class IssueDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
 
         # On Error
         promise.then null, @.onInitialDataError.bind(@)
+
+        @scope.onMoveToArea = () ->
+            if !that.scope.moveto
+                return
+            
+            selectedProjectId = that.scope.moveto.project_id
+
+            that.rs.issues.moveIssueTo(selectedProjectId,that.scope.issue.id).then(
+                (response) -> 
+                    that.confirm.notify("success")
+                (error) -> 
+                    that.confirm.notify("error")
+            )
 
     _setMeta: ->
         title = @translate.instant("ISSUE.PAGE_TITLE", {

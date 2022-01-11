@@ -1652,7 +1652,9 @@
     },
     "ISSUE": {
         "PAGE_TITLE": "{{issueSubject}} - Bug {{issueRef}} - {{projectName}}",
-        "PAGE_DESCRIPTION": "Status: {{issueStatus }}. Type: {{issueType}}, Priority: {{issuePriority}}. Severity: {{issueSeverity}}. Description: {{issueDescription}}"
+        "PAGE_DESCRIPTION": "Status: {{issueStatus }}. Type: {{issueType}}, Priority: {{issuePriority}}. Severity: {{issueSeverity}}. Description: {{issueDescription}}",
+        "MOVE_TO_PROJECT": "Move to theme area",
+        "MOVE_ACTION": "Move"
     },
     "KANBAN": {
         "PAGE_TITLE": "Kanban - {{projectName}}",

@@ -41,7 +41,7 @@
             span(translate="COMMON.WYSIWYG.MARKDOWN_HELP")
 
 .tools(ng-class="{visible: editMode}")
-    btn.btn-small(
+    btn.btn-small.clickable(
         variant="primary"
         ng-class="{disabled: required && !markdown.length}"
         tg-loading="saving"
@@ -50,7 +50,7 @@
     )
         tg-svg(svg-icon="icon-save")
         span {{'COMMON.SAVE' | translate}}
-    btn.btn-small(
+    btn.btn-small.clickable(
         variant="secondary"
         href="#",
         ng-click="cancelWithConfirmation($event)"

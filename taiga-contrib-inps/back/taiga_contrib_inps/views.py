@@ -7,9 +7,13 @@
 # Copyright (c) 2021 INPS - Istituto Nazionale di Previdenza Sociale
 ###
 from .models import ProjectCustomOrder
-from taiga.projects.models import Membership, Project
+from taiga.projects.models import Membership, Project, Priority, Severity, IssueType, IssueStatus
+from taiga.projects.issues.models import Issue
+from taiga.projects.history.models import HistoryEntry
+from taiga.projects.attachments import models as attachments_models
 from taiga.base.api.permissions import ResourcePermission
 from taiga.base.api.generics import RetrieveAPIView
+from taiga.timeline.models import Timeline
 
 from taiga.base.exceptions import MethodNotAllowed
 from taiga.base.decorators import list_route
@@ -124,3 +128,60 @@ class bulk_update_projects_custom_order(APIView):
         return JsonResponse(json.dumps(order_created_response), safe=False)
         
 bulk_update_projects_custom_order_view = bulk_update_projects_custom_order.as_view()
+
+class MoveIssueView(APIView):
+    def post(self, request, *args, **kwargs):
+        """Moves an issue to a different project.
+        """
+        if not user_is_admin(request.user):
+            return response.Forbidden()
+
+        issue_id = kwargs.get('pk')
+        # Let's retrieve the issue:
+        issue = Issue.objects.get(id=issue_id)
+        old_project_id = issue.project_id
+
+        json_request = json.loads(request.body.decode('utf-8'))
+        new_project_id = json_request['project_id']
+
+        project = get_object_or_404(Project, pk=new_project_id)
+        
+        issue.project = project
+        
+        issue.status, created = IssueStatus.objects.get_or_create(project_id=new_project_id,slug=issue.status.slug, defaults={"name": issue.status.name, "order":10,"is_closed":issue.status.is_closed,"color":issue.status.color})
+
+        issue.severity, created = Severity.objects.get_or_create(name=issue.severity.name,project_id=new_project_id, defaults={"order":10,"color":issue.severity.color})
+
+        issue.priority, created = Priority.objects.get_or_create(name=issue.priority.name,project_id=new_project_id, defaults={"order":10,"color":issue.priority.color})
+
+        issue.type, created = IssueType.objects.get_or_create(name=issue.type.name,project_id=new_project_id, defaults={"order":10,"color":issue.type.color})
+
+        issue.save()
+
+        # Let's find and update attachments
+        attachments = attachments_models.Attachment.objects.filter(object_id=issue_id, project=old_project_id)
+
+        if attachments.count() > 0:
+
+            for attachment in attachments:
+                attachment.project = project
+                attachment.save()
+
+        # Let's find and manipulate history entries
+        history_entries = HistoryEntry.objects.filter(key='issues.issue:'+str(issue_id))
+
+        if history_entries.count() > 0:
+            for history_entry in history_entries:
+                history_entry.project = project
+                history_entry.save()
+
+        # Let's delete old timeline entries for consistency
+        old_timeline_entries = Timeline.objects.filter(
+            project_id=old_project_id,
+            event_type__contains="issues.issue",
+            data__issue__id=issue.id
+        )
+
+        old_timeline_entries.delete()
+
+        return JsonResponse(json_request, safe=False)

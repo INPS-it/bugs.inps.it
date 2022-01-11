@@ -167,6 +167,22 @@ div.wrapper(
             required-perm="modify_issue"
         )
 
+        section.ticket-section.move-issue(
+            tg-check-permission="modify_issue"
+        )
+            label(for="project-list-select") {{'ISSUE.MOVE_TO_PROJECT' | translate}}:
+            select#project-list-select(
+                ng-model="moveto.project_id" 
+            )
+                option(
+                    ng-repeat="project in projects_list"
+                    value="{{project.id}}") {{project.name}}
+            button.btn-small(
+                ng-if="moveto.project_id"
+                variant="primary"
+                ng-click="onMoveToArea()"
+                ) {{'ISSUE.MOVE_ACTION' | translate}}
+
         section.ticket-section.ticket-detail-settings
             tg-due-date(
                 due-date="issue.due_date"
