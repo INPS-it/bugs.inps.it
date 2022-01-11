@@ -827,3 +827,83 @@ IssuePublicButtonDirective = ($rootScope, $repo, $confirm, $loading, $modelTrans
 
 module.directive("tgIssuePublicButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQueueModelTransformation", "$tgTemplate", "$compile", IssuePublicButtonDirective])
 
+#############################################################################
+## Issue url edit directive
+#############################################################################
+
+IssueUrlEditDirective = ($rootScope, $repo, $confirm, $loading, $modelTransform, $template, $compile) ->
+
+    template = $template.get("issue/issue-url-edit.html", true)
+
+    link = ($scope, $el, $attrs, $model) ->
+
+        $scope.issueUrlEditMode = false
+        $scope.savingIssueUrl = false
+
+        isNewIssue = $scope.$eval($attrs.isNewIssue)
+
+        isEditable = ->
+            return $scope.project.my_permissions.indexOf("modify_issue") != -1
+
+        render = () ->
+
+            issueUrl = $scope.issue.issue_url
+
+            html = template({
+                issueUrl: issueUrl
+                isEditable: isEditable()
+            })
+
+            html = $compile(html)($scope)
+
+            $el.html(html)
+
+        save = (issueUrl) ->
+            $.fn.popover().closeAll()
+
+            transform = $modelTransform.save (issue) ->
+                issue.setAttr('issue_url', issueUrl)
+                return issue
+
+            onSuccess = ->
+                $scope.savingIssueUrl = false
+                $scope.issueUrlEditMode = false
+                $scope.$apply($scope.issueUrlEditMode);
+                $rootScope.$broadcast("object:updated")
+
+            onError = ->
+                $scope.savingIssueUrl = false
+                $confirm.notify("error")
+
+            transform.then(onSuccess, onError)
+
+        $el.on "click", ".issue-url-display", (event) ->
+            return if not isEditable()
+            $scope.issueUrlEditMode = !$scope.issueUrlEditMode
+            $scope.$apply($scope.issueUrlEditMode);
+
+        $el.on "click", "#btn-cancel", (event) ->
+            $scope.issueUrlEditMode = false
+            $scope.$apply($scope.issueUrlEditMode);
+
+        $el.on "click", "#btn-save", (event) ->
+            $scope.savingIssueUrl = true
+            issueUrl = $el.children().find('.issue-url-input').val()
+            save(issueUrl)
+
+        $scope.$on "$destroy", ->
+            $el.off()
+
+        $scope.$watch () ->
+            return $model.$modelValue
+        , () ->
+            issue = $model.$modelValue
+            render() if issue
+
+    return {
+        link: link
+        restrict: "EA"
+        require: "ngModel"
+    }
+
+module.directive("tgIssueUrlEdit", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQueueModelTransformation", "$tgTemplate", "$compile", IssueUrlEditDirective])

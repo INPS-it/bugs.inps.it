@@ -31,6 +31,22 @@ class IssueVisibility(models.Model):
         return "%s public: %s" % (self.issue.subject, self.is_public)
 
 
+class IssueUrl(models.Model):
+    issue = models.OneToOneField(
+        Issue,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='issue_url'
+    )
+
+    issue_url = models.CharField(max_length=1024)
+
+    class Meta:
+        app_label = 'taiga_contrib_inps'
+
+    def __str__(self):
+        return "%s public: %s" % (self.issue.subject, self.isue_url)
+
 class ProjectCustomOrder(models.Model):
     """External model that enables projects to be custom ordered by admins in the Discover page.
 

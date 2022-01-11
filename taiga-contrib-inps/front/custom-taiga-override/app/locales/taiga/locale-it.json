@@ -1196,6 +1196,8 @@
             "ISSUE_PLACEHOLDER_DESCRIPTION": "Inserisci un testo descrittivo che aiuti gli altri a comprendere meglio questo Bug",
             "ISSUE_DESCRIPTION_TEMPLATE": "Descrizione del problema:\n\n\nTipo e Versione del Software utilizzato (es., OS, browser):\n\n\nPassi per riprodurre il problema:\n1.\n2.\n3.\n\n\nRisultato Attuale:\n\n\nRisultato Atteso:\n\n\nUlteriori informazioni:",
             "US_PLACEHOLDER_DESCRIPTION": "Aggiungi un testo descrittivo che aiuti gli altri a comprendere meglio questa storia utente",
+            "ISSUE_URL_LABEL": "Url del bug (facoltativo)",
+            "ISSUE_URL_PLACEHOLDER": "Incolla qui la url della pagina dove hai riscontrato il bug",
             "NEW_TASK": "Nuovo compito",
             "NEW_ISSUE": "Nuovo Bug",
             "NEW_US": "Nuova storia utente",

@@ -79,6 +79,23 @@ form(ng-if="lightboxOpen")
                         autocomplete="off"
                     )
 
+                    label.new_label(
+                        ng-if="objType == 'issue'"
+                        for="issue_url_input") {{ 'LIGHTBOX.CREATE_EDIT.ISSUE_URL_LABEL' | translate }}
+
+                    input#issue_url_input(
+                        ng-if="objType == 'issue'"
+                        type="text"
+                        name="issue_url"
+                        ng-model-options="{ debounce: 200 }"
+                        ng-model="obj.issue_url"
+                        tg-auto-select
+                        placeholder="{{ 'LIGHTBOX.CREATE_EDIT.ISSUE_URL_PLACEHOLDER' | translate }}"
+                        data-required="false"
+                        data-maxlength="1024"
+                        autocomplete="off"
+                    )
+
                 fieldset
                     textarea.description(
                         rows=7
