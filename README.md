@@ -115,7 +115,7 @@ docker cp ./taiga-front-next/dist/elements/elements.js <idcontainer-taiga-front>
 
 ## Run tests
 
-Prepeare test env
+Prepare test env
 
 ```sh
 make prepare-test
