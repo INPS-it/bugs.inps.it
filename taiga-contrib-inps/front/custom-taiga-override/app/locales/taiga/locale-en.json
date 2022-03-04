@@ -1191,7 +1191,7 @@
             "ISSUE_PLACEHOLDER_DESCRIPTION": "Please add descriptive text to help others better understand this issue",
             "ISSUE_DESCRIPTION_TEMPLATE": "Description of the problem:\n\n\nType and Version of the software used (e.g., OS, browser):\n\n\nSteps to Reproduce:\n1.\n2.\n3.\n\n\nActual results:\n\n\nExpected results:\n\n\nAdditional info:",
             "US_PLACEHOLDER_DESCRIPTION": "Please add descriptive text to help others better understand this user story",
-            "ISSUE_URL_LABEL": "Bug url (optional)",
+            "ISSUE_URL_LABEL": "Bug URL (mandatory)",
             "ISSUE_URL_PLACEHOLDER": "Paste here the page url where you found the bug",
             "NEW_TASK": "New task",
             "NEW_ISSUE": "New bug",
