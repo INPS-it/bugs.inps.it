@@ -465,7 +465,7 @@ a.secondary:hover {
 
 .main {
     @media (max-width: $xl) {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
