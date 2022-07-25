@@ -465,7 +465,7 @@ a.secondary:hover {
 
 .main {
     @media (max-width: $xl) {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
@@ -1495,4 +1495,9 @@ tg-wysiwyg {
             cursor: pointer;
         }
     }
+}
+
+.lightbox-create-edit {
+    position: absolute;
+    top: -48px;
 }
