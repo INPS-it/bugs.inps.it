@@ -19,6 +19,8 @@ cp /certs/private.key /taiga-back/$CERT_PATH/private.key
 
 cd taiga-back
 
+pip install git+https://github.com/kaleidos-ventures/taiga-contrib-protected.git@6.5.0#egg=taiga-contrib-protected
+
 export DJANGO_SETTINGS_MODULE="settings.config"
 python manage.py collectstatic --no-input
 python manage.py migrate

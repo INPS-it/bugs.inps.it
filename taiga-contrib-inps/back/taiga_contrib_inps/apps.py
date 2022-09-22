@@ -456,6 +456,9 @@ class TaigaContribINPSAppConfig(AppConfig):
         # Disable the default Taiga auth Routes
         urlpatterns.insert(0, url('api/v1/auth/register', self.render_404))
         urlpatterns.insert(0, url('api/v1/auth', self.render_404))
+        
+        # Disable Taiga API listing attachments endpoint
+        urlpatterns.insert(0, url('api/v1/issues/attachments', self.render_404))
 
         from taiga.projects.validators import _MemberBulkValidator
         from taiga.base.api.fields import validate_user_email_allowed_domains, InvalidEmailValidationError

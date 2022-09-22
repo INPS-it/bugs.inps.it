@@ -92,6 +92,16 @@ services:
       - "./docker/spid-saml-check-config/idp_demo.json:/spid-saml-check/spid-validator/config/idp_demo.json:ro"
       - "./docker/spid-saml-check-config/server.json:/spid-saml-check/spid-validator/config/server.json:ro"
 
+  taiga-protected:
+    image: taigaio/taiga-protected:6.5.0
+    ports:
+      - "8003:8003"
+    environment:
+      MAX_AGE: 120
+      SECRET_KEY: "aw3+t2r(8(0kkrhg8)gx6i96v5^kv%6cfep9wxfom0%7dy0m9e"
+    networks:
+      - taiga
+
 volumes:
   taigadbdata:
   taiga-static-data:
