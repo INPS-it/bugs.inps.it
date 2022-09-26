@@ -5,6 +5,7 @@ pip install git+https://github.com/kaleidos-ventures/taiga-contrib-protected.git
 cd ..
 
 cd taiga-protected
+git checkout stable
 pip install -r requirements.txt
 cd ..
 
