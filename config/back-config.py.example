@@ -68,6 +68,7 @@ DATABASES = {
     }
 }
 
+# taiga-contrib-protected config
 DEFAULT_FILE_STORAGE = "taiga_contrib_protected.storage.ProtectedFileSystemStorage"
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
