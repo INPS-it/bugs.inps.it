@@ -97,7 +97,7 @@ services:
     ports:
       - "8003:8003"
     environment:
-      MAX_AGE: 120
+      MAX_AGE: 300
       SECRET_KEY: "aw3+t2r(8(0kkrhg8)gx6i96v5^kv%6cfep9wxfom0%7dy0m9e"
     networks:
       - taiga
