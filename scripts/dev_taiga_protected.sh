@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Before proceeding make sure you have already activated virtual environment in ./taiga-back/.venv
+# Before proceeding make sure you have already activated virtual environment in .venv
 
 cd taiga-back
 pip install git+https://github.com/kaleidos-ventures/taiga-contrib-protected.git@6.5.0#egg=taiga-contrib-protected
