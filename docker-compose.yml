@@ -1,10 +1,11 @@
 version: "3"
 
 services:
+
   certs:
     image: psmiraglia/spid-compliant-certificates
     volumes:
-        - ./certs:/tmp/certs:rw
+      - certs-volume:/tmp/certs
     entrypoint: spid-compliant-certificates generator --key-size 3072 --common-name "A.C.M.E" --days 365 --entity-id https://spid.acme.it --locality-name Roma --org-id "PA:IT-c_h501" --org-name "A Company Making Everything" --sector public --key-out /tmp/certs/private.key --crt-out /tmp/certs/public.cert
 
   taiga-gateway:
@@ -23,6 +24,7 @@ services:
       - taiga-back
     networks:
       - taiga
+
   taiga-front:
     build:
       context: .
@@ -31,6 +33,7 @@ services:
       - taiga-back
     networks:
       - taiga
+
   taiga-back:
     build:
       context: .
@@ -54,10 +57,10 @@ services:
     volumes:
       - taiga-static-data:/taiga-back/static
       - taiga-media-data:/taiga-back/media
-      - ./certs:/certs
-
+      - certs-volume:/certs
     networks:
       - taiga
+
   taiga-db:
     image: postgres:12.3
     expose:
@@ -81,8 +84,18 @@ services:
     volumes:
       - taigadbdata:/var/lib/postgresql/data
 
+  taiga-protected:
+    image: taigaio/taiga-protected:6.5.0
+    ports:
+      - "8003:8003"
+    environment:
+      MAX_AGE: 300
+      SECRET_KEY: "aw3+t2r(8(0kkrhg8)gx6i96v5^kv%6cfep9wxfom0%7dy0m9e"
+    networks:
+      - taiga
+
   spid-saml-check:
-    image: italia/spid-saml-check
+    image: italia/spid-saml-check:v.1.8.1
     ports:
       - "8080:8080"
     networks:
@@ -96,6 +109,7 @@ volumes:
   taigadbdata:
   taiga-static-data:
   taiga-media-data:
+  certs-volume:
 
 networks:
   taiga:
