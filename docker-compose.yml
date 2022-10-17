@@ -5,7 +5,7 @@ services:
   certs:
     image: psmiraglia/spid-compliant-certificates
     volumes:
-        - ./certs:/tmp/certs:rw
+      - certs-volume:/tmp/certs
     entrypoint: spid-compliant-certificates generator --key-size 3072 --common-name "A.C.M.E" --days 365 --entity-id https://spid.acme.it --locality-name Roma --org-id "PA:IT-c_h501" --org-name "A Company Making Everything" --sector public --key-out /tmp/certs/private.key --crt-out /tmp/certs/public.cert
 
   taiga-gateway:
@@ -57,7 +57,7 @@ services:
     volumes:
       - taiga-static-data:/taiga-back/static
       - taiga-media-data:/taiga-back/media
-      - ./certs:/certs
+      - certs-volume:/certs
     networks:
       - taiga
 
@@ -99,6 +99,7 @@ volumes:
   taigadbdata:
   taiga-static-data:
   taiga-media-data:
+  certs-volume:
 
 networks:
   taiga:
