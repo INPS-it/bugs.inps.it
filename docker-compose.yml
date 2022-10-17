@@ -85,7 +85,7 @@ services:
       - taigadbdata:/var/lib/postgresql/data
 
   spid-saml-check:
-    image: italia/spid-saml-check
+    image: italia/spid-saml-check:v.1.8.1
     ports:
       - "8080:8080"
     networks:
