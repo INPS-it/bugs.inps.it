@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
   certs:
     image: psmiraglia/spid-compliant-certificates
     volumes:
@@ -23,6 +24,7 @@ services:
       - taiga-back
     networks:
       - taiga
+
   taiga-front:
     build:
       context: .
@@ -31,6 +33,7 @@ services:
       - taiga-back
     networks:
       - taiga
+
   taiga-back:
     build:
       context: .
@@ -55,9 +58,9 @@ services:
       - taiga-static-data:/taiga-back/static
       - taiga-media-data:/taiga-back/media
       - ./certs:/certs
-
     networks:
       - taiga
+
   taiga-db:
     image: postgres:12.3
     expose:
