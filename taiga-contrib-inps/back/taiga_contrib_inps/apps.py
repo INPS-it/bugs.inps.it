@@ -158,6 +158,41 @@ class TaigaContribINPSAppConfig(AppConfig):
         IssueViewSet.update = ext_update
         IssueViewSet.create = ext_create
 
+        # Monkey patch IssueAttachmentViewset
+
+        from taiga.projects.attachments.api import IssueAttachmentViewSet
+        from taiga.projects.issues.models import Issue
+        from taiga.projects.models import Project
+
+
+        prev_issue_attach_viewset_get_queryset = IssueAttachmentViewSet.get_queryset
+        IssueAttachmentViewSet.original_get_queryset = IssueAttachmentViewSet.get_queryset
+
+        def get_queryset(self):
+            qs = prev_issue_attach_viewset_get_queryset(self)
+
+            if self.request.user.is_superuser:
+                return qs
+
+            public_issue_ids_subquery = Subquery(
+                IssueVisibility.objects.filter(is_public=True).values('issue_id'))
+
+            if self.request.user.is_anonymous:
+                qs = qs.filter(Q(object_id__in=public_issue_ids_subquery))
+            else:
+                own_issue_ids_subquery = Subquery(
+                    Issue.objects.filter(owner=self.request.user).values('id'))
+                project_where_member_ids_subquery = Subquery(
+                    Project.objects.filter(members=self.request.user).values('id'))
+                qs = qs.filter(Q(object_id__in=public_issue_ids_subquery)
+                               | Q(object_id__in=own_issue_ids_subquery)
+                               | Q(project__in=project_where_member_ids_subquery))
+
+            return qs
+
+        IssueAttachmentViewSet.get_queryset = get_queryset
+        IssueAttachmentViewSet.retrieve = retrieve
+
         # Monkey patch ProjectTimeline
 
         from taiga.timeline.api import ProjectTimeline

@@ -16,6 +16,7 @@ cp -R ./taiga-contrib-inps/back/taiga_contrib_inps/ext_templates ./taiga-back/
 
 cd taiga-back
 pip install -r requirements.txt
+pip install git+https://github.com/kaleidos-ventures/taiga-contrib-protected.git@6.5.0#egg=taiga-contrib-protected
 cd ../
 
 pip install -e ./taiga-contrib-inps/back
