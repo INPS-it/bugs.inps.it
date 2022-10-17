@@ -68,6 +68,9 @@ DATABASES = {
     }
 }
 
+DEFAULT_FILE_STORAGE = "taiga_contrib_protected.storage.ProtectedFileSystemStorage"
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+
 PRODUCTION = False
 
 STATS_CACHE_TIMEOUT = 1 # one second for test, to increment for production
