@@ -20,6 +20,10 @@ def build_project_namespace(project: object):
     return "{0}:{1}".format("project", project.id)
 
 
+def build_user_namespace(user: object):
+    return "{0}:{1}".format("user", user.id)
+
+
 def get_timeline(obj, namespace=None):
     assert isinstance(obj, Model), "obj must be a instance of Model"
     from taiga.timeline.models import Timeline
@@ -178,6 +182,15 @@ def _get_not_allowed_epic_related_query(accessing_user, namespace):
 def get_project_timeline(project, accessing_user=None):
     namespace = build_project_namespace(project)
     timeline = get_timeline(project, namespace)
+    if accessing_user is not None:
+        timeline = filter_timeline_for_user(
+            timeline, accessing_user, namespace)
+
+    return timeline
+
+def get_user_timeline(user, accessing_user=None):
+    namespace = build_user_namespace(user)
+    timeline = get_timeline(user, namespace)
     if accessing_user is not None:
         timeline = filter_timeline_for_user(
             timeline, accessing_user, namespace)
