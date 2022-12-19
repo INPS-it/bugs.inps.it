@@ -207,6 +207,21 @@ class TaigaContribINPSAppConfig(AppConfig):
 
         ProjectTimeline.get_timeline = get_timeline
 
+        # Monkey patch UserTimeline
+
+        from taiga.timeline.api import UserTimeline
+        from .timeline import services as timeline_services
+
+        def get_timeline(self, user):
+            # the methods called by get_user_timeline have been overridden in
+            # the timeline/services.py file
+            return timeline_services.get_user_timeline(
+                user, accessing_user=self.request.user
+            )
+
+        UserTimeline.get_timeline = get_timeline
+
+
         # Register signals
         # TODO Without this line no signal is imported
         # See https://github.com/taigaio/taiga-contrib-slack/blob/master/back/taiga_contrib_slack/apps.py
