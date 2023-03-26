@@ -465,7 +465,7 @@ a.secondary:hover {
 
 .main {
     @media (max-width: $xl) {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
@@ -487,6 +487,9 @@ a.secondary:hover {
 }
 
 .lightbox-create-edit {
+    position: absolute;
+    top: -48px;
+
     form {
         @media (max-width: $xl) {
             max-width: 100%;
