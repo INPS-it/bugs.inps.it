@@ -110,19 +110,20 @@ div.wrapper
                                     translate="REGISTER_FORM.LINK_LOGIN"
                                 )
 
-                h2.title {{"PROJECT.SECTION.TEAM" | translate}}
-                ul.involved-team
-                    li(tg-repeat="member in vm.members")
-                        a(
-                            tg-nav="user-profile:username=member.get('username')",
-                            title="{{::member.get('full_name')}}"
-                        )
-                            img(
-                                tg-avatar="member"
-                                alt="{{::member.get('full_name')}}"
+                div(ng-if="vm.project.get(\'i_am_owner\') || vm.project.get(\'i_am_member\') || vm.project.get(\'i_am_admin\')")
+                    h2.title {{"PROJECT.SECTION.TEAM" | translate}}
+                    ul.involved-team
+                        li(tg-repeat="member in vm.members")
+                            a(
+                                tg-nav="user-profile:username=member.get('username')",
+                                title="{{::member.get('full_name')}}"
                             )
-                            tg-svg(
-                                ng-if="member.get('id') == vm.project.getIn(['owner', 'id'])"
-                                svg-icon="icon-badge"
-                                svgTitleTranslate: "COMMON.OWNER"
-                            )
+                                img(
+                                    tg-avatar="member"
+                                    alt="{{::member.get('full_name')}}"
+                                )
+                                tg-svg(
+                                    ng-if="member.get('id') == vm.project.getIn(['owner', 'id'])"
+                                    svg-icon="icon-badge"
+                                    svgTitleTranslate: "COMMON.OWNER"
+                                )
