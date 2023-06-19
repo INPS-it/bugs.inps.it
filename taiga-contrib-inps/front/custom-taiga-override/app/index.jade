@@ -47,16 +47,6 @@ html(lang="en", ng-attr-dir="{{ isRTL ? 'rtl' : 'ltr' }}")
 
     body(tg-main, ng-class="{'rtl': isRTL}")
 
-        a.screenreader-text(
-            href="#navigation-bar"
-        )
-            {{'SCREENREADER.SKIP_LINKS.NAVBAR' | translate}}
-
-        a.screenreader-text(
-            href="#main-content"
-        )
-            {{'SCREENREADER.SKIP_LINKS.MAIN_CONTENT' | translate}}
-
         include partials/includes/modules/inps-loading
         
         tg-legacy
